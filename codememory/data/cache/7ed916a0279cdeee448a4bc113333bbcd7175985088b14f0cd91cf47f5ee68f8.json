@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR does not touch the downstream ledger code at all; it only reorganizes billing modules and renames a function.",
+    "The workaround's revisit condition requires the downstream ledger to be migrated to bigint columns (ticket PAY-240), which is not addressed by this PR.",
+    "The PR does not remove or modify the capping logic (if amount > 50000: ... amount = 50000) that constitutes the workaround.",
+    "The PR does not close or reference ticket PAY-240, which is the ticket that tracks the ledger migration.",
+    "Renaming charge_customer to submit_charge and moving retry logic to stripe_retry is a refactoring change with no functional impact on the integer overflow issue."
+  ],
+  "reasoning": "The workaround HACK-008 caps charge amounts at 50000 cents to prevent integer overflow in the downstream ledger. The revisit condition explicitly requires the downstream ledger to be migrated to bigint columns as part of ticket PAY-240. The PR under review is purely a refactoring: it renames a file (retry.py to stripe_retry.py) and a function (charge_customer to submit_charge). It does not modify the downstream ledger, does not change column types, does not remove the capping logic, and does not reference ticket PAY-240. There is no evidence that this PR addresses the underlying condition (integer overflow in the ledger) that the workaround was waiting on. The match is clearly wrong."
+}

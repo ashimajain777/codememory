@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.97,
+  "counter_arguments": [
+    "The PR only introduces a new metrics module; it does not modify or remove the cap logic that limits charge amounts to 50000 cents.",
+    "The revisit condition explicitly requires the ledger migration to bigint (ticket PAY-240) to be completed; this PR does not address that migration or any related database schema changes.",
+    "Even if the new metrics could be used to monitor how often the cap is triggered, they do not eliminate the need for the cap nor resolve the underlying overflow risk.",
+    "There is no reference to the HACK-008 identifier, the cap code, or the PAY-240 ticket in the PR description or diff, indicating no direct intent to resolve the workaround."
+  ],
+  "reasoning": "The workaround HACK-008 exists to prevent integer overflow in the downstream ledger by capping charge amounts. The condition for removal is the completion of a ledger migration to bigint (PAY-240). The PR under review adds a metrics collection file unrelated to charge processing or database schema. It neither removes the cap nor contributes to the migration. Therefore, it does not satisfy the revisit condition and does not resolve the workaround."
+}

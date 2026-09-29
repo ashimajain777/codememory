@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.96,
+  "counter_arguments": [
+    "The PR only renames a function and moves retry logic to a new module; it does not modify or remove the in\u2011memory tax cache variables (_tax_cache, _cache_times) or the TTL check.",
+    "The revisit condition for the workaround is a performance threshold (API latency <200\u202fms). The PR makes no changes to how the tax provider API is called, nor does it add any latency\u2011monitoring or performance improvements that would satisfy that condition.",
+    "The diff excerpt shows changes limited to billing/retry.py \u2192 billing/stripe_retry.py and a function rename from charge_customer to submit_charge. There is no reference to tax rate fetching, caching, or any related configuration.",
+    "Even if the retry logic is now in a separate file, the underlying caching mechanism remains untouched, so the workaround would still be required to avoid repeated slow API calls.",
+    "A reorganization of modules does not constitute a resolution of the underlying latency problem; the condition for removal is a measurable improvement in API response time, which this PR does not address."
+  ],
+  "reasoning": "The workaround HACK-012 is intended to mitigate high latency of the tax provider API by caching tax rates. Its removal depends on the API latency dropping below 200\u202fms. The PR under review merely restructures billing code, moving retry logic to a new file and renaming a function. It does not interact with the tax cache implementation, does not improve the tax provider's latency, and does not remove the caching code. Therefore, there is no evidence that the PR satisfies the revisit condition, and it does not resolve the workaround."
+}

@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR modifies retry logic in billing/retry.py, unrelated to webhook processing code where the in\u2011memory set lives.",
+    "It does not reference or alter the _seen_events set, nor does it remove or replace the duplicate\u2011event check.",
+    "The revisit condition for HACK\u2011004 is tied to the database\u2011level idempotency fix in ticket PAY\u2011212; this PR does not implement or depend on that fix.",
+    "The only \u201cworkaround\u201d mentioned in the PR is a fixed 3\u2011second delay for rate\u2011limit retries, which is a separate issue from Stripe webhook idempotency.",
+    "No changes to the webhook handling pipeline, database schema, or idempotency logic are present, so the underlying condition for removing the in\u2011memory set remains unmet."
+  ],
+  "reasoning": "HACK-004 concerns duplicate Stripe webhook events and uses an in\u2011memory set as a temporary idempotency measure. The PR under review addresses a different problem: it replaces exponential backoff with a fixed retry delay for charge attempts. It neither touches the webhook handling code nor satisfies the condition that the database\u2011level idempotency fix (PAY-212) be deployed. Therefore, the PR does not resolve the workaround."
+}

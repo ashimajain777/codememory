@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "skip duplicate webhook deliveries using an in-memory set",
+  "why": "Stripe sometimes sends the same event twice within a few seconds; this prevents double-charge until PAY-212 adds idempotency at the database layer",
+  "risk": "medium",
+  "revisit_condition": "when PAY-212 provides database-level idempotency for webhook events",
+  "ticket_id": "PAY-212",
+  "anchor_snippet": "if event_id in _seen_events:\n    logger.info(\"skipping duplicate event %s\", event_id)\n    return jsonify({\"received\": True, \"duplicate\": True})\n_seen_events.add(event_id)"
+}

@@ -1,0 +1,1856 @@
+{
+  "meta": {
+    "generated_at": "2026-09-28T17:49:04.443449+00:00",
+    "model": "qwen/qwen3.8-27b",
+    "bank_id": "payments-service-ce319f46"
+  },
+  "prs": [
+    {
+      "pr": 1,
+      "title": "Initial payments service scaffolding",
+      "author": "Priya Sharma",
+      "date": "2026-02-03T09:14:00",
+      "branch": "init-payments",
+      "tag": "",
+      "diff": "diff --git a/billing/retry.py b/billing/retry.py\nnew file mode 100644\nindex 0000000..34e504f\n--- /dev/null\n+++ b/billing/retry.py\n@@ -0,0 +1,20 @@\n+import stripe\n+import time\n+import logging\n+\n+logger = logging.getLogger(__name__)\n+\n+def charge_customer(customer_id, amount, currency=\"usd\"):\n+    \"\"\"Attempt a charge with basic retry logic.\"\"\"\n+    for attempt in range(3):\n+        try:\n+            return stripe.Charge.create(\n+                customer=customer_id,\n+                amount=amount,\n+                currency=currency,\n+            )\n+        except stripe.error.RateLimitError:\n+            wait = 2 ** attempt\n+            logger.warning(\"rate limited, retrying in %ds\", wait)\n+            time.sleep(wait)\n+    raise RuntimeError(\"charge failed after retries\")\ndiff --git a/checkout.py b/checkout.py\nnew file mode 100644\nindex 0000000..de272eb\n--- /dev/null\n+++ b/checkout.py\n@@ -0,0 +1,14 @@\n+from flask import Flask, request, jsonify\n+import stripe\n+\n+app = Flask(__name__)\n+\n+@app.route(\"/checkout\", methods=[\"POST\"])\n+def checkout():\n+    data = request.get_json()\n+    charge = stripe.Charge.create(\n+        amount=data[\"amount\"],\n+        currency=data.get(\"currency\", \"usd\"),\n+        source=data[\"source\"],\n+    )\n+    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\ndiff --git a/config.py b/config.py\nnew file mode 100644\nindex 0000000..b61d6f5\n--- /dev/null\n+++ b/config.py\n@@ -0,0 +1,7 @@\n+import os\n+\n+STRIPE_API_KEY = os.environ.get(\"STRIPE_API_KEY\", \"\")\n+TAX_PROVIDER_URL = os.environ.get(\"TAX_PROVIDER_URL\", \"https://tax.example.com\")\n+TAX_CACHE_TTL = int(os.environ.get(\"TAX_CACHE_TTL\", \"300\"))\n+DATABASE_URL = os.environ.get(\"DATABASE_URL\", \"sqlite:///payments.db\")\n+LOG_LEVEL = os.environ.get(\"LOG_LEVEL\", \"INFO\")\ndiff --git a/invoices.py b/invoices.py\nnew file mode 100644\nindex 0000000..9acb34b\n--- /dev/null\n+++ b/invoices.py\n@@ -0,0 +1,18 @@\n+import logging\n+from datetime import datetime\n+\n+logger = logging.getLogger(__name__)\n+\n+def generate_invoice(customer_id, line_items, tax_rate=0.0):\n+    \"\"\"Build an invoice dict from line items.\"\"\"\n+    subtotal = sum(item[\"amount\"] for item in line_items)\n+    tax = round(subtotal * tax_rate, 2)\n+    return {\n+        \"customer_id\": customer_id,\n+        \"line_items\": line_items,\n+        \"subtotal\": subtotal,\n+        \"tax\": tax,\n+        \"total\": subtotal + tax,\n+        \"issued_at\": datetime.utcnow().isoformat(),\n+        \"status\": \"pending\",\n+    }\ndiff --git a/requirements.txt b/requirements.txt\nnew file mode 100644\nindex 0000000..d068891\n--- /dev/null\n+++ b/requirements.txt\n@@ -0,0 +1,3 @@\n+flask==3.0.0\n+stripe==3.8.0\n+requests==2.31.0\ndiff --git a/tax.py b/tax.py\nnew file mode 100644\nindex 0000000..65fcaf8\n--- /dev/null\n+++ b/tax.py\n@@ -0,0 +1,15 @@\n+import requests\n+import logging\n+from config import TAX_PROVIDER_URL\n+\n+logger = logging.getLogger(__name__)\n+\n+def get_tax_rate(country_code, product_type=\"digital\"):\n+    \"\"\"Fetch current tax rate from provider.\"\"\"\n+    resp = requests.get(\n+        f\"{TAX_PROVIDER_URL}/rates\",\n+        params={\"country\": country_code, \"type\": product_type},\n+        timeout=5,\n+    )\n+    resp.raise_for_status()\n+    return resp.json()[\"rate\"]\ndiff --git a/webhooks.py b/webhooks.py\nnew file mode 100644\nindex 0000000..20bea67\n--- /dev/null\n+++ b/webhooks.py\n@@ -0,0 +1,18 @@\n+from flask import request, jsonify\n+import logging\n+\n+logger = logging.getLogger(__name__)\n+\n+def handle_webhook(app):\n+    @app.route(\"/webhooks/stripe\", methods=[\"POST\"])\n+    def stripe_webhook():\n+        payload = request.get_json()\n+        event_type = payload.get(\"type\", \"\")\n+        event_id = payload.get(\"id\", \"\")\n+        logger.info(\"received webhook %s: %s\", event_id, event_type)\n+        if event_type == \"charge.succeeded\":\n+            _process_charge(payload[\"data\"][\"object\"])\n+        return jsonify({\"received\": True})\n+\n+    def _process_charge(charge):\n+        logger.info(\"processing charge %s\", charge[\"id\"])\n",
+      "files_after": {},
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #1: Initial payments service scaffolding"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: requirements.txt, webhooks.py, checkout.py, config."
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': "
+        },
+        {
+          "kind": "usage",
+          "text": "tokens: 1181"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 2,
+      "title": "configure structured logging",
+      "author": "Marcus Chen",
+      "date": "2026-02-10T14:32:00",
+      "branch": "logging-setup",
+      "tag": "",
+      "diff": "diff --git a/logging_config.py b/logging_config.py\nnew file mode 100644\nindex 0000000..7ba5363\n--- /dev/null\n+++ b/logging_config.py\n@@ -0,0 +1,18 @@\n+import logging\n+import json\n+from config import LOG_LEVEL\n+\n+class JsonFormatter(logging.Formatter):\n+    def format(self, record):\n+        return json.dumps({\n+            \"time\": self.formatTime(record),\n+            \"level\": record.levelname,\n+            \"msg\": record.getMessage(),\n+            \"module\": record.module,\n+        })\n+\n+def setup_logging():\n+    handler = logging.StreamHandler()\n+    handler.setFormatter(JsonFormatter())\n+    logging.root.addHandler(handler)\n+    logging.root.setLevel(getattr(logging, LOG_LEVEL))\n",
+      "files_after": {},
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #2: configure structured logging"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: logging_config.py; functions: setup_logging, format"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 3,
+      "title": "feat: add health check endpoint",
+      "author": "Aisha Okafor",
+      "date": "2026-02-18T11:05:00",
+      "branch": "feat/health-check",
+      "tag": "",
+      "diff": "diff --git a/health.py b/health.py\nnew file mode 100644\nindex 0000000..5c5a445\n--- /dev/null\n+++ b/health.py\n@@ -0,0 +1,9 @@\n+from flask import jsonify\n+import os\n+\n+VERSION = os.environ.get(\"SERVICE_VERSION\", \"0.1.0\")\n+\n+def register_health(app):\n+    @app.route(\"/health\")\n+    def health():\n+        return jsonify({\"status\": \"ok\", \"version\": VERSION})\n",
+      "files_after": {},
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #3: feat: add health check endpoint"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: health.py; functions: health, register_health"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 4,
+      "title": "fix duplicate webhook processing",
+      "author": "Marcus Chen",
+      "date": "2026-03-02T16:41:00",
+      "branch": "fix-webhook-dupes",
+      "tag": "HACK",
+      "diff": "diff --git a/webhooks.py b/webhooks.py\nindex 20bea67..03de357 100644\n--- a/webhooks.py\n+++ b/webhooks.py\n@@ -3,12 +3,21 @@ import logging\n \n logger = logging.getLogger(__name__)\n \n+# HACK: skip duplicate webhook deliveries using an in-memory set.\n+# Stripe sometimes sends the same event twice within a few seconds.\n+# Revisit when PAY-212 adds idempotency at the database layer.\n+_seen_events = set()\n+\n def handle_webhook(app):\n     @app.route(\"/webhooks/stripe\", methods=[\"POST\"])\n     def stripe_webhook():\n         payload = request.get_json()\n         event_type = payload.get(\"type\", \"\")\n         event_id = payload.get(\"id\", \"\")\n+        if event_id in _seen_events:\n+            logger.info(\"skipping duplicate event %s\", event_id)\n+            return jsonify({\"received\": True, \"duplicate\": True})\n+        _seen_events.add(event_id)\n         logger.info(\"received webhook %s: %s\", event_id, event_type)\n         if event_type == \"charge.succeeded\":\n             _process_charge(payload[\"data\"][\"object\"])\n",
+      "files_after": {},
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #4: fix duplicate webhook processing"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: webhooks.py"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=True"
+        },
+        {
+          "kind": "reflect",
+          "text": "only 1 open hacks, skipping reflect"
+        },
+        {
+          "kind": "retain",
+          "text": "retained hack HACK-004"
+        },
+        {
+          "kind": "retain",
+          "text": "hack HACK-004 retired (anchor removed)"
+        }
+      ],
+      "skipped": false,
+      "comments": [
+        {
+          "kind": "retired",
+          "hack_id": "HACK-004",
+          "path": "webhooks.py",
+          "anchor_snippet": "_seen_events = set()\n\n        if event_id in _seen_events:",
+          "body_md": "Workaround removed.\n\n**Hack HACK-004**: An in-memory set is used to track and skip duplicate webhook event IDs to prevent double processing.\nThe anchor code has been deleted from the codebase.",
+          "evidence_prs": [
+            4,
+            4
+          ],
+          "id": "CMT-001"
+        }
+      ]
+    },
+    {
+      "pr": 5,
+      "title": "add unit tests for invoice generation",
+      "author": "Priya Sharma",
+      "date": "2026-03-08T10:20:00",
+      "branch": "tests-invoices",
+      "tag": "",
+      "diff": "diff --git a/tests/test_invoices.py b/tests/test_invoices.py\nnew file mode 100644\nindex 0000000..506f323\n--- /dev/null\n+++ b/tests/test_invoices.py\n@@ -0,0 +1,17 @@\n+import unittest\n+from invoices import generate_invoice\n+\n+class TestInvoice(unittest.TestCase):\n+    def test_basic_invoice(self):\n+        items = [{\"amount\": 1000}, {\"amount\": 2000}]\n+        inv = generate_invoice(\"cust_1\", items, tax_rate=0.1)\n+        self.assertEqual(inv[\"subtotal\"], 3000)\n+        self.assertEqual(inv[\"tax\"], 300.0)\n+        self.assertEqual(inv[\"total\"], 3300.0)\n+\n+    def test_zero_amount(self):\n+        inv = generate_invoice(\"cust_2\", [], tax_rate=0.2)\n+        self.assertEqual(inv[\"total\"], 0)\n+\n+if __name__ == \"__main__\":\n+    unittest.main()\n",
+      "files_after": {},
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #5: add unit tests for invoice generation"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: tests/test_invoices.py; functions: test_basic_invoi"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 6,
+      "title": "use fixed retry delay for charge attempts",
+      "author": "Priya Sharma",
+      "date": "2026-03-19T08:55:00",
+      "branch": "fix-retry-delay",
+      "tag": "HACK",
+      "diff": "diff --git a/billing/retry.py b/billing/retry.py\nindex 34e504f..81f623b 100644\n--- a/billing/retry.py\n+++ b/billing/retry.py\n@@ -5,7 +5,7 @@ import logging\n logger = logging.getLogger(__name__)\n \n def charge_customer(customer_id, amount, currency=\"usd\"):\n-    \"\"\"Attempt a charge with basic retry logic.\"\"\"\n+    \"\"\"Attempt a charge with retry logic.\"\"\"\n     for attempt in range(3):\n         try:\n             return stripe.Charge.create(\n@@ -14,7 +14,11 @@ def charge_customer(customer_id, amount, currency=\"usd\"):\n                 currency=currency,\n             )\n         except stripe.error.RateLimitError:\n-            wait = 2 ** attempt\n-            logger.warning(\"rate limited, retrying in %ds\", wait)\n+            # Workaround: fixed 3-second delay instead of exponential backoff.\n+            # Stripe's batch endpoint throttles under sustained load and\n+            # exponential backoff causes timeouts downstream.\n+            # Remove once Stripe's batch endpoint stops throttling under load.\n+            wait = 3\n+            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n             time.sleep(wait)\n     raise RuntimeError(\"charge failed after retries\")\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #6: use fixed retry delay for charge attempts"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: billing/retry.py"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=True"
+        },
+        {
+          "kind": "reflect",
+          "text": "only 1 open hacks, skipping reflect"
+        },
+        {
+          "kind": "retain",
+          "text": "retained hack HACK-006"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 7,
+      "title": "docs: update README with setup instructions",
+      "author": "Aisha Okafor",
+      "date": "2026-03-25T13:10:00",
+      "branch": "docs/readme-update",
+      "tag": "",
+      "diff": "diff --git a/README.md b/README.md\nnew file mode 100644\nindex 0000000..fe68a8d\n--- /dev/null\n+++ b/README.md\n@@ -0,0 +1,16 @@\n+# Payments Service\n+\n+Local development setup for the payments API.\n+\n+## Setup\n+\n+1. Copy `.env.example` to `.env`\n+2. Set STRIPE_API_KEY to your test key\n+3. Run `pip install -r requirements.txt`\n+4. Run `flask run`\n+\n+## Environment Variables\n+\n+- STRIPE_API_KEY: Stripe secret key\n+- TAX_PROVIDER_URL: Tax rate API base URL\n+- DATABASE_URL: SQLite connection string\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #7: docs: update README with setup instructions"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: README.md"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.99)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 8,
+      "title": "cap single charge amount at 50000",
+      "author": "Marcus Chen",
+      "date": "2026-04-07T15:30:00",
+      "branch": "fix-ledger-overflow",
+      "tag": "HACK",
+      "diff": "diff --git a/checkout.py b/checkout.py\nindex de272eb..bdb1602 100644\n--- a/checkout.py\n+++ b/checkout.py\n@@ -1,13 +1,21 @@\n from flask import Flask, request, jsonify\n import stripe\n+import logging\n \n app = Flask(__name__)\n+logger = logging.getLogger(__name__)\n \n @app.route(\"/checkout\", methods=[\"POST\"])\n def checkout():\n     data = request.get_json()\n+    amount = data[\"amount\"]\n+    # HACK: cap single charge to 50000 cents due to a downstream ledger\n+    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n+    if amount > 50000:\n+        logger.warning(\"capping charge amount from %d to 50000\", amount)\n+        amount = 50000\n     charge = stripe.Charge.create(\n-        amount=data[\"amount\"],\n+        amount=amount,\n         currency=data.get(\"currency\", \"usd\"),\n         source=data[\"source\"],\n     )\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    # HACK: cap single charge to 50000 cents due to a downstream ledger\n    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    charge = stripe.Charge.create(\n        amount=amount,\n        currency=data.get(\"currency\", \"usd\"),\n        source=data[\"source\"],\n    )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #8: cap single charge amount at 50000"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: checkout.py"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=True"
+        },
+        {
+          "kind": "reflect",
+          "text": "only 2 open hacks, skipping reflect"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "retain",
+          "text": "retained hack HACK-008"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 9,
+      "title": "fix typo in webhook log message",
+      "author": "James Park",
+      "date": "2026-04-11T09:45:00",
+      "branch": "fix-typo",
+      "tag": "",
+      "diff": "",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    # HACK: cap single charge to 50000 cents due to a downstream ledger\n    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    charge = stripe.Charge.create(\n        amount=amount,\n        currency=data.get(\"currency\", \"usd\"),\n        source=data[\"source\"],\n    )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #9: fix typo in webhook log message"
+        },
+        {
+          "kind": "recall",
+          "text": "empty diff, skipping recall"
+        },
+        {
+          "kind": "classify",
+          "text": "empty diff, skipping"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.99)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.99)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 10,
+      "title": "feat: database-backed event idempotency",
+      "author": "Aisha Okafor",
+      "date": "2026-04-22T10:15:00",
+      "branch": "feat/idempotent-webhooks",
+      "tag": "",
+      "diff": "diff --git a/db.py b/db.py\nnew file mode 100644\nindex 0000000..39528be\n--- /dev/null\n+++ b/db.py\n@@ -0,0 +1,16 @@\n+import sqlite3\n+import os\n+from config import DATABASE_URL\n+\n+_connection = None\n+\n+def get_db():\n+    global _connection\n+    if _connection is None:\n+        db_path = DATABASE_URL.replace(\"sqlite:///\", \"\")\n+        _connection = sqlite3.connect(db_path)\n+        _connection.execute(\n+            \"CREATE TABLE IF NOT EXISTS processed_events \"\n+            \"(event_id TEXT PRIMARY KEY, processed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)\"\n+        )\n+    return _connection\ndiff --git a/webhooks.py b/webhooks.py\nindex 03de357..e552d33 100644\n--- a/webhooks.py\n+++ b/webhooks.py\n@@ -1,23 +1,23 @@\n from flask import request, jsonify\n import logging\n+from db import get_db\n \n logger = logging.getLogger(__name__)\n \n-# HACK: skip duplicate webhook deliveries using an in-memory set.\n-# Stripe sometimes sends the same event twice within a few seconds.\n-# Revisit when PAY-212 adds idempotency at the database layer.\n-_seen_events = set()\n-\n def handle_webhook(app):\n     @app.route(\"/webhooks/stripe\", methods=[\"POST\"])\n     def stripe_webhook():\n         payload = request.get_json()\n         event_type = payload.get(\"type\", \"\")\n         event_id = payload.get(\"id\", \"\")\n-        if event_id in _seen_events:\n-            logger.info(\"skipping duplicate event %s\", event_id)\n+        db = get_db()\n+        if db.execute(\n+            \"SELECT 1 FROM processed_events WHERE event_id = ?\", (event_id,)\n+        ).fetchone():\n+            logger.info(\"skipping duplicate event %s (db)\", event_id)\n             return jsonify({\"received\": True, \"duplicate\": True})\n-        _seen_events.add(event_id)\n+        db.execute(\"INSERT INTO processed_events (event_id) VALUES (?)\", (event_id,))\n+        db.commit()\n         logger.info(\"received webhook %s: %s\", event_id, event_type)\n         if event_type == \"charge.succeeded\":\n             _process_charge(payload[\"data\"][\"object\"])\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    # HACK: cap single charge to 50000 cents due to a downstream ledger\n    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    charge = stripe.Charge.create(\n        amount=amount,\n        currency=data.get(\"currency\", \"usd\"),\n        source=data[\"source\"],\n    )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #10: feat: database-backed event idempotency"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: db.py, webhooks.py; functions: get_db"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 11,
+      "title": "validate checkout request body",
+      "author": "Priya Sharma",
+      "date": "2026-04-28T14:00:00",
+      "branch": "validate-checkout",
+      "tag": "",
+      "diff": "diff --git a/.pr_marker b/.pr_marker\nnew file mode 100644\nindex 0000000..d6777e3\n--- /dev/null\n+++ b/.pr_marker\n@@ -0,0 +1 @@\n+PR-11\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    # HACK: cap single charge to 50000 cents due to a downstream ledger\n    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    charge = stripe.Charge.create(\n        amount=amount,\n        currency=data.get(\"currency\", \"usd\"),\n        source=data[\"source\"],\n    )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #11: validate checkout request body"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: .pr_marker"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 12,
+      "title": "cache tax provider responses",
+      "author": "James Park",
+      "date": "2026-05-06T11:30:00",
+      "branch": "cache-tax-rates",
+      "tag": "HACK",
+      "diff": "diff --git a/tax.py b/tax.py\nindex 65fcaf8..f1fde1e 100644\n--- a/tax.py\n+++ b/tax.py\n@@ -1,15 +1,29 @@\n import requests\n+import time\n import logging\n-from config import TAX_PROVIDER_URL\n+from config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n \n logger = logging.getLogger(__name__)\n \n+# Workaround: cache tax rates in memory because the tax provider API\n+# responds slowly (p95 over 2 seconds). Remove when the provider\n+# brings latency reliably below 200ms.\n+_tax_cache = {}\n+_cache_times = {}\n+\n def get_tax_rate(country_code, product_type=\"digital\"):\n-    \"\"\"Fetch current tax rate from provider.\"\"\"\n+    \"\"\"Fetch current tax rate, with caching.\"\"\"\n+    cache_key = f\"{country_code}:{product_type}\"\n+    now = time.time()\n+    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n+        return _tax_cache[cache_key]\n     resp = requests.get(\n         f\"{TAX_PROVIDER_URL}/rates\",\n         params={\"country\": country_code, \"type\": product_type},\n         timeout=5,\n     )\n     resp.raise_for_status()\n-    return resp.json()[\"rate\"]\n+    rate = resp.json()[\"rate\"]\n+    _tax_cache[cache_key] = rate\n+    _cache_times[cache_key] = now\n+    return rate\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    # HACK: cap single charge to 50000 cents due to a downstream ledger\n    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    charge = stripe.Charge.create(\n        amount=amount,\n        currency=data.get(\"currency\", \"usd\"),\n        source=data[\"source\"],\n    )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #12: cache tax provider responses"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: tax.py"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=True"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "query: The tax provider API has high latency (p95 over 2 seconds) which is too slow for..."
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "recall hit IDs: []"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "survivors after open filter: []"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "returned IDs: []"
+        },
+        {
+          "kind": "reflect",
+          "text": "only 0 open similar hacks, skipping reflect"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "retain",
+          "text": "retained hack HACK-012"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 13,
+      "title": "bump requests to 2.32.0",
+      "author": "Priya Sharma",
+      "date": "2026-05-12T08:50:00",
+      "branch": "bump-requests",
+      "tag": "",
+      "diff": "diff --git a/requirements.txt b/requirements.txt\nindex d068891..5cf2d51 100644\n--- a/requirements.txt\n+++ b/requirements.txt\n@@ -1,3 +1,3 @@\n flask==3.0.0\n stripe==3.8.0\n-requests==2.31.0\n+requests==2.32.0\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    # HACK: cap single charge to 50000 cents due to a downstream ledger\n    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    charge = stripe.Charge.create(\n        amount=amount,\n        currency=data.get(\"currency\", \"usd\"),\n        source=data[\"source\"],\n    )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #13: bump requests to 2.32.0"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: requirements.txt"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.99)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 14,
+      "title": "feat: add global error handler",
+      "author": "Aisha Okafor",
+      "date": "2026-05-20T16:15:00",
+      "branch": "feat/error-handler",
+      "tag": "",
+      "diff": "diff --git a/errors.py b/errors.py\nnew file mode 100644\nindex 0000000..0ff2f72\n--- /dev/null\n+++ b/errors.py\n@@ -0,0 +1,18 @@\n+from flask import jsonify\n+import logging\n+\n+logger = logging.getLogger(__name__)\n+\n+def register_error_handlers(app):\n+    @app.errorhandler(400)\n+    def bad_request(e):\n+        return jsonify({\"error\": \"bad request\", \"message\": str(e)}), 400\n+\n+    @app.errorhandler(404)\n+    def not_found(e):\n+        return jsonify({\"error\": \"not found\"}), 404\n+\n+    @app.errorhandler(500)\n+    def server_error(e):\n+        logger.exception(\"internal server error\")\n+        return jsonify({\"error\": \"internal server error\"}), 500\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    # HACK: cap single charge to 50000 cents due to a downstream ledger\n    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    charge = stripe.Charge.create(\n        amount=amount,\n        currency=data.get(\"currency\", \"usd\"),\n        source=data[\"source\"],\n    )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #14: feat: add global error handler"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: errors.py; functions: bad_request, not_found, regis"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: "
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 15,
+      "title": "increase stripe timeout and limit concurrency",
+      "author": "James Park",
+      "date": "2026-05-28T09:20:00",
+      "branch": "stripe-timeout-fix",
+      "tag": "HACK",
+      "diff": "diff --git a/checkout.py b/checkout.py\nindex bdb1602..7695263 100644\n--- a/checkout.py\n+++ b/checkout.py\n@@ -1,22 +1,25 @@\n from flask import Flask, request, jsonify\n import stripe\n import logging\n+from config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\n+import threading\n \n app = Flask(__name__)\n logger = logging.getLogger(__name__)\n+_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n \n @app.route(\"/checkout\", methods=[\"POST\"])\n def checkout():\n     data = request.get_json()\n     amount = data[\"amount\"]\n-    # HACK: cap single charge to 50000 cents due to a downstream ledger\n-    # overflow bug. Revisit when PAY-240 migrates ledger to bigint columns.\n     if amount > 50000:\n         logger.warning(\"capping charge amount from %d to 50000\", amount)\n         amount = 50000\n-    charge = stripe.Charge.create(\n-        amount=amount,\n-        currency=data.get(\"currency\", \"usd\"),\n-        source=data[\"source\"],\n-    )\n+    with _charge_semaphore:\n+        charge = stripe.Charge.create(\n+            amount=amount,\n+            currency=data.get(\"currency\", \"usd\"),\n+            source=data[\"source\"],\n+            timeout=STRIPE_TIMEOUT,\n+        )\n     return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\ndiff --git a/config.py b/config.py\nindex b61d6f5..82cad6c 100644\n--- a/config.py\n+++ b/config.py\n@@ -5,3 +5,8 @@ TAX_PROVIDER_URL = os.environ.get(\"TAX_PROVIDER_URL\", \"https://tax.example.com\")\n TAX_CACHE_TTL = int(os.environ.get(\"TAX_CACHE_TTL\", \"300\"))\n DATABASE_URL = os.environ.get(\"DATABASE_URL\", \"sqlite:///payments.db\")\n LOG_LEVEL = os.environ.get(\"LOG_LEVEL\", \"INFO\")\n+# Workaround: raised timeout from default 10s to 45s and cap concurrency\n+# at 4 because Stripe times out under concurrent load.\n+# Remove when Stripe stabilizes response times for batch operations.\n+STRIPE_TIMEOUT = int(os.environ.get(\"STRIPE_TIMEOUT\", \"45\"))\n+STRIPE_MAX_CONCURRENT = int(os.environ.get(\"STRIPE_MAX_CONCURRENT\", \"4\"))\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #15: increase stripe timeout and limit concurrency"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: checkout.py, config.py"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu"
+        },
+        {
+          "kind": "usage",
+          "text": "tokens: 713"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=True"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "query: Stripe times out under load, and concurrent requests exacerbate the issue. This ..."
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "recall hit IDs: []"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "survivors after open filter: []"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "returned IDs: []"
+        },
+        {
+          "kind": "reflect",
+          "text": "only 0 open similar hacks, skipping reflect"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.95)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "retain",
+          "text": "retained hack HACK-015"
+        },
+        {
+          "kind": "retain",
+          "text": "hack HACK-015 retired (anchor removed)"
+        }
+      ],
+      "skipped": false,
+      "comments": [
+        {
+          "kind": "retired",
+          "hack_id": "HACK-015",
+          "path": "checkout.py",
+          "anchor_snippet": "STRIPE_TIMEOUT = int(os.environ.get(\"STRIPE_TIMEOUT\", \"45\"))\nSTRIPE_MAX_CONCURRENT = int(os.environ.get(\"STRIPE_MAX_CONCURRENT\", \"4\"))",
+          "body_md": "Workaround removed.\n\n**Hack HACK-015**: Increased Stripe client timeout to 45 seconds and limited concurrent charge requests to 4 using a semaphore.\nThe anchor code has been deleted from the codebase.",
+          "evidence_prs": [
+            15,
+            15
+          ],
+          "id": "CMT-002"
+        }
+      ]
+    },
+    {
+      "pr": 16,
+      "title": "add basic metrics counters",
+      "author": "Marcus Chen",
+      "date": "2026-06-03T14:45:00",
+      "branch": "add-metrics",
+      "tag": "",
+      "diff": "diff --git a/metrics.py b/metrics.py\nnew file mode 100644\nindex 0000000..af43769\n--- /dev/null\n+++ b/metrics.py\n@@ -0,0 +1,22 @@\n+import time\n+import logging\n+\n+logger = logging.getLogger(__name__)\n+\n+_counters = {}\n+\n+def increment(name, value=1):\n+    _counters[name] = _counters.get(name, 0) + value\n+\n+def get_counts():\n+    return dict(_counters)\n+\n+class Timer:\n+    def __init__(self, name):\n+        self.name = name\n+    def __enter__(self):\n+        self.start = time.time()\n+        return self\n+    def __exit__(self, *args):\n+        elapsed = time.time() - self.start\n+        logger.info(\"%s took %.3fs\", self.name, elapsed)\n",
+      "files_after": {
+        "billing/retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef charge_customer(customer_id, amount, currency=\"usd\"):\n    \"\"\"Attempt a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #16: add basic metrics counters"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: metrics.py; functions: __exit__, __init__, get_coun"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 17,
+      "title": "reorganize billing modules",
+      "author": "Priya Sharma",
+      "date": "2026-06-10T10:30:00",
+      "branch": "reorganize-billing",
+      "tag": "MOVE",
+      "diff": "diff --git a/billing/retry.py b/billing/stripe_retry.py\nsimilarity index 88%\nrename from billing/retry.py\nrename to billing/stripe_retry.py\nindex 81f623b..1678a0d 100644\n--- a/billing/retry.py\n+++ b/billing/stripe_retry.py\n@@ -4,8 +4,8 @@ import logging\n \n logger = logging.getLogger(__name__)\n \n-def charge_customer(customer_id, amount, currency=\"usd\"):\n-    \"\"\"Attempt a charge with retry logic.\"\"\"\n+def submit_charge(customer_id, amount, currency=\"usd\"):\n+    \"\"\"Submit a charge with retry logic.\"\"\"\n     for attempt in range(3):\n         try:\n             return stripe.Charge.create(\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #17: reorganize billing modules"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: billing/stripe_retry.py, billing/retry.py; function"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.95)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "retain",
+          "text": "hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py"
+        }
+      ],
+      "skipped": false,
+      "comments": [
+        {
+          "kind": "related_hack",
+          "hack_id": "HACK-006",
+          "path": "billing/stripe_retry.py",
+          "anchor_snippet": "wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)",
+          "body_md": "This PR moves a tracked workaround to a new location.\n\n**Hack HACK-006**: Fixed 3-second retry delay replacing exponential backoff for charge attempts\n- Previous location: `billing/retry.py` in `unknown`\n- New location: `billing/stripe_retry.py` in `submit_charge`",
+          "evidence_prs": [
+            6
+          ],
+          "id": "CMT-003"
+        }
+      ]
+    },
+    {
+      "pr": 18,
+      "title": "add .env.example file",
+      "author": "Marcus Chen",
+      "date": "2026-06-15T11:20:00",
+      "branch": "env-example",
+      "tag": "",
+      "diff": "diff --git a/.env.example b/.env.example\nnew file mode 100644\nindex 0000000..97fe769\n--- /dev/null\n+++ b/.env.example\n@@ -0,0 +1,6 @@\n+STRIPE_API_KEY=sk_test_xxx\n+TAX_PROVIDER_URL=https://tax.example.com\n+DATABASE_URL=sqlite:///payments.db\n+LOG_LEVEL=INFO\n+STRIPE_TIMEOUT=45\n+STRIPE_MAX_CONCURRENT=4\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #18: add .env.example file"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: .env.example"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.99)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.99)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 19,
+      "title": "bump stripe-sdk to 4.0.3",
+      "author": "James Park",
+      "date": "2026-06-22T08:10:00",
+      "branch": "bump-stripe-403",
+      "tag": "",
+      "diff": "diff --git a/requirements.txt b/requirements.txt\nindex 5cf2d51..882dc01 100644\n--- a/requirements.txt\n+++ b/requirements.txt\n@@ -1,3 +1,3 @@\n flask==3.0.0\n-stripe==3.8.0\n+stripe==4.0.3\n requests==2.32.0\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #19: bump stripe-sdk to 4.0.3"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: requirements.txt"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.95)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 20,
+      "title": "feat: verify webhook signatures",
+      "author": "Aisha Okafor",
+      "date": "2026-07-01T13:40:00",
+      "branch": "feat/webhook-sig",
+      "tag": "",
+      "diff": "diff --git a/.pr_marker b/.pr_marker\nindex d6777e3..5ead28c 100644\n--- a/.pr_marker\n+++ b/.pr_marker\n@@ -1 +1 @@\n-PR-11\n+PR-20\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #20: feat: verify webhook signatures"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: .pr_marker"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.99)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 21,
+      "title": "add tests for charge retry logic",
+      "author": "Priya Sharma",
+      "date": "2026-07-08T09:30:00",
+      "branch": "test-retry",
+      "tag": "",
+      "diff": "diff --git a/tests/test_retry.py b/tests/test_retry.py\nnew file mode 100644\nindex 0000000..b166403\n--- /dev/null\n+++ b/tests/test_retry.py\n@@ -0,0 +1,13 @@\n+import unittest\n+from unittest.mock import patch, MagicMock\n+from billing.stripe_retry import submit_charge\n+\n+class TestRetry(unittest.TestCase):\n+    @patch(\"billing.stripe_retry.stripe.Charge.create\")\n+    def test_successful_charge(self, mock_create):\n+        mock_create.return_value = MagicMock(id=\"ch_123\")\n+        result = submit_charge(\"cust_1\", 5000)\n+        self.assertEqual(result.id, \"ch_123\")\n+\n+if __name__ == \"__main__\":\n+    unittest.main()\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #21: add tests for charge retry logic"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 22,
+      "title": "add batch charge verification and fallback",
+      "author": "Marcus Chen",
+      "date": "2026-07-18T15:55:00",
+      "branch": "batch-charge-verify",
+      "tag": "HACK",
+      "diff": "diff --git a/invoices.py b/invoices.py\nindex 9acb34b..1b225c6 100644\n--- a/invoices.py\n+++ b/invoices.py\n@@ -1,4 +1,5 @@\n import logging\n+import stripe\n from datetime import datetime\n \n logger = logging.getLogger(__name__)\n@@ -16,3 +17,26 @@ def generate_invoice(customer_id, line_items, tax_rate=0.0):\n         \"issued_at\": datetime.utcnow().isoformat(),\n         \"status\": \"pending\",\n     }\n+\n+def batch_charge_and_invoice(customer_id, line_items, tax_rate=0.0):\n+    \"\"\"Charge for all items then build an invoice.\n+\n+    Workaround: after batch charges, re-verify each total individually\n+    and fall back to per-charge mode because Stripe's batch API returns\n+    inconsistent totals under load.\n+    Remove when Stripe's batch charge API returns consistent totals.\n+    \"\"\"\n+    total = sum(item[\"amount\"] for item in line_items)\n+    try:\n+        batch = stripe.Charge.create(amount=total, customer=customer_id)\n+        # Verify: re-fetch and compare\n+        fetched = stripe.Charge.retrieve(batch.id)\n+        if fetched.amount != total:\n+            logger.warning(\"batch total mismatch, falling back to per-charge\")\n+            for item in line_items:\n+                stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n+    except stripe.error.APIError:\n+        logger.warning(\"batch charge failed, falling back to per-charge\")\n+        for item in line_items:\n+            stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n+    return generate_invoice(customer_id, line_items, tax_rate)\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n",
+        "invoices.py": "import logging\nimport stripe\nfrom datetime import datetime\n\nlogger = logging.getLogger(__name__)\n\ndef generate_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Build an invoice dict from line items.\"\"\"\n    subtotal = sum(item[\"amount\"] for item in line_items)\n    tax = round(subtotal * tax_rate, 2)\n    return {\n        \"customer_id\": customer_id,\n        \"line_items\": line_items,\n        \"subtotal\": subtotal,\n        \"tax\": tax,\n        \"total\": subtotal + tax,\n        \"issued_at\": datetime.utcnow().isoformat(),\n        \"status\": \"pending\",\n    }\n\ndef batch_charge_and_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Charge for all items then build an invoice.\n\n    Workaround: after batch charges, re-verify each total individually\n    and fall back to per-charge mode because Stripe's batch API returns\n    inconsistent totals under load.\n    Remove when Stripe's batch charge API returns consistent totals.\n    \"\"\"\n    total = sum(item[\"amount\"] for item in line_items)\n    try:\n        batch = stripe.Charge.create(amount=total, customer=customer_id)\n        # Verify: re-fetch and compare\n        fetched = stripe.Charge.retrieve(batch.id)\n        if fetched.amount != total:\n            logger.warning(\"batch total mismatch, falling back to per-charge\")\n            for item in line_items:\n                stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    except stripe.error.APIError:\n        logger.warning(\"batch charge failed, falling back to per-charge\")\n        for item in line_items:\n            stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    return generate_invoice(customer_id, line_items, tax_rate)\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #22: add batch charge verification and fallback"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=True"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "query: Stripe's batch charge API returns inconsistent totals under load, causing produc..."
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "recall hit IDs: []"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "survivors after open filter: []"
+        },
+        {
+          "kind": "reflect_gate",
+          "text": "returned IDs: []"
+        },
+        {
+          "kind": "reflect",
+          "text": "only 0 open similar hacks, skipping reflect"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.95)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "usage",
+          "text": "tokens: 1133"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "retain",
+          "text": "retained hack HACK-022"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 23,
+      "title": "docs: document batch charging flow",
+      "author": "Aisha Okafor",
+      "date": "2026-07-25T10:10:00",
+      "branch": "docs/batch-charging",
+      "tag": "",
+      "diff": "diff --git a/.pr_marker b/.pr_marker\nindex 5ead28c..755e95b 100644\n--- a/.pr_marker\n+++ b/.pr_marker\n@@ -1 +1 @@\n-PR-20\n+PR-23\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge with retry logic.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n",
+        "invoices.py": "import logging\nimport stripe\nfrom datetime import datetime\n\nlogger = logging.getLogger(__name__)\n\ndef generate_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Build an invoice dict from line items.\"\"\"\n    subtotal = sum(item[\"amount\"] for item in line_items)\n    tax = round(subtotal * tax_rate, 2)\n    return {\n        \"customer_id\": customer_id,\n        \"line_items\": line_items,\n        \"subtotal\": subtotal,\n        \"tax\": tax,\n        \"total\": subtotal + tax,\n        \"issued_at\": datetime.utcnow().isoformat(),\n        \"status\": \"pending\",\n    }\n\ndef batch_charge_and_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Charge for all items then build an invoice.\n\n    Workaround: after batch charges, re-verify each total individually\n    and fall back to per-charge mode because Stripe's batch API returns\n    inconsistent totals under load.\n    Remove when Stripe's batch charge API returns consistent totals.\n    \"\"\"\n    total = sum(item[\"amount\"] for item in line_items)\n    try:\n        batch = stripe.Charge.create(amount=total, customer=customer_id)\n        # Verify: re-fetch and compare\n        fetched = stripe.Charge.retrieve(batch.id)\n        if fetched.amount != total:\n            logger.warning(\"batch total mismatch, falling back to per-charge\")\n            for item in line_items:\n                stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    except stripe.error.APIError:\n        logger.warning(\"batch charge failed, falling back to per-charge\")\n        for item in line_items:\n            stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    return generate_invoice(customer_id, line_items, tax_rate)\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #23: docs: document batch charging flow"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: .pr_marker"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.99)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-022"
+        },
+        {
+          "kind": "usage",
+          "text": "tokens: 690"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-022: NEEDS_WORK (conf=0.98)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 24,
+      "title": "upgrade to stripe-sdk 4.2 and use batched charge API",
+      "author": "James Park",
+      "date": "2026-08-05T14:20:00",
+      "branch": "stripe-sdk-42",
+      "tag": "",
+      "diff": "diff --git a/billing/stripe_retry.py b/billing/stripe_retry.py\nindex 1678a0d..8055d28 100644\n--- a/billing/stripe_retry.py\n+++ b/billing/stripe_retry.py\n@@ -5,7 +5,7 @@ import logging\n logger = logging.getLogger(__name__)\n \n def submit_charge(customer_id, amount, currency=\"usd\"):\n-    \"\"\"Submit a charge with retry logic.\"\"\"\n+    \"\"\"Submit a charge using the batched charge API.\"\"\"\n     for attempt in range(3):\n         try:\n             return stripe.Charge.create(\ndiff --git a/requirements.txt b/requirements.txt\nindex 882dc01..6aa6c25 100644\n--- a/requirements.txt\n+++ b/requirements.txt\n@@ -1,3 +1,3 @@\n flask==3.0.0\n-stripe==4.0.3\n+stripe==4.2.0\n requests==2.32.0\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge using the batched charge API.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n",
+        "invoices.py": "import logging\nimport stripe\nfrom datetime import datetime\n\nlogger = logging.getLogger(__name__)\n\ndef generate_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Build an invoice dict from line items.\"\"\"\n    subtotal = sum(item[\"amount\"] for item in line_items)\n    tax = round(subtotal * tax_rate, 2)\n    return {\n        \"customer_id\": customer_id,\n        \"line_items\": line_items,\n        \"subtotal\": subtotal,\n        \"tax\": tax,\n        \"total\": subtotal + tax,\n        \"issued_at\": datetime.utcnow().isoformat(),\n        \"status\": \"pending\",\n    }\n\ndef batch_charge_and_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Charge for all items then build an invoice.\n\n    Workaround: after batch charges, re-verify each total individually\n    and fall back to per-charge mode because Stripe's batch API returns\n    inconsistent totals under load.\n    Remove when Stripe's batch charge API returns consistent totals.\n    \"\"\"\n    total = sum(item[\"amount\"] for item in line_items)\n    try:\n        batch = stripe.Charge.create(amount=total, customer=customer_id)\n        # Verify: re-fetch and compare\n        fetched = stripe.Charge.retrieve(batch.id)\n        if fetched.amount != total:\n            logger.warning(\"batch total mismatch, falling back to per-charge\")\n            for item in line_items:\n                stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    except stripe.error.APIError:\n        logger.warning(\"batch charge failed, falling back to per-charge\")\n        for item in line_items:\n            stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    return generate_invoice(customer_id, line_items, tax_rate)\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: requirements.txt, billing/stripe_retry.py"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch"
+        },
+        {
+          "kind": "usage",
+          "text": "tokens: 469"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.95)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-022"
+        },
+        {
+          "kind": "usage",
+          "text": "tokens: 964"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-022: NEEDS_WORK (conf=0.95)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 25,
+      "title": "remove unused imports",
+      "author": "Priya Sharma",
+      "date": "2026-08-12T09:00:00",
+      "branch": "cleanup-imports",
+      "tag": "",
+      "diff": "diff --git a/.pr_marker b/.pr_marker\nindex 755e95b..22b12e0 100644\n--- a/.pr_marker\n+++ b/.pr_marker\n@@ -1 +1 @@\n-PR-23\n+PR-25\n",
+      "files_after": {
+        "billing/stripe_retry.py": "import stripe\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\ndef submit_charge(customer_id, amount, currency=\"usd\"):\n    \"\"\"Submit a charge using the batched charge API.\"\"\"\n    for attempt in range(3):\n        try:\n            return stripe.Charge.create(\n                customer=customer_id,\n                amount=amount,\n                currency=currency,\n            )\n        except stripe.error.RateLimitError:\n            # Workaround: fixed 3-second delay instead of exponential backoff.\n            # Stripe's batch endpoint throttles under sustained load and\n            # exponential backoff causes timeouts downstream.\n            # Remove once Stripe's batch endpoint stops throttling under load.\n            wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n            time.sleep(wait)\n    raise RuntimeError(\"charge failed after retries\")\n",
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n",
+        "invoices.py": "import logging\nimport stripe\nfrom datetime import datetime\n\nlogger = logging.getLogger(__name__)\n\ndef generate_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Build an invoice dict from line items.\"\"\"\n    subtotal = sum(item[\"amount\"] for item in line_items)\n    tax = round(subtotal * tax_rate, 2)\n    return {\n        \"customer_id\": customer_id,\n        \"line_items\": line_items,\n        \"subtotal\": subtotal,\n        \"tax\": tax,\n        \"total\": subtotal + tax,\n        \"issued_at\": datetime.utcnow().isoformat(),\n        \"status\": \"pending\",\n    }\n\ndef batch_charge_and_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Charge for all items then build an invoice.\n\n    Workaround: after batch charges, re-verify each total individually\n    and fall back to per-charge mode because Stripe's batch API returns\n    inconsistent totals under load.\n    Remove when Stripe's batch charge API returns consistent totals.\n    \"\"\"\n    total = sum(item[\"amount\"] for item in line_items)\n    try:\n        batch = stripe.Charge.create(amount=total, customer=customer_id)\n        # Verify: re-fetch and compare\n        fetched = stripe.Charge.retrieve(batch.id)\n        if fetched.amount != total:\n            logger.warning(\"batch total mismatch, falling back to per-charge\")\n            for item in line_items:\n                stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    except stripe.error.APIError:\n        logger.warning(\"batch charge failed, falling back to per-charge\")\n        for item in line_items:\n            stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    return generate_invoice(customer_id, line_items, tax_rate)\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #25: remove unused imports"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: .pr_marker"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.99)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.99)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.99)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-022"
+        },
+        {
+          "kind": "usage",
+          "text": "tokens: 715"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-022: NEEDS_WORK (conf=0.99)"
+        }
+      ],
+      "skipped": false,
+      "comments": []
+    },
+    {
+      "pr": 26,
+      "title": "remove fixed retry delay workaround",
+      "author": "Priya Sharma",
+      "date": "2026-08-20T11:45:00",
+      "branch": "remove-retry-delay",
+      "tag": "",
+      "diff": "diff --git a/billing/stripe_retry.py b/billing/stripe_retry.py\nindex 8055d28..5fa9e7b 100644\n--- a/billing/stripe_retry.py\n+++ b/billing/stripe_retry.py\n@@ -1,24 +1,16 @@\n import stripe\n-import time\n import logging\n \n logger = logging.getLogger(__name__)\n \n def submit_charge(customer_id, amount, currency=\"usd\"):\n-    \"\"\"Submit a charge using the batched charge API.\"\"\"\n-    for attempt in range(3):\n-        try:\n-            return stripe.Charge.create(\n-                customer=customer_id,\n-                amount=amount,\n-                currency=currency,\n-            )\n-        except stripe.error.RateLimitError:\n-            # Workaround: fixed 3-second delay instead of exponential backoff.\n-            # Stripe's batch endpoint throttles under sustained load and\n-            # exponential backoff causes timeouts downstream.\n-            # Remove once Stripe's batch endpoint stops throttling under load.\n-            wait = 3\n-            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)\n-            time.sleep(wait)\n-    raise RuntimeError(\"charge failed after retries\")\n+    \"\"\"Submit a charge using the batched charge API.\n+\n+    The fixed retry delay workaround has been removed now that\n+    stripe-sdk 4.2 handles rate limiting properly.\n+    \"\"\"\n+    return stripe.Charge.create(\n+        customer=customer_id,\n+        amount=amount,\n+        currency=currency,\n+    )\n",
+      "files_after": {
+        "checkout.py": "from flask import Flask, request, jsonify\nimport stripe\nimport logging\nfrom config import STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT\nimport threading\n\napp = Flask(__name__)\nlogger = logging.getLogger(__name__)\n_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\n\n@app.route(\"/checkout\", methods=[\"POST\"])\ndef checkout():\n    data = request.get_json()\n    amount = data[\"amount\"]\n    if amount > 50000:\n        logger.warning(\"capping charge amount from %d to 50000\", amount)\n        amount = 50000\n    with _charge_semaphore:\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=data.get(\"currency\", \"usd\"),\n            source=data[\"source\"],\n            timeout=STRIPE_TIMEOUT,\n        )\n    return jsonify({\"charge_id\": charge.id, \"status\": charge.status})\n",
+        "tax.py": "import requests\nimport time\nimport logging\nfrom config import TAX_PROVIDER_URL, TAX_CACHE_TTL\n\nlogger = logging.getLogger(__name__)\n\n# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms.\n_tax_cache = {}\n_cache_times = {}\n\ndef get_tax_rate(country_code, product_type=\"digital\"):\n    \"\"\"Fetch current tax rate, with caching.\"\"\"\n    cache_key = f\"{country_code}:{product_type}\"\n    now = time.time()\n    if cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:\n        return _tax_cache[cache_key]\n    resp = requests.get(\n        f\"{TAX_PROVIDER_URL}/rates\",\n        params={\"country\": country_code, \"type\": product_type},\n        timeout=5,\n    )\n    resp.raise_for_status()\n    rate = resp.json()[\"rate\"]\n    _tax_cache[cache_key] = rate\n    _cache_times[cache_key] = now\n    return rate\n",
+        "invoices.py": "import logging\nimport stripe\nfrom datetime import datetime\n\nlogger = logging.getLogger(__name__)\n\ndef generate_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Build an invoice dict from line items.\"\"\"\n    subtotal = sum(item[\"amount\"] for item in line_items)\n    tax = round(subtotal * tax_rate, 2)\n    return {\n        \"customer_id\": customer_id,\n        \"line_items\": line_items,\n        \"subtotal\": subtotal,\n        \"tax\": tax,\n        \"total\": subtotal + tax,\n        \"issued_at\": datetime.utcnow().isoformat(),\n        \"status\": \"pending\",\n    }\n\ndef batch_charge_and_invoice(customer_id, line_items, tax_rate=0.0):\n    \"\"\"Charge for all items then build an invoice.\n\n    Workaround: after batch charges, re-verify each total individually\n    and fall back to per-charge mode because Stripe's batch API returns\n    inconsistent totals under load.\n    Remove when Stripe's batch charge API returns consistent totals.\n    \"\"\"\n    total = sum(item[\"amount\"] for item in line_items)\n    try:\n        batch = stripe.Charge.create(amount=total, customer=customer_id)\n        # Verify: re-fetch and compare\n        fetched = stripe.Charge.retrieve(batch.id)\n        if fetched.amount != total:\n            logger.warning(\"batch total mismatch, falling back to per-charge\")\n            for item in line_items:\n                stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    except stripe.error.APIError:\n        logger.warning(\"batch charge failed, falling back to per-charge\")\n        for item in line_items:\n            stripe.Charge.create(amount=item[\"amount\"], customer=customer_id)\n    return generate_invoice(customer_id, line_items, tax_rate)\n"
+      },
+      "log": [
+        {
+          "kind": "start",
+          "text": "processing PR #26: remove fixed retry delay workaround"
+        },
+        {
+          "kind": "recall",
+          "text": "file query: Code changes touching files: billing/stripe_retry.py"
+        },
+        {
+          "kind": "recall",
+          "text": "semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t"
+        },
+        {
+          "kind": "classify",
+          "text": "is_workaround=False"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-006"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-006: NEEDS_WORK (conf=0.95)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-008"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-008: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-012"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-012: NEEDS_WORK (conf=0.98)"
+        },
+        {
+          "kind": "check",
+          "text": "resolve-check for hack HACK-022"
+        },
+        {
+          "kind": "usage",
+          "text": "tokens: 1067"
+        },
+        {
+          "kind": "check",
+          "text": "hack HACK-022: NEEDS_WORK (conf=0.95)"
+        },
+        {
+          "kind": "retain",
+          "text": "hack HACK-006 retired (anchor removed)"
+        }
+      ],
+      "skipped": false,
+      "comments": [
+        {
+          "kind": "retired",
+          "hack_id": "HACK-006",
+          "path": "billing/stripe_retry.py",
+          "anchor_snippet": "wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)",
+          "body_md": "Workaround removed.\n\n**Hack HACK-006**: Fixed 3-second retry delay replacing exponential backoff for charge attempts\nThe anchor code has been deleted from the codebase.",
+          "evidence_prs": [
+            6,
+            26
+          ],
+          "id": "CMT-004"
+        }
+      ]
+    }
+  ],
+  "hacks": [
+    {
+      "id": "HACK-004",
+      "pr_added": 4,
+      "path_at_add": "webhooks.py",
+      "function_at_add": "unknown",
+      "what": "An in-memory set is used to track and skip duplicate webhook event IDs to prevent double processing.",
+      "why": "Stripe occasionally sends the same webhook event twice within a short timeframe, causing double-charges. This in-memory check stops the issue until a permanent database-level idempotency solution is implemented.",
+      "risk": "medium",
+      "revisit_condition": "The database layer implements idempotency for webhook events as specified in ticket PAY-212.",
+      "ticket_id": "PAY-212",
+      "anchor_snippet": "_seen_events = set()\n\n        if event_id in _seen_events:",
+      "status": "retired",
+      "status_since_pr": 4,
+      "location_by_pr": {
+        "4": {
+          "path": "webhooks.py",
+          "function": "unknown"
+        }
+      },
+      "note_text": "Workaround added in PR #4 titled 'fix duplicate webhook processing' by Marcus Chen. An in-memory set is used to track and skip duplicate webhook event IDs to prevent double processing.. This exists because Stripe occasionally sends the same webhook event twice within a short timeframe, causing double-charges. This in-memory check stops the issue until a permanent database-level idempotency solution is implemented.. It should be removed when The database layer implements idempotency for webhook events as specified in ticket PAY-212.. Risk level: medium. Located in webhooks.py, function unknown."
+    },
+    {
+      "id": "HACK-006",
+      "pr_added": 6,
+      "path_at_add": "billing/retry.py",
+      "function_at_add": "unknown",
+      "what": "Fixed 3-second retry delay replacing exponential backoff for charge attempts",
+      "why": "Stripe's batch endpoint throttles under sustained load, causing downstream timeouts with exponential backoff",
+      "risk": "medium",
+      "revisit_condition": "Stripe's batch endpoint stops throttling under sustained load",
+      "ticket_id": null,
+      "anchor_snippet": "wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)",
+      "status": "retired",
+      "status_since_pr": 26,
+      "location_by_pr": {
+        "6": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "7": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "8": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "9": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "10": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "11": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "12": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "13": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "14": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "15": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "16": {
+          "path": "billing/retry.py",
+          "function": "unknown"
+        },
+        "17": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        },
+        "18": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        },
+        "19": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        },
+        "20": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        },
+        "21": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        },
+        "22": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        },
+        "23": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        },
+        "24": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        },
+        "25": {
+          "path": "billing/stripe_retry.py",
+          "function": "submit_charge"
+        }
+      },
+      "note_text": "Workaround added in PR #6 titled 'use fixed retry delay for charge attempts' by Priya Sharma. Fixed 3-second retry delay replacing exponential backoff for charge attempts. This exists because Stripe's batch endpoint throttles under sustained load, causing downstream timeouts with exponential backoff. It should be removed when Stripe's batch endpoint stops throttling under sustained load. Risk level: medium. Located in billing/retry.py, function unknown."
+    },
+    {
+      "id": "HACK-008",
+      "pr_added": 8,
+      "path_at_add": "checkout.py",
+      "function_at_add": "unknown",
+      "what": "Caps the single charge amount at 50000 cents to prevent integer overflow in the downstream ledger.",
+      "why": "The downstream ledger uses integer columns that overflow when values exceed 50000 cents.",
+      "risk": "high",
+      "revisit_condition": "The downstream ledger is migrated to use bigint columns as part of ticket PAY-240.",
+      "ticket_id": "PAY-240",
+      "anchor_snippet": "if amount > 50000:\n    logger.warning(\"capping charge amount from %d to 50000\", amount)\n    amount = 50000",
+      "status": "open",
+      "status_since_pr": 8,
+      "location_by_pr": {
+        "8": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "9": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "10": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "11": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "12": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "13": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "14": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "15": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "16": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "17": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "18": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "19": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "20": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "21": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "22": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "23": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "24": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "25": {
+          "path": "checkout.py",
+          "function": "unknown"
+        },
+        "26": {
+          "path": "checkout.py",
+          "function": "unknown"
+        }
+      },
+      "note_text": "Workaround added in PR #8 titled 'cap single charge amount at 50000' by Marcus Chen. Caps the single charge amount at 50000 cents to prevent integer overflow in the downstream ledger.. This exists because The downstream ledger uses integer columns that overflow when values exceed 50000 cents.. It should be removed when The downstream ledger is migrated to use bigint columns as part of ticket PAY-240.. Risk level: high. Located in checkout.py, function unknown."
+    },
+    {
+      "id": "HACK-012",
+      "pr_added": 12,
+      "path_at_add": "tax.py",
+      "function_at_add": "unknown",
+      "what": "In-memory caching of tax provider responses",
+      "why": "The tax provider API has high latency (p95 over 2 seconds) which is too slow for real-time checkout",
+      "risk": "medium",
+      "revisit_condition": "The tax provider API latency is reliably below 200ms",
+      "ticket_id": null,
+      "anchor_snippet": "_tax_cache = {}\n_cache_times = {}",
+      "status": "open",
+      "status_since_pr": 12,
+      "location_by_pr": {
+        "12": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "13": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "14": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "15": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "16": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "17": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "18": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "19": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "20": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "21": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "22": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "23": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "24": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "25": {
+          "path": "tax.py",
+          "function": "unknown"
+        },
+        "26": {
+          "path": "tax.py",
+          "function": "unknown"
+        }
+      },
+      "note_text": "Workaround added in PR #12 titled 'cache tax provider responses' by James Park. In-memory caching of tax provider responses. This exists because The tax provider API has high latency (p95 over 2 seconds) which is too slow for real-time checkout. It should be removed when The tax provider API latency is reliably below 200ms. Risk level: medium. Located in tax.py, function unknown."
+    },
+    {
+      "id": "HACK-015",
+      "pr_added": 15,
+      "path_at_add": "checkout.py",
+      "function_at_add": "unknown",
+      "what": "Increased Stripe client timeout to 45 seconds and limited concurrent charge requests to 4 using a semaphore.",
+      "why": "Stripe times out under load, and concurrent requests exacerbate the issue. This prevents the service from failing during high traffic.",
+      "risk": "medium",
+      "revisit_condition": "Stripe stabilizes response times for batch operations.",
+      "ticket_id": null,
+      "anchor_snippet": "STRIPE_TIMEOUT = int(os.environ.get(\"STRIPE_TIMEOUT\", \"45\"))\nSTRIPE_MAX_CONCURRENT = int(os.environ.get(\"STRIPE_MAX_CONCURRENT\", \"4\"))",
+      "status": "retired",
+      "status_since_pr": 15,
+      "location_by_pr": {
+        "15": {
+          "path": "checkout.py",
+          "function": "unknown"
+        }
+      },
+      "note_text": "Workaround added in PR #15 titled 'increase stripe timeout and limit concurrency' by James Park. Increased Stripe client timeout to 45 seconds and limited concurrent charge requests to 4 using a semaphore.. This exists because Stripe times out under load, and concurrent requests exacerbate the issue. This prevents the service from failing during high traffic.. It should be removed when Stripe stabilizes response times for batch operations.. Risk level: medium. Located in checkout.py, function unknown."
+    },
+    {
+      "id": "HACK-022",
+      "pr_added": 22,
+      "path_at_add": "invoices.py",
+      "function_at_add": "batch_charge_and_invoice",
+      "what": "Re-verifies batch charge totals and falls back to individual per-charge processing when mismatches are detected or API errors occur.",
+      "why": "Stripe's batch charge API returns inconsistent totals under load, causing production mismatches.",
+      "risk": "medium",
+      "revisit_condition": "Stripe's batch charge API returns consistent totals under load.",
+      "ticket_id": null,
+      "anchor_snippet": "if fetched.amount != total:\n    logger.warning(\"batch total mismatch, falling back to per-charge\")\n    for item in line_items:",
+      "status": "open",
+      "status_since_pr": 22,
+      "location_by_pr": {
+        "22": {
+          "path": "invoices.py",
+          "function": "batch_charge_and_invoice"
+        },
+        "23": {
+          "path": "invoices.py",
+          "function": "batch_charge_and_invoice"
+        },
+        "24": {
+          "path": "invoices.py",
+          "function": "batch_charge_and_invoice"
+        },
+        "25": {
+          "path": "invoices.py",
+          "function": "batch_charge_and_invoice"
+        },
+        "26": {
+          "path": "invoices.py",
+          "function": "batch_charge_and_invoice"
+        }
+      },
+      "note_text": "Workaround added in PR #22 titled 'add batch charge verification and fallback' by Marcus Chen. Re-verifies batch charge totals and falls back to individual per-charge processing when mismatches are detected or API errors occur.. This exists because Stripe's batch charge API returns inconsistent totals under load, causing production mismatches.. It should be removed when Stripe's batch charge API returns consistent totals under load.. Risk level: medium. Located in invoices.py, function batch_charge_and_invoice."
+    }
+  ]
+}

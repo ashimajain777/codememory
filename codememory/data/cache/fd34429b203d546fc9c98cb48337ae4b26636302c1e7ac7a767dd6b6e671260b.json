@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Re-verify totals after batch charges and fall back to per-charge if mismatch",
+  "why": "Stripe's batch API returns inconsistent totals under load, causing mismatches in production",
+  "risk": "medium",
+  "revisit_condition": "When Stripe's batch charge API consistently returns correct totals and no mismatches are observed in production",
+  "ticket_id": null,
+  "anchor_snippet": "if fetched.amount != total:\n    logger.warning(\"batch total mismatch, falling back to per-charge\")\n    for item in line_items:"
+}

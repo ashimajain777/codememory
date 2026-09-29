@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only changes retry logic for charge attempts; it does not touch webhook handling code.",
+    "There is no reference to `event_id`, `_seen_events`, or any duplicate\u2011event detection logic.",
+    "The PR does not modify or add any database\u2011level idempotency mechanisms required by PAY\u2011212.",
+    "The PR does not close or reference ticket PAY\u2011212, which is the revisit condition for the workaround.",
+    "The code changes are unrelated to the in\u2011memory set used to skip duplicate Stripe events."
+  ],
+  "reasoning": "The PR addresses a different problem (retry delay for charges) and does not modify the code that implements the duplicate\u2011webhook skip logic. Therefore it does not resolve the HACK\u2011004 workaround."
+}

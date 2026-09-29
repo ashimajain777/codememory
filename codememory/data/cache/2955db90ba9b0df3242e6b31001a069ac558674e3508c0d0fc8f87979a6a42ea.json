@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Fixed 3-second retry delay replacing exponential backoff for charge attempts",
+  "why": "Stripe's batch endpoint throttles under sustained load, causing downstream timeouts with exponential backoff",
+  "risk": "medium",
+  "revisit_condition": "Stripe's batch endpoint stops throttling under sustained load",
+  "ticket_id": null,
+  "anchor_snippet": "wait = 3\n            logger.warning(\"rate limited on charge, waiting %ds (fixed)\", wait)"
+}

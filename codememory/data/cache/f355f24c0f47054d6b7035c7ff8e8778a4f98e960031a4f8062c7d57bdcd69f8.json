@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only adds unit tests for invoice generation and does not modify any webhook handling logic.",
+    "The diff shows a new test file for invoices, with no changes to the webhook event processing code or the _seen_events set.",
+    "The PR does not close or reference the PAY-212 ticket or the HACK-004 workaround.",
+    "There is no evidence that the PR implements database-level idempotency or removes the in-memory duplicate check.",
+    "The anchor code for the workaround is not touched or referenced in the PR."
+  ],
+  "reasoning": "The pull request under review is solely concerned with adding unit tests for invoice generation. It does not modify the webhook event handling code that implements the in-memory duplicate check described in the workaround HACK-004. Therefore, it does not resolve the workaround\u2019s revisit condition of providing database-level idempotency for webhook events. The PR is unrelated to the workaround and should be marked as NEEDS_WORK."
+}

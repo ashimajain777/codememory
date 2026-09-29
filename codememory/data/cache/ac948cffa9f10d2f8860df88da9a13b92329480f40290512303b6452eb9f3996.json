@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Caps a single charge amount to 50000 cents before processing.",
+  "why": "Downstream ledger stores amounts in int columns that overflow above 50000 cents; the cap prevents overflow until the ledger is migrated to bigint.",
+  "risk": "low",
+  "revisit_condition": "When the ledger migration to bigint (ticket PAY-240) is completed.",
+  "ticket_id": "PAY-240",
+  "anchor_snippet": "# HACK: cap single charge to 50000 cents due to a downstream ledger\nif amount > 50000:\n    logger.warning(\"capping charge amount from %d to 50000\", amount)\n    amount = 50000"
+}

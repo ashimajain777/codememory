@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only adds unit tests for invoice generation and does not modify any webhook handling code.",
+    "It does not reference or alter the _seen_events in-memory set used for duplicate detection.",
+    "There is no implementation of the database\u2011level idempotency fix described in ticket PAY-212.",
+    "The changes are unrelated to Stripe webhook processing, so the in\u2011memory duplicate check remains unchanged."
+  ],
+  "reasoning": "The workaround HACK-004 is about removing an in\u2011memory duplicate\u2011event check once a proper database\u2011level idempotency solution (PAY-212) is deployed. The PR under review merely introduces tests for invoice generation and does not touch the webhook processing logic, the _seen_events set, or the underlying idempotency mechanism. Therefore it does not satisfy the revisit condition and does not resolve the workaround."
+}

@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.97,
+  "counter_arguments": [
+    "The PR only adds a new test file for Stripe charge retry logic; it does not modify any tax\u2011related code, caching mechanisms, or the TTL logic described in the workaround.",
+    "The anchor code snippet (_tax_cache, _cache_times, TTL check) is untouched; there is no evidence the PR alters or removes this caching implementation.",
+    "The revisit condition for the workaround is a performance threshold (API latency <200\u202fms). The PR does not measure, monitor, or claim any improvement to the tax provider's latency.",
+    "Even if the PR indirectly improves overall system performance, the specific condition required to retire the tax\u2011rate cache (latency reduction) is not addressed.",
+    "The PR's scope is limited to unit testing of billing.retry behavior, which is unrelated to the tax provider integration or its latency characteristics."
+  ],
+  "reasoning": "The workaround HACK-012 is about caching tax rates to mitigate high latency from a tax provider API, and it should be removed only when that latency drops below 200\u202fms. The submitted PR merely introduces tests for Stripe charge retry logic and does not touch the tax caching code, the TTL mechanism, or any performance metrics of the tax provider. Therefore, there is no substantive evidence that the PR resolves the underlying condition required to retire the workaround."
+}

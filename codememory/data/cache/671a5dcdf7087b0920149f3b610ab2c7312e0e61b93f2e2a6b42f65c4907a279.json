@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only adds a README file; it does not modify any source code.",
+    "No changes are made to the webhook handling logic or the _seen_events set.",
+    "The PR does not reference or address the PAY-212 ticket or database-level idempotency.",
+    "There is no evidence that the PR introduces any new idempotency mechanism or removes the in-memory duplicate check."
+  ],
+  "reasoning": "The PR is purely documentation and does not touch the code that implements the duplicate webhook skip logic. Therefore it does not resolve the workaround HACK-004, which requires database-level idempotency to be added. The PR lacks any code changes that would satisfy the revisit condition."
+}

@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "cache tax rates in memory",
+  "why": "tax provider API is too slow for real-time checkout",
+  "risk": "medium",
+  "revisit_condition": "when the provider brings latency reliably below 200ms",
+  "ticket_id": null,
+  "anchor_snippet": "# Workaround: cache tax rates in memory because the tax provider API\n# responds slowly (p95 over 2 seconds). Remove when the provider\n# brings latency reliably below 200ms."
+}

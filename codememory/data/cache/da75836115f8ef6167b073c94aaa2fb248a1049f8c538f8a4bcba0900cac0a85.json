@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only adds a README.md file with setup instructions; it does not modify any source code, retry logic, or Stripe integration.",
+    "The workaround's revisit condition is 'Stripe's batch endpoint stops throttling under sustained load', which is an external service behavior change, not something a documentation PR can address.",
+    "The anchor code (wait = 3, logger.warning) is not touched or removed by this PR.",
+    "The PR title and message explicitly state it is a documentation update, not a code change to retry logic."
+  ],
+  "reasoning": "This PR is purely a documentation addition (README.md) and has zero impact on the retry logic that the workaround addresses. The workaround's revisit condition requires Stripe's batch endpoint to stop throttling, which is an external dependency change. A docs PR cannot resolve this. There is no code change, no removal of the fixed 3-second delay, and no modification to the charge attempt logic. This is clearly not a match."
+}

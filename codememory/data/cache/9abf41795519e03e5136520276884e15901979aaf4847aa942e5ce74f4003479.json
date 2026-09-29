@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR title and message explicitly state it is about verifying Stripe webhook signatures, which is a security feature unrelated to tax provider API latency.",
+    "The diff excerpt only shows a change to a .pr_marker file, which is a build/CI artifact and does not touch any tax caching logic.",
+    "The workaround is specifically about in-memory caching of tax provider responses due to high latency, and the PR does not address latency, caching, or the tax provider at all.",
+    "There is no evidence in the PR that it removes the _tax_cache or _cache_times anchors or modifies the tax provider integration."
+  ],
+  "reasoning": "The PR is clearly about adding Stripe webhook signature verification, which is a completely different concern from the tax provider latency workaround. The diff does not touch any tax-related code, caching logic, or latency improvements. There is no overlap between the PR's purpose and the workaround's revisit condition (tax provider API latency reliably below 200ms). This is a clear non-match."
+}

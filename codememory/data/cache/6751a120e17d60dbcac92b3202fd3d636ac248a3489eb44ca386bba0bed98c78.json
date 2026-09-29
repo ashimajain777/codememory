@@ -1,0 +1,11 @@
+{
+  "shares_root_cause": true,
+  "root_cause": "Stripe batch charge API instability under load (throttling, timeouts, and inconsistent totals)",
+  "hack_ids": [
+    "HACK-006",
+    "HACK-015",
+    "HACK-022"
+  ],
+  "summary": "Three hacks address Stripe batch charge API failures caused by load\u2011related instability.",
+  "proposal": "Introduce a unified Stripe integration wrapper that implements exponential backoff with jitter, request throttling, timeout handling, and post\u2011charge verification; replace the individual hacks with this single abstraction."
+}

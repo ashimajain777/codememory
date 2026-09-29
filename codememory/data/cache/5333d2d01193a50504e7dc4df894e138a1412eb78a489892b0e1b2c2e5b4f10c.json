@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR only adds a test file for Stripe charge retry logic; it does not modify any production code related to tax provider caching.",
+    "The workaround is about in-memory caching of tax provider responses due to high latency, but the PR touches billing/stripe_retry, which is a completely different subsystem.",
+    "The revisit condition requires the tax provider API latency to be reliably below 200ms, but the PR contains no changes to tax provider integration, no latency improvements, and no removal of the _tax_cache or _cache_times anchors.",
+    "The PR title and message explicitly state it is about testing charge retry logic and rate limit handling, which is unrelated to tax provider latency or caching."
+  ],
+  "reasoning": "The PR is entirely about adding tests for Stripe charge retry behavior. It does not touch the tax provider code, does not remove the in-memory cache, and does not address the latency issue that motivated the workaround. There is no evidence that the tax provider API latency has improved or that the caching layer has been removed. This is a clear non-match."
+}

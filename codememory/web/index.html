@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeMemory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1 class="topbar-title">CodeMemory</h1>
+      <span class="topbar-desc">Remembers why workarounds exist and when they can be removed</span>
+    </div>
+    <div class="topbar-right">
+      
+      <button class="topbar-btn" onclick="startGuidedRun()">Guided run</button>
+      <button class="topbar-btn" onclick="openModal('terms')">Terms</button>
+      <button class="topbar-btn" onclick="openModal('privacy')">Privacy</button>
+    </div>
+  </header>
+
+  <!-- Time scrubber -->
+  <div class="scrubber-wrap">
+    <div class="scrubber-label" id="scrubber-label">PR #1</div>
+    <input type="range" class="scrubber" id="scrubber" min="0" max="25" value="0">
+    <div class="scrubber-ticks" id="scrubber-ticks"></div>
+  </div>
+
+  <!-- Main grid -->
+  <div class="main-grid">
+    <!-- Left: PR Ledger -->
+    <aside class="pr-ledger">
+      <h2 class="section-title">Pull Requests</h2>
+      <table id="pr-table">
+        <thead>
+          <tr><th>#</th><th>Title</th><th>Date</th></tr>
+        </thead>
+        <tbody id="pr-tbody"></tbody>
+      </table>
+    </aside>
+
+    <!-- Center: Stage -->
+    <main class="center-stage">
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="pr" onclick="switchView('pr')">Pull Request</button>
+        <button class="view-tab" data-view="editor" onclick="switchView('editor')">Editor</button>
+      </div>
+
+      <!-- Skeleton -->
+      <div class="skeleton-wrap" id="skeleton">
+        <div class="skeleton"></div>
+        <div class="skeleton" style="width:80%"></div>
+        <div class="skeleton" style="width:60%"></div>
+        <div class="skeleton" style="width:90%"></div>
+        <div class="skeleton" style="width:70%"></div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="empty-state" style="display:none">
+        No hacks tracked yet. Navigate through the PR timeline to see workarounds as they are introduced.
+      </div>
+
+      <!-- PR View -->
+      <div class="pr-view" id="pr-view" style="display:none">
+        <div class="pr-header">
+          <h2 class="pr-title" id="pr-title"></h2>
+          <div class="pr-meta">
+            <span class="pr-number" id="pr-number"></span>
+            <span class="pr-branch" id="pr-branch"></span>
+            <span class="pr-state" id="pr-state">OPEN</span>
+          </div>
+          <p class="pr-description" id="pr-description"></p>
+          <div class="pr-author-date">
+            <span id="pr-author"></span>
+            <span id="pr-date"></span>
+          </div>
+        </div>
+
+        <div class="diff-block" id="diff-block"></div>
+
+        <div class="review-thread" id="review-thread"></div>
+
+        <div class="merge-area" id="merge-area">
+          <p class="merge-advisory">Advisory checks only. Merging is not blocked.</p>
+          <button class="merge-btn" id="merge-btn" onclick="mergePR()">Merge</button>
+        </div>
+      </div>
+
+      <!-- Editor View -->
+      <div class="editor-view" id="editor-view" style="display:none">
+        <div class="editor-titlebar" id="editor-titlebar">checkout.py</div>
+        <div class="editor-layout">
+          <div class="editor-sidebar" id="editor-sidebar"></div>
+          <div class="editor-main">
+            <div class="editor-tabs" id="editor-tabs"></div>
+            <div class="editor-content" id="editor-content"></div>
+          </div>
+        </div>
+        <div class="editor-statusbar" id="editor-statusbar">
+          <span id="editor-branch">main</span>
+          <span id="editor-lang">Python</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right: Open Hacks Ledger -->
+    <aside class="hacks-ledger">
+      <h2 class="section-title">Open Hacks</h2>
+      <div id="hacks-list"></div>
+    </aside>
+  </div>
+
+  <!-- Agent Log -->
+  <div class="agent-log">
+    <h2 class="section-title">Agent Log</h2>
+    <div id="log-entries"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Sample repository. Synthetic history authored for this demo.
+  </footer>
+
+  <!-- Terms Modal -->
+  <div class="modal-overlay" id="modal-terms" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Terms of Use</h2>
+        <button class="drawer-close" onclick="closeModal('terms')">Close</button>
+      </div>
+      <div class="modal-body">
+        <p>This is a demonstration project built for HackwithHyderabad 3.0. It is not a production service.</p>
+        <p>The sample repository, commit history, and all pull request data shown in this demo are synthetic. They were authored specifically for this demonstration and do not represent real code or real engineering incidents.</p>
+        <p>No accounts are required. No user data is collected. No authentication is performed.</p>
+        <p>The source code is provided as-is for evaluation purposes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Modal -->
+  <div class="modal-overlay" id="modal-privacy" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Privacy</h2>
+        <button class="drawer-close" onclick="closeModal('privacy')">Close</button>
+      </div>
+      <div class="modal-body">
+        <p>CodeMemory does not collect, store, or transmit any personal data.</p>
+        <p>No cookies are set. No analytics scripts are loaded. No network requests are made beyond loading the static page assets and the local results.json data file.</p>
+        <p>All processing shown in the demo was performed offline during the build step. The web interface reads pre-computed results from a local JSON file only.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

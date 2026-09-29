@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Uses an in-memory set to record processed webhook event IDs and skips processing if the ID has already been seen.",
+  "why": "Stripe can deliver the same event multiple times; the in-memory set prevents double\u2011charging until a proper idempotency solution (ticket PAY-212) is added.",
+  "risk": "medium",
+  "revisit_condition": "When the database\u2011level idempotency fix described in ticket PAY-212 is deployed, the in\u2011memory duplicate check can be removed.",
+  "ticket_id": "PAY-212",
+  "anchor_snippet": "_seen_events = set()\nif event_id in _seen_events:\n    _seen_events.add(event_id)"
+}

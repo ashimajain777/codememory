@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR addresses Stripe payment processing latency and concurrency, not tax provider API latency. These are two distinct external services with different root causes.",
+    "The workaround's revisit condition requires the tax provider API latency to be reliably below 200ms. The PR makes no changes to tax provider calls, caching logic, or tax provider configuration.",
+    "The anchor code (_tax_cache = {} and _cache_times = {}) is not touched by this PR. The diff only modifies checkout.py for Stripe charge handling and config.py for Stripe timeout/concurrency settings.",
+    "The PR explicitly states it is 'not a real fix' for Stripe issues, and it does not mention tax providers, tax caching, or the specific latency problem that motivated HACK-012.",
+    "Even if the tax provider were fast, the in-memory cache would still be a valid optimization. The PR does not demonstrate that the underlying condition (tax provider latency < 200ms) has been met."
+  ],
+  "reasoning": "The workaround HACK-012 is specifically about in-memory caching of tax provider responses due to high tax provider API latency (p95 > 2s). The PR under review addresses a completely different problem: Stripe payment processing timeouts and concurrency issues. The diff modifies Stripe charge creation with a semaphore and timeout, and adds Stripe-specific config values. There is no change to tax provider calls, no removal of the tax cache, and no evidence that tax provider latency has improved. The two issues involve different external services (tax provider vs. Stripe) with different root causes. This is a clear case of a PR touching similar checkout code but addressing an entirely different problem. The match is definitively wrong."
+}

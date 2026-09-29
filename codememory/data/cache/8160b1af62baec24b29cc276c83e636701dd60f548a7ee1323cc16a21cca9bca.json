@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR does not modify the downstream ledger schema; it only upgrades the Stripe SDK and changes the charge submission method.",
+    "The workaround's revisit condition explicitly requires migration to bigint columns (ticket PAY-240), which is not addressed in this PR.",
+    "The PR's stated purpose is to resolve throughput issues via batched API, not to fix integer overflow in the ledger.",
+    "The anchor code (capping amount at 50000) is not touched or removed in the diff.",
+    "Upgrading stripe-sdk does not change the data type of columns in the downstream ledger database."
+  ],
+  "reasoning": "The workaround exists because the downstream ledger uses integer columns that overflow above 50000 cents. The only valid resolution is migrating those columns to bigint (ticket PAY-240). This PR upgrades the Stripe SDK and switches to a batched charge API to address throughput issues. It does not touch the ledger schema, does not remove the cap, and does not reference PAY-240. The root cause (integer overflow in ledger) remains entirely unaddressed."
+}

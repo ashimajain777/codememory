@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only adds unit tests for invoice generation and does not modify any webhook handling code.",
+    "The diff shows a new test file for generate_invoice, with no changes to the _seen_events logic or event_id handling.",
+    "The PR message and title reference invoice tests, not Stripe webhook idempotency.",
+    "There is no reference to PAY-212 or any database-level idempotency implementation.",
+    "Thus the PR does not address the duplicate webhook delivery workaround."
+  ]
+}

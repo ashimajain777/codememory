@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR title and message explicitly state it only removes unused imports via autoflake, which is a purely cosmetic change with no functional impact.",
+    "The diff excerpt shows only a change to a .pr_marker file, which is a build/metadata artifact, not application logic.",
+    "The workaround involves a specific 3-second fixed retry delay in charge attempt logic, which is not touched by this PR.",
+    "The revisit condition requires Stripe's batch endpoint to stop throttling under sustained load, which is an external service behavior change, not something a code cleanup PR can address.",
+    "There is no evidence in the PR that any retry logic, backoff mechanism, or rate limiting code has been modified."
+  ],
+  "reasoning": "This PR is a trivial cleanup that removes unused imports. It has absolutely no bearing on the retry delay logic, Stripe's batch endpoint throttling behavior, or the underlying condition that the workaround was waiting on. The diff does not touch any application logic related to charge attempts, retries, or rate limiting. This is a clear non-match."
+}

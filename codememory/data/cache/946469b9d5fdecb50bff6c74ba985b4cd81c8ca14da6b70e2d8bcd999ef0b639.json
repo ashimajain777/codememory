@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "An in-memory set is used to track and skip duplicate webhook event IDs to prevent double processing.",
+  "why": "Stripe occasionally sends the same webhook event twice within a short timeframe, causing double-charges. This in-memory check stops the issue until a permanent database-level idempotency solution is implemented.",
+  "risk": "medium",
+  "revisit_condition": "The database layer implements idempotency for webhook events as specified in ticket PAY-212.",
+  "ticket_id": "PAY-212",
+  "anchor_snippet": "_seen_events = set()\n\n        if event_id in _seen_events:"
+}

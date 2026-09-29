@@ -1,0 +1,7 @@
+{
+  "shares_root_cause": false,
+  "root_cause": "",
+  "hack_ids": [],
+  "summary": "Only two of the listed hacks share a Stripe\u2011related performance issue; no three or more share a common root cause.",
+  "proposal": "Monitor and improve external service performance (Stripe, tax provider, ledger) so that individual time\u2011outs, caps, and caching workarounds can be removed when each service meets its SLA."
+}

@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR introduces a global error handler for HTTP status codes (400, 404, 500) in a new file `errors.py`, which is completely unrelated to the retry/backoff logic for Stripe charge attempts.",
+    "The workaround specifically addresses a fixed 3-second retry delay (`wait = 3`) replacing exponential backoff due to Stripe's batch endpoint throttling. The PR does not touch any retry logic, backoff calculations, or Stripe integration code.",
+    "The revisit condition requires Stripe's batch endpoint to stop throttling under sustained load, which is an external dependency change. The PR does not address this condition at all.",
+    "The PR's scope is limited to registering Flask error handlers for JSON responses, which has no connection to the rate limiting or retry mechanism described in the workaround."
+  ],
+  "reasoning": "The PR is entirely unrelated to the workaround. The workaround concerns a fixed retry delay for Stripe charge attempts due to throttling, while the PR adds global HTTP error handlers. There is no overlap in code, logic, or intent. The PR does not address the underlying condition (Stripe throttling) nor does it modify the retry mechanism. This is a clear non-match."
+}

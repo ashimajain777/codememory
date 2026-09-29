@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR only adds a test file (tests/test_retry.py) and does not modify any production code in billing/stripe_retry.py or any other module.",
+    "The workaround's revisit condition is 'Stripe's batch endpoint stops throttling under sustained load' \u2014 this is an external infrastructure change, not something a test file can address.",
+    "The PR does not remove the fixed 3-second retry delay (wait = 3) or restore exponential backoff, which is what resolving the workaround would require.",
+    "Adding a test for the current (workaround) behavior does not resolve the workaround; it merely documents or validates the temporary fix.",
+    "The PR title and message explicitly state it is about adding tests, not about changing retry logic or removing the workaround."
+  ],
+  "reasoning": "The PR under review is purely a test addition. It does not modify the production code that contains the workaround (the fixed 3-second delay replacing exponential backoff). The revisit condition for HACK-006 is an external change (Stripe's batch endpoint no longer throttling), and resolving the workaround would require changing the retry logic in the billing module to restore exponential backoff. Since the PR touches no production code and does not alter the retry behavior, it cannot possibly resolve the workaround. This is a clear case of a PR that is topically related (it tests the same module) but does not address the underlying condition."
+}

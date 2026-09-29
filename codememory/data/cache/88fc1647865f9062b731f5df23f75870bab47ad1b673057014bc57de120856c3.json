@@ -1,0 +1,10 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.95,
+  "counter_arguments": [
+    "The PR introduces a new workaround (re-verification and fallback) rather than removing the existing one. The anchor code (STRIPE_TIMEOUT and STRIPE_MAX_CONCURRENT) is not touched or removed.",
+    "The PR explicitly states 'ugly but necessary until stripe fixes it', indicating that the underlying instability in Stripe's batch API persists and the workaround is still required.",
+    "The PR addresses a different symptom (inconsistent totals) with a different mechanism (fallback logic), not the original issue (timeouts under load) that the HACK-015 workaround was designed to mitigate."
+  ],
+  "reasoning": "The PR does not resolve the workaround; it adds a new workaround on top of the existing one. The original workaround (increased timeout and concurrency limit) is still in place and necessary because Stripe's batch API is still unstable. The PR's own message confirms that the underlying issue (Stripe's batch API inconsistency) is not fixed, so the revisit condition for HACK-015 has not been met."
+}

@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Caps the single charge amount at 50000 cents to prevent integer overflow in the downstream ledger.",
+  "why": "The downstream ledger uses integer columns that overflow when values exceed 50000 cents.",
+  "risk": "high",
+  "revisit_condition": "The downstream ledger is migrated to use bigint columns as part of ticket PAY-240.",
+  "ticket_id": "PAY-240",
+  "anchor_snippet": "if amount > 50000:\n    logger.warning(\"capping charge amount from %d to 50000\", amount)\n    amount = 50000"
+}

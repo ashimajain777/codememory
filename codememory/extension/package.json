@@ -1,0 +1,13 @@
+{
+  "name": "codememory",
+  "displayName": "CodeMemory",
+  "description": "Shows hover cards for tracked workarounds",
+  "version": "0.1.0",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Other"],
+  "activationEvents": ["onLanguage:python"],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [{ "id": "python", "extensions": [".py"] }]
+  }
+}

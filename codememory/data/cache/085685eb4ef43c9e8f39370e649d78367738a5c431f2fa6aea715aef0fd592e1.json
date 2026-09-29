@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR is explicitly a documentation update ('docs: document batch charging flow') and does not contain any code changes to the ledger schema or the workaround logic.",
+    "The workaround's revisit condition requires the downstream ledger to be migrated to use bigint columns (ticket PAY-240). This PR does not perform any database migration or schema change.",
+    "The PR does not close ticket PAY-240, nor does it reference it in the message or diff.",
+    "The diff only modifies a marker file (.pr_marker), which is unrelated to the integer overflow issue or the ledger's data types."
+  ],
+  "reasoning": "The PR is purely a documentation change and does not address the underlying technical issue (integer overflow in the downstream ledger) nor does it perform the required migration to bigint columns. It fails to meet the revisit condition for the workaround."
+}

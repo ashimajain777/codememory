@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only removes unused imports and updates a marker file; it makes no changes to the tax caching logic, the TTL handling, or any API call paths.",
+    "The revisit condition for the workaround is a performance threshold (API latency <200\u202fms). The PR does not contain any performance measurements, latency checks, or configuration changes that could affect the tax provider's response time.",
+    "No code related to `_tax_cache`, `_cache_times`, or `TAX_CACHE_TTL` is touched, so the underlying cause (high latency) remains unaddressed.",
+    "A change limited to `.pr_marker` is unrelated to runtime behavior; it cannot influence the tax provider's latency or the need for caching.",
+    "Even if the PR indirectly improves code cleanliness, it does not provide evidence that the tax provider API latency has improved to the required level."
+  ],
+  "reasoning": "The workaround HACK-012 exists because the tax provider API is slow, and it should be removed only when latency drops below 200\u202fms. The PR under review merely removes unused imports and updates a marker file, with no modifications to the caching mechanism, no performance improvements, and no evidence that the latency condition has been met. Therefore, the PR does not resolve the workaround."
+}

@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR only adds a .env.example file for developer onboarding; it does not modify any application logic, caching code, or API client configuration.",
+    "The workaround's revisit condition requires the tax provider API latency to be reliably below 200ms, which is an external infrastructure/performance metric that cannot be resolved by adding a static configuration example file.",
+    "The anchor code (_tax_cache = {} and _cache_times = {}) is not touched, removed, or refactored in this PR, meaning the in-memory caching workaround remains fully active in the codebase.",
+    "There is no evidence in the diff that the tax provider's latency has improved; the PR merely documents environment variables, including TAX_PROVIDER_URL, but does not change how the provider is called or cached."
+  ],
+  "reasoning": "The PR is purely a developer-experience improvement (adding a .env.example file) and has zero impact on the tax provider's API latency or the in-memory caching workaround. The revisit condition for HACK-012 is a performance threshold (p95 < 200ms) that must be met by the external tax provider, not by internal code changes. Since the anchor code remains untouched and no latency improvement is demonstrated or implied, this PR does not resolve the workaround."
+}

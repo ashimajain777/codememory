@@ -1,0 +1,7 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only modifies Stripe client timeout and concurrency limits; it does not touch the tax provider API or its latency. The workaround HACK-012 specifically requires caching tax rates in memory until the tax provider\u2019s latency drops below 200\u202fms, which this PR does not address. The PR\u2019s changes are unrelated to the tax provider\u2019s performance and therefore do not satisfy the revisit condition."
+  ]
+}

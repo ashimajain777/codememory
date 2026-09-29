@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR title and message focus on webhook signature verification, which is a security feature unrelated to charge retry logic or rate limiting.",
+    "The diff excerpt only shows a change to a marker file (.pr_marker), with no actual code changes to the retry logic or backoff mechanism.",
+    "The workaround is about a fixed 3-second retry delay for charge attempts due to Stripe's batch endpoint throttling, while the PR is about verifying webhook signatures using an endpoint secret.",
+    "There is no evidence in the PR that it addresses the underlying condition of Stripe's batch endpoint throttling under sustained load.",
+    "The PR does not touch the anchor code (wait = 3, logger.warning) or any related retry/backoff logic."
+  ],
+  "reasoning": "The PR is about adding Stripe webhook signature verification, which is a completely different concern from the workaround's fixed retry delay for charge attempts. The diff excerpt shows no changes to the retry logic, and the PR's stated purpose (webhook verification) has no bearing on whether Stripe's batch endpoint stops throttling under sustained load. This is a clear mismatch."
+}

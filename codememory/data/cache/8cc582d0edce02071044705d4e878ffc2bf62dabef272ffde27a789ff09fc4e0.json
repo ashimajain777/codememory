@@ -1,0 +1,7 @@
+{
+  "shares_root_cause": false,
+  "root_cause": "",
+  "hack_ids": [],
+  "summary": "Only two hacks (HACK-006 and HACK-015) share the Stripe\u2011load performance issue; no three or more share a common root cause.",
+  "proposal": "Monitor and improve external service reliability (Stripe, tax provider, ledger) individually; no single abstraction can replace three or more workarounds at this time."
+}

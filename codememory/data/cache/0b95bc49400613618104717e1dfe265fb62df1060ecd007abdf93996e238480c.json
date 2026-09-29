@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR is explicitly a documentation-only change ('docs: document batch charging flow') and does not modify any application logic, retry mechanisms, or wait times.",
+    "The workaround involves a specific code anchor (`wait = 3`) that implements a fixed delay. The PR diff does not touch this code or any related retry logic.",
+    "The revisit condition requires that 'Stripe's batch endpoint stops throttling under sustained load.' A documentation PR cannot change external API behavior or server-side throttling policies.",
+    "The diff only updates a marker file (`.pr_marker`), which is a build/versioning artifact, not functional code that would resolve a performance or reliability issue."
+  ],
+  "reasoning": "The PR is purely documentary in nature. It adds a sequence diagram and notes for the batch charge flow. It does not alter the retry logic, remove the fixed 3-second delay, or implement exponential backoff. Furthermore, the root cause of the workaround (Stripe's throttling) is an external dependency behavior that cannot be resolved by adding documentation to the local codebase. Therefore, this PR does not resolve the workaround."
+}

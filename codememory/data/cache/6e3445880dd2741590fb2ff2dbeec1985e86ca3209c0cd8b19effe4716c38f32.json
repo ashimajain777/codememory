@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR does not touch the anchor code (_tax_cache, _cache_times) or any tax provider logic at all.",
+    "The PR adds a generic metrics module (counters and a Timer class) that is unrelated to tax provider latency or caching.",
+    "The revisit condition requires the tax provider API latency to be reliably below 200ms, which is an external infrastructure/performance condition, not something a metrics PR can resolve.",
+    "Adding metrics instrumentation does not reduce API latency; it only observes it. The workaround (in-memory caching) is still necessary if latency remains high.",
+    "The PR title and message explicitly state it is about tracking charge success/failure and webhook processing times, not tax provider performance."
+  ],
+  "reasoning": "The workaround HACK-012 exists because the tax provider API has high latency (p95 > 2s), and the in-memory cache is a mitigation. The revisit condition is that the tax provider API latency drops below 200ms. The PR under review adds a basic metrics module with counters and a timer class. This PR does not modify the tax provider integration, does not remove the cache, does not address the root cause (API latency), and does not satisfy the revisit condition. It is a completely unrelated observability addition. There is no evidence that this PR resolves the workaround."
+}

@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Cap single charge amount to 50000 cents",
+  "why": "Prevent ledger overflow due to downstream ledger using int columns; will be resolved when PAY-240 migrates to bigint columns",
+  "risk": "medium",
+  "revisit_condition": "When PAY-240 migrates ledger to bigint columns",
+  "ticket_id": "PAY-240",
+  "anchor_snippet": "if amount > 50000:\n    logger.warning(\"capping charge amount from %d to 50000\", amount)\n    amount = 50000"
+}

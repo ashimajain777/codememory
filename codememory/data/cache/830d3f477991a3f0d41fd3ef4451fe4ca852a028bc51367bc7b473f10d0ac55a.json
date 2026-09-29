@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR only adds a test file (tests/test_retry.py) and does not modify any production code in billing/stripe_retry.py or any other module.",
+    "The workaround's revisit condition is 'Stripe's batch endpoint stops throttling under sustained load' \u2014 this is an external infrastructure change, not something a test file can address.",
+    "The PR does not remove the fixed 3-second retry delay (wait = 3) or restore exponential backoff, which is what resolving the workaround would require.",
+    "The PR does not touch the anchor code (wait = 3 / logger.warning) at all.",
+    "Adding tests for existing retry behavior is orthogonal to resolving a workaround; it documents current behavior rather than changing it."
+  ],
+  "reasoning": "The workaround HACK-006 was introduced because Stripe's batch endpoint throttles under sustained load, forcing a fixed 3-second delay instead of exponential backoff. The revisit condition is explicitly an external change: Stripe's batch endpoint must stop throttling. The PR under review only adds a unit test file that tests the existing charge submission logic. It does not modify the retry logic, does not remove the fixed delay, does not restore exponential backoff, and does not address the underlying Stripe throttling issue. A test file cannot resolve a workaround that depends on an external service behavior change. This is clearly not a match."
+}

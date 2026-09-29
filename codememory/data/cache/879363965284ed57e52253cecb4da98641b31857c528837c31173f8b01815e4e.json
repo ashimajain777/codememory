@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Re-verifies batch charge totals and falls back to individual per-charge processing when mismatches are detected or API errors occur.",
+  "why": "Stripe's batch charge API returns inconsistent totals under load, causing production mismatches.",
+  "risk": "medium",
+  "revisit_condition": "Stripe's batch charge API returns consistent totals under load.",
+  "ticket_id": null,
+  "anchor_snippet": "if fetched.amount != total:\n    logger.warning(\"batch total mismatch, falling back to per-charge\")\n    for item in line_items:"
+}

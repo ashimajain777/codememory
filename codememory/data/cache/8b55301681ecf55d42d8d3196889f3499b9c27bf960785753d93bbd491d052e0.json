@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only adds unit tests for invoice generation and does not modify any webhook handling logic.",
+    "The workaround relies on an in-memory set to deduplicate Stripe events; the PR does not touch that code or any related database idempotency mechanisms.",
+    "The PR does not close or reference ticket PAY-212, which is the trigger for removing the workaround.",
+    "There is no evidence that the PR introduces database-level idempotency for webhook events, the condition required to retire the workaround."
+  ],
+  "reasoning": "The pull request focuses solely on testing invoice generation and does not address the duplicate webhook delivery issue or the database-level idempotency that the workaround is waiting for. Therefore it does not resolve the workaround HACK-004."
+}

@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR introduces a global error handler for HTTP status codes 400, 404, and 500, which has no relation to tax rate caching or API latency.",
+    "The diff only adds a new file `errors.py` and registers error handlers; there is no code that interacts with the tax provider, caches tax rates, or measures latency.",
+    "The anchor comment in the workaround explicitly mentions caching tax rates in memory due to a p95 latency over 2 seconds, and the revisit condition is a provider latency below 200\u202fms. The PR does not modify any tax\u2011related logic or provider calls.",
+    "The PR does not touch any existing tax\u2011rate retrieval code, nor does it add any performance monitoring or caching mechanisms. Therefore it cannot satisfy the revisit condition of the workaround.",
+    "The PR\u2019s title, message, and diff all focus on error handling, not on improving or measuring tax provider latency."
+  ]
+}

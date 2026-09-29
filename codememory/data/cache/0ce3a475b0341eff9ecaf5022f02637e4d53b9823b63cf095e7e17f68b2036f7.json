@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only modifies retry logic for charge attempts and does not touch any webhook handling code.",
+    "There is no reference to event_id, _seen_events, or any duplicate\u2011event check in the diff.",
+    "The PR does not mention or address database\u2011level idempotency (PAY\u2011212) or the specific workaround HACK\u2011004.",
+    "The PR does not close or reference ticket PAY\u2011212, which is the revisit condition for the workaround.",
+    "The code changes are unrelated to the in\u2011memory set used to skip duplicate webhook deliveries."
+  ]
+}

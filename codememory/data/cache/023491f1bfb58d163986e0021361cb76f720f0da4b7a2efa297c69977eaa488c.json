@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR modifies billing/stripe_retry.py and upgrades the Stripe SDK, which is completely unrelated to the tax provider API mentioned in the workaround.",
+    "The workaround is specifically about in-memory caching of tax provider responses due to high latency (p95 > 2s), but the PR addresses Stripe charge throughput issues, not tax calculation latency.",
+    "The anchor code (_tax_cache = {} and _cache_times = {}) is not touched or removed in this PR, indicating the workaround is still in place.",
+    "The revisit condition requires the tax provider API latency to be reliably below 200ms, but the PR makes no changes to the tax provider integration or its latency characteristics.",
+    "The PR's stated purpose is to resolve 'throughput issues' with Stripe charges, which is a different problem domain than tax provider latency."
+  ],
+  "reasoning": "This PR is clearly about upgrading the Stripe SDK and using a batched charge API to improve billing throughput. The workaround HACK-012 is about caching tax provider responses because the tax provider API has high latency. These are two completely different systems (Stripe billing vs. tax provider) and two different problems (throughput/rate limiting vs. latency). The PR does not touch the anchor code (_tax_cache, _cache_times), does not address the tax provider API, and does not satisfy the revisit condition of tax provider latency being below 200ms. There is no evidence this PR resolves the workaround."
+}

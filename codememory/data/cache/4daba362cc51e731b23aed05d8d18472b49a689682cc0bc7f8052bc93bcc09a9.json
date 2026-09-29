@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR does not touch the downstream ledger code at all; it only renames a file and a function in the billing module.",
+    "The PR does not modify any database schema, migration files, or column definitions, which is required to change integer columns to bigint.",
+    "The PR does not remove or modify the anchor code (the capping logic `if amount > 50000`), so the workaround remains active.",
+    "The PR does not reference ticket PAY-240, which is the specific ticket for the ledger migration.",
+    "The PR's stated purpose is 'reorganize billing modules for clarity', which is a refactoring task unrelated to the ledger's data type limitations."
+  ],
+  "reasoning": "The workaround HACK-008 exists because the downstream ledger uses integer columns that overflow at 50000 cents. The revisit condition explicitly requires the ledger to be migrated to bigint columns (ticket PAY-240). The PR under review is a pure refactoring that renames `billing/retry.py` to `billing/stripe_retry.py` and renames the function `charge_customer` to `submit_charge`. It does not alter any database schema, does not remove the capping logic, and does not address the root cause (integer overflow in the ledger). Therefore, it does not resolve the workaround."
+}

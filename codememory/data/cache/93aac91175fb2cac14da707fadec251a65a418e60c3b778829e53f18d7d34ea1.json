@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR title and description focus on Stripe webhook signature verification, which is unrelated to tax rate fetching or caching logic.",
+    "The diff only modifies a marker file (.pr_marker) and does not touch any of the tax\u2011related code (_tax_cache, _cache_times, TAX_CACHE_TTL, or the surrounding logic).",
+    "The revisit condition for the workaround requires the tax provider API latency to drop below 200\u202fms; the PR does not address API latency, performance measurements, or any changes to the tax provider integration.",
+    "Even if the PR indirectly improves overall system reliability, it does not remove or modify the caching mechanism that the workaround implements.",
+    "A dependency bump or unrelated feature (webhook verification) does not satisfy the specific condition of eliminating the tax\u2011rate cache."
+  ],
+  "reasoning": "The workaround HACK-012 is specifically about caching tax rates to mitigate high latency of the tax provider API. The PR under review adds Stripe webhook signature verification and only changes a marker file, with no impact on the tax cache implementation or the latency of the tax provider. Therefore, there is no evidence that the PR resolves the underlying condition (latency <200\u202fms) or removes the caching code. The match is unsupported."
+}

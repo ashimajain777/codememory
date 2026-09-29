@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Increase Stripe client timeout to 45 seconds and limit concurrent charge requests to 4 using a threading semaphore.",
+  "why": "Stripe API calls time out under load and concurrent requests worsen the problem; the change prevents the service from failing.",
+  "risk": "medium",
+  "revisit_condition": "When Stripe stabilizes response times for batch operations and no longer times out under concurrent load.",
+  "ticket_id": null,
+  "anchor_snippet": "_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\nwith _charge_semaphore:\n    charge = stripe.Charge.create(\n        amount=amount,\n        currency=data.get(\"currency\", \"usd\"),\n        source=data[\"source\"],\n        timeout=STRIPE_TIMEOUT,\n    )"
+}

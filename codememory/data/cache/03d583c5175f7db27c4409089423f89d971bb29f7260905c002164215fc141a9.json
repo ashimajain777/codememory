@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Increased Stripe client timeout to 45 seconds and limited concurrent charge requests to 4 using a semaphore.",
+  "why": "Stripe times out under load, and concurrent requests exacerbate the issue. This prevents the service from failing during high traffic.",
+  "risk": "medium",
+  "revisit_condition": "Stripe stabilizes response times for batch operations.",
+  "ticket_id": null,
+  "anchor_snippet": "STRIPE_TIMEOUT = int(os.environ.get(\"STRIPE_TIMEOUT\", \"45\"))\nSTRIPE_MAX_CONCURRENT = int(os.environ.get(\"STRIPE_MAX_CONCURRENT\", \"4\"))"
+}

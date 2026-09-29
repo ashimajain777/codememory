@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.96,
+  "counter_arguments": [
+    "The PR adds a Stripe timeout and concurrency semaphore but leaves the amount\u2011capping logic unchanged; it does not remove or modify the 50000\u2011cent cap.",
+    "The revisit condition for HACK-008 is the completion of the ledger migration (PAY-240), which this PR does not address or reference.",
+    "The diff only introduces new configuration variables (STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT) unrelated to the ledger overflow issue.",
+    "The comment explaining the hack is removed, but the functional code that enforces the cap remains, indicating no intention to resolve the underlying problem."
+  ],
+  "reasoning": "HACK-008 requires the cap to be eliminated once the downstream ledger is migrated to bigint columns (ticket PAY-240). The PR under review merely adjusts Stripe client timeout and limits concurrency; it does not modify or remove the amount\u2011capping logic, nor does it tie its changes to the ledger migration. Therefore, it does not satisfy the revisit condition and does not resolve the workaround."
+}

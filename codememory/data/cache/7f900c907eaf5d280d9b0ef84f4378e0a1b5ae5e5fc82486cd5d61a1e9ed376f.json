@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR does not touch the tax provider code or the in-memory caching mechanism (_tax_cache, _cache_times) at all.",
+    "The PR is purely a refactoring of billing modules (renaming retry.py to stripe_retry.py and charge_customer to submit_charge), which is unrelated to tax provider latency.",
+    "The revisit condition requires the tax provider API latency to be reliably below 200ms, which is an external infrastructure/performance condition, not something a code reorganization can resolve.",
+    "The PR does not remove the workaround, disable the cache, or modify any tax-related logic."
+  ],
+  "reasoning": "The PR is a cosmetic reorganization of billing modules with no impact on the tax provider caching workaround. The workaround's revisit condition is about external API latency, which this PR does not address. There is no evidence that the tax provider latency has improved or that the caching logic has been removed or modified."
+}

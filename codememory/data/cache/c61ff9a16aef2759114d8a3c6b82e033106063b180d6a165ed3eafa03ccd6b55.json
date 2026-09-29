@@ -1,0 +1,7 @@
+{
+  "shares_root_cause": false,
+  "root_cause": "",
+  "hack_ids": [],
+  "summary": "No three hacks share a common underlying cause; each addresses a distinct issue.",
+  "proposal": "Maintain separate fixes; each hack requires its own targeted change when its specific condition is met."
+}

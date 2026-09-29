@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR title and message focus on webhook signature verification, which is a security feature unrelated to database schema changes.",
+    "The diff excerpt only shows a change to a marker file (.pr_marker), with no evidence of any database migration or schema update.",
+    "The workaround's revisit condition explicitly requires the downstream ledger to be migrated to bigint columns, which is not addressed in this PR.",
+    "The PR does not mention ticket PAY-240, which is the specific ticket responsible for the bigint migration.",
+    "There is no code change related to the integer overflow issue or the capping logic in the PR."
+  ],
+  "reasoning": "The PR is about adding Stripe webhook signature verification, which is a completely different concern from the database schema migration required to resolve the integer overflow workaround. The workaround specifically requires the downstream ledger to be migrated to bigint columns as part of ticket PAY-240, and this PR does not address that requirement. The diff excerpt only shows a marker file change, with no evidence of any database migration or related code changes. This is clearly not a match."
+}

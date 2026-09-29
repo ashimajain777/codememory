@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Caches tax rates in memory with a TTL to avoid repeated slow API calls",
+  "why": "The tax provider API has high latency (p95 >2s), making real\u2011time checkout too slow",
+  "risk": "low",
+  "revisit_condition": "When the tax provider API latency is reliably below 200\u202fms",
+  "ticket_id": null,
+  "anchor_snippet": "_tax_cache = {}\n_cache_times = {}\nif cache_key in _tax_cache and (now - _cache_times[cache_key]) < TAX_CACHE_TTL:"
+}

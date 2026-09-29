@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Increases Stripe client timeout to 45 seconds and caps concurrent charge requests at 4 using a threading.Semaphore.",
+  "why": "Stripe API times out under load and concurrent requests worsen the problem; the change prevents the service from failing.",
+  "risk": "medium",
+  "revisit_condition": "When Stripe stabilizes response times for batch operations and no longer times out under load.",
+  "ticket_id": null,
+  "anchor_snippet": "_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\nwith _charge_semaphore:\n    timeout=STRIPE_TIMEOUT,"
+}

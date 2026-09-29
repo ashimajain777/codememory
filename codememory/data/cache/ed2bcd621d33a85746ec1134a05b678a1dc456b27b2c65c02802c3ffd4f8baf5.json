@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR is explicitly a documentation update ('docs: document batch charging flow') and does not modify any application logic, configuration, or infrastructure that would affect API latency.",
+    "The diff only changes a marker file (.pr_marker), which is a build/CI artifact, not production code.",
+    "The workaround's revisit condition requires the tax provider API latency to be reliably below 200ms. A documentation PR cannot change network latency or provider performance.",
+    "There is no evidence in the PR that the tax provider has improved their API performance, nor any code changes to remove the in-memory cache (_tax_cache, _cache_times).",
+    "The PR title and message focus on 'batch charge and invoice flow', which is a different domain from real-time tax calculation latency."
+  ],
+  "reasoning": "The PR is purely a documentation update with no functional code changes. It cannot possibly resolve a performance-related workaround that depends on external API latency improvements. The revisit condition (latency < 200ms) is a runtime/infrastructure metric, not something addressed by adding sequence diagrams or notes. The diff confirms only a marker file change. This is a clear non-match."
+}

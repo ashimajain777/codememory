@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR modifies `billing/stripe_retry.py` to remove a fixed retry delay, whereas the workaround HACK-008 is located in code that caps charge amounts (likely in a different file or function).",
+    "The PR does not touch the anchor code `if amount > 50000: ... amount = 50000` at all.",
+    "The PR does not address the downstream ledger's integer overflow issue or the migration to bigint columns required by ticket PAY-240.",
+    "The PR is unrelated to ticket PAY-240 and does not close it."
+  ],
+  "reasoning": "The PR under review removes a workaround related to Stripe rate limiting and retry delays, which is completely unrelated to the integer overflow workaround in the downstream ledger. The PR does not modify the anchor code, does not address the revisit condition (migration to bigint columns), and does not reference the relevant ticket (PAY-240). This is a clear mismatch."
+}

@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "Limit concurrent Stripe charges to 4 and increase timeout to 45s",
+  "why": "Stripe times out under load; limiting concurrency and raising timeout prevents service failures",
+  "risk": "medium",
+  "revisit_condition": "When Stripe stabilizes response times for batch operations and no longer times out under concurrent load",
+  "ticket_id": null,
+  "anchor_snippet": "_charge_semaphore = threading.Semaphore(STRIPE_MAX_CONCURRENT)\nwith _charge_semaphore:\n    charge = stripe.Charge.create("
+}

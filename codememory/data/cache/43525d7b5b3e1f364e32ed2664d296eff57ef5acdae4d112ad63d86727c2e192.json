@@ -1,0 +1,10 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR only modifies documentation (README.md) and does not touch any application code related to webhook handling or the in\u2011memory _seen_events set.",
+    "The revisit condition for HACK-004 requires the deployment of the database\u2011level idempotency fix (ticket PAY-212); this PR does not implement or reference that fix.",
+    "No changes are made to the logic that adds to or checks the _seen_events set, nor is there any migration of duplicate\u2011check responsibility to the database."
+  ],
+  "reasoning": "The workaround HACK-004 is about runtime duplicate detection for Stripe webhook events, which should be removed once a persistent idempotency solution is in place. The PR under review solely adds a README with setup instructions and does not modify the webhook processing code, the in\u2011memory set, or the underlying idempotency mechanism. Therefore it does not resolve the workaround."
+}

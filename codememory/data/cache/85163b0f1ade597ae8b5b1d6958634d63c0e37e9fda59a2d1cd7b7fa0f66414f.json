@@ -1,0 +1,13 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR addresses a completely different issue: Stripe batch charge API inconsistency, not tax provider API latency.",
+    "The PR does not touch the anchor code (_tax_cache = {} or _cache_times = {}) at all.",
+    "The PR does not remove or modify any in-memory caching of tax provider responses.",
+    "The PR does not address the revisit condition (tax provider API latency reliably below 200ms).",
+    "The PR introduces a new workaround for a different problem (Stripe batch API), which is unrelated to the tax provider latency issue.",
+    "The PR's changes are in invoices.py and deal with charge verification, not tax calculation or tax provider API calls."
+  ],
+  "reasoning": "This PR is entirely unrelated to the workaround in question. The workaround HACK-012 is about in-memory caching of tax provider responses due to high latency (p95 over 2 seconds), with the revisit condition being that the tax provider API latency drops below 200ms. The PR under review is about adding batch charge verification and fallback logic for Stripe's batch API returning inconsistent totals. These are completely different problems: one is about tax provider API latency and caching, the other is about Stripe charge API consistency. The PR does not touch the anchor code, does not remove any tax caching, and does not address the tax provider latency issue. There is no overlap between the two issues."
+}

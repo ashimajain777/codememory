@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "After creating a batch charge, the code retrieves the charge, compares the amount to the expected total, and if they differ it falls back to creating individual charges for each line item.",
+  "why": "Stripe's batch charge API can return inconsistent totals under load, causing mismatches in production.",
+  "risk": "medium",
+  "revisit_condition": "When Stripe's batch charge API reliably returns consistent totals, the verification and fallback logic can be removed.",
+  "ticket_id": null,
+  "anchor_snippet": "fetched = stripe.Charge.retrieve(batch.id)\nif fetched.amount != total:\n    logger.warning(\"batch total mismatch, falling back to per-charge\")"
+}

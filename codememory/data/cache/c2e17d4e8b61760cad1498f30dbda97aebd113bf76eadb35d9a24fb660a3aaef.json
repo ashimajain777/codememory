@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR modifies webhook duplicate handling, not the charge amount logic where the cap is applied.",
+    "The workaround HACK-008 is tied to a downstream ledger overflow; the PR does not change any ledger schema, data types, or amount processing.",
+    "Revisit condition for HACK-008 is the completion of ticket PAY-240 (ledger migration to bigint). The PR closes ticket PAY-212, unrelated to the ledger migration.",
+    "No code changes touch the `if amount > 50000:` block or any related financial calculation; the diff only adds SQLite idempotency code.",
+    "Even if the PR indirectly affects downstream processing, it does not address the root cause (int column overflow) that the cap was protecting against."
+  ],
+  "reasoning": "The PR under review introduces database-backed idempotency for Stripe webhook events, replacing an in-memory set. The workaround HACK-008 concerns capping charge amounts to avoid integer overflow in a ledger table, with the condition to remove the cap only after a bigint migration (PAY-240). Since the PR does not modify the amount-capping logic, the ledger schema, or any related financial processing, it does not satisfy the revisit condition and therefore does not resolve the workaround."
+}

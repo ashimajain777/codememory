@@ -1,0 +1,11 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.98,
+  "counter_arguments": [
+    "The PR is explicitly a documentation-only change ('docs: document batch charging flow') and does not modify any production code, configuration, or logic.",
+    "The workaround's revisit condition is 'Stripe stabilizes response times for batch operations,' which is an external service-level improvement, not something a documentation PR can address or verify.",
+    "The diff only updates a marker file (.pr_marker) and adds documentation (sequence diagram/notes), with no changes to STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT, or any semaphore/timeout logic.",
+    "A documentation PR cannot resolve a performance/stability workaround; it merely describes the existing flow without altering behavior or removing the hack."
+  ],
+  "reasoning": "The PR is purely a documentation update describing the batch charging flow. It does not touch the anchor code (STRIPE_TIMEOUT, STRIPE_MAX_CONCURRENT), does not remove the semaphore or timeout adjustments, and does not address the underlying condition (Stripe response time stability). The revisit condition requires an external service improvement or a code change that removes the workaround, neither of which is present. Therefore, this PR does not resolve the workaround."
+}

@@ -1,0 +1,9 @@
+{
+  "is_workaround": true,
+  "what": "In-memory caching of tax provider responses",
+  "why": "The tax provider API has high latency (p95 over 2 seconds) which is too slow for real-time checkout",
+  "risk": "medium",
+  "revisit_condition": "The tax provider API latency is reliably below 200ms",
+  "ticket_id": null,
+  "anchor_snippet": "_tax_cache = {}\n_cache_times = {}"
+}

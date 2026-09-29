@@ -1,0 +1,3 @@
+hindsight-all==0.3.1
+groq==0.25.0
+python-dotenv==1.1.0

@@ -1,0 +1,12 @@
+{
+  "verdict": "NEEDS_WORK",
+  "confidence": 0.99,
+  "counter_arguments": [
+    "The PR title is 'remove unused imports' and the message states it ran autoflake to remove unused imports. This is a purely cosmetic cleanup with no functional change to retry logic.",
+    "The diff excerpt only shows a change to a marker file (.pr_marker), which is unrelated to the charge retry logic or Stripe batch endpoint handling.",
+    "The workaround's revisit condition is 'Stripe's batch endpoint stops throttling under sustained load'. This is an external dependency condition that cannot be resolved by a code cleanup PR. The PR does not modify the retry delay, backoff strategy, or any logic related to Stripe throttling.",
+    "The anchor code 'wait = 3' and the logger.warning message are not touched by this PR. There is no evidence that the fixed 3-second delay has been replaced with exponential backoff or any other change.",
+    "Removing unused imports has zero impact on runtime behavior, network calls, or retry mechanisms. It cannot possibly resolve a workaround related to API throttling."
+  ],
+  "reasoning": "This PR is a trivial cleanup that removes unused imports. It does not modify any retry logic, does not change the fixed 3-second delay, and does not address the underlying condition (Stripe batch endpoint throttling). The revisit condition requires an external change in Stripe's behavior or a corresponding code change to restore exponential backoff, neither of which is present. This is clearly not a match."
+}
