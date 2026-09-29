@@ -1,0 +1,2420 @@
+[2026-09-28T16:10:37Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-28T16:10:37Z] PR#1 recall: file query: Code changes touching files: config.py, tax.py, requirements.txt, billing/retry.
+[2026-09-28T16:10:48Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-28T16:10:54Z] PR#1 usage: tokens: 1181
+[2026-09-28T16:10:57Z] PR#1 classify: is_workaround=False
+[2026-09-28T16:10:57Z] PR#1 done: tag=, comments=0
+[2026-09-28T16:10:57Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-28T16:10:57Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: setup_logging, format
+[2026-09-28T16:11:02Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-28T16:11:07Z] PR#2 usage: tokens: 512
+[2026-09-28T16:11:10Z] PR#2 classify: is_workaround=False
+[2026-09-28T16:11:10Z] PR#2 done: tag=, comments=0
+[2026-09-28T16:11:10Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-28T16:11:10Z] PR#3 recall: file query: Code changes touching files: health.py; functions: health, register_health
+[2026-09-28T16:11:21Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-28T16:11:25Z] PR#3 usage: tokens: 464
+[2026-09-28T16:11:28Z] PR#3 classify: is_workaround=False
+[2026-09-28T16:11:28Z] PR#3 done: tag=, comments=0
+[2026-09-28T16:11:28Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-28T16:11:28Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-28T16:11:37Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-28T16:11:44Z] PR#4 usage: tokens: 619
+[2026-09-28T16:11:47Z] PR#4 classify: is_workaround=True
+[2026-09-28T16:11:47Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T16:11:50Z] PR#4 retain: retained hack HACK-004
+[2026-09-28T16:11:50Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-28T16:11:50Z] PR#4 done: tag=HACK, comments=1
+[2026-09-28T16:11:50Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-28T16:11:50Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_zero_amount
+[2026-09-28T16:11:54Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-28T16:11:58Z] PR#5 usage: tokens: 573
+[2026-09-28T16:12:01Z] PR#5 classify: is_workaround=False
+[2026-09-28T16:12:01Z] PR#5 done: tag=, comments=0
+[2026-09-28T16:12:01Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-28T16:12:01Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-28T16:12:04Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-28T16:12:15Z] PR#6 usage: tokens: 588
+[2026-09-28T16:12:18Z] PR#6 classify: is_workaround=True
+[2026-09-28T16:12:18Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T16:12:21Z] PR#6 retain: retained hack HACK-006
+[2026-09-28T16:12:21Z] PR#6 done: tag=HACK, comments=0
+[2026-09-28T16:12:21Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-28T16:12:21Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-28T16:12:25Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-28T16:12:28Z] PR#7 usage: tokens: 506
+[2026-09-28T16:12:31Z] PR#7 classify: is_workaround=False
+[2026-09-28T16:12:34Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-28T16:12:35Z] PR#7 usage: tokens: 804
+[2026-09-28T16:12:38Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:12:38Z] PR#7 done: tag=, comments=0
+[2026-09-28T16:12:38Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-28T16:12:38Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-28T16:12:49Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-28T16:12:55Z] PR#8 usage: tokens: 655
+[2026-09-28T16:12:58Z] PR#8 classify: is_workaround=True
+[2026-09-28T16:12:58Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-28T16:13:03Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-28T16:13:04Z] PR#8 usage: tokens: 921
+[2026-09-28T16:13:07Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:13:19Z] PR#8 retain: retained hack HACK-008
+[2026-09-28T16:13:19Z] PR#8 done: tag=HACK, comments=0
+[2026-09-28T16:13:19Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-28T16:13:19Z] PR#9 recall: empty diff, skipping recall
+[2026-09-28T16:13:19Z] PR#9 classify: empty diff, skipping
+[2026-09-28T16:13:22Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-28T16:13:22Z] PR#9 usage: tokens: 564
+[2026-09-28T16:13:25Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:13:25Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-28T16:13:26Z] PR#9 usage: tokens: 641
+[2026-09-28T16:13:29Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:13:29Z] PR#9 done: tag=, comments=0
+[2026-09-28T16:13:29Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-28T16:13:29Z] PR#10 recall: file query: Code changes touching files: db.py, webhooks.py; functions: get_db
+[2026-09-28T16:13:32Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-28T16:13:43Z] PR#10 usage: tokens: 625
+[2026-09-28T16:13:46Z] PR#10 classify: is_workaround=False
+[2026-09-28T16:13:51Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-28T16:13:52Z] PR#10 usage: tokens: 1242
+[2026-09-28T16:13:55Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:13:55Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-28T16:13:56Z] PR#10 usage: tokens: 1254
+[2026-09-28T16:13:59Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:13:59Z] PR#10 done: tag=, comments=0
+[2026-09-28T16:13:59Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-28T16:13:59Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T16:14:03Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-28T16:14:12Z] PR#11 usage: tokens: 421
+[2026-09-28T16:14:15Z] PR#11 classify: is_workaround=False
+[2026-09-28T16:14:21Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-28T16:14:22Z] PR#11 usage: tokens: 702
+[2026-09-28T16:14:25Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:14:25Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-28T16:14:26Z] PR#11 usage: tokens: 784
+[2026-09-28T16:14:29Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:14:29Z] PR#11 done: tag=, comments=0
+[2026-09-28T16:14:29Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-28T16:14:29Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-28T16:14:33Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-28T16:14:38Z] PR#12 usage: tokens: 651
+[2026-09-28T16:14:41Z] PR#12 classify: is_workaround=True
+[2026-09-28T16:14:49Z] PR#12 reflect: recall returned 0 similar open hacks (need 2+), skipping reflect
+[2026-09-28T16:14:52Z] PR#12 check: resolve-check for hack HACK-006
+[2026-09-28T16:14:54Z] PR#12 usage: tokens: 1006
+[2026-09-28T16:14:57Z] PR#12 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:14:57Z] PR#12 check: resolve-check for hack HACK-008
+[2026-09-28T16:14:59Z] PR#12 usage: tokens: 1081
+[2026-09-28T16:15:02Z] PR#12 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:15:13Z] PR#12 retain: retained hack HACK-012
+[2026-09-28T16:15:13Z] PR#12 done: tag=HACK, comments=0
+[2026-09-28T16:15:13Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-28T16:15:13Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T16:15:22Z] PR#13 recall: semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques
+[2026-09-28T16:15:26Z] PR#13 usage: tokens: 428
+[2026-09-28T16:15:29Z] PR#13 classify: is_workaround=False
+[2026-09-28T16:15:32Z] PR#13 check: resolve-check for hack HACK-006
+[2026-09-28T16:15:33Z] PR#13 usage: tokens: 821
+[2026-09-28T16:15:36Z] PR#13 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:15:36Z] PR#13 check: resolve-check for hack HACK-008
+[2026-09-28T16:15:42Z] PR#13 usage: tokens: 829
+[2026-09-28T16:15:45Z] PR#13 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:15:45Z] PR#13 check: resolve-check for hack HACK-012
+[2026-09-28T16:15:59Z] PR#13 usage: tokens: 748
+[2026-09-28T16:16:02Z] PR#13 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:16:02Z] PR#13 done: tag=, comments=0
+[2026-09-28T16:16:02Z] PR#14 start: processing PR #14: feat: add global error handler
+[2026-09-28T16:16:02Z] PR#14 recall: file query: Code changes touching files: errors.py; functions: server_error, not_found, bad_
+[2026-09-28T16:16:18Z] PR#14 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: 
+[2026-09-28T16:16:23Z] PR#14 usage: tokens: 559
+[2026-09-28T16:16:26Z] PR#14 classify: is_workaround=False
+[2026-09-28T16:16:30Z] PR#14 check: resolve-check for hack HACK-006
+[2026-09-28T16:16:31Z] PR#14 usage: tokens: 906
+[2026-09-28T16:16:34Z] PR#14 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:16:34Z] PR#14 check: resolve-check for hack HACK-008
+[2026-09-28T16:16:39Z] PR#14 usage: tokens: 869
+[2026-09-28T16:16:42Z] PR#14 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:16:42Z] PR#14 check: resolve-check for hack HACK-012
+[2026-09-28T16:16:49Z] PR#14 usage: tokens: 847
+[2026-09-28T16:16:52Z] PR#14 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:16:52Z] PR#14 done: tag=, comments=0
+[2026-09-28T16:16:52Z] PR#15 start: processing PR #15: increase stripe timeout and limit concurrency
+[2026-09-28T16:16:52Z] PR#15 recall: file query: Code changes touching files: config.py, checkout.py
+[2026-09-28T16:16:58Z] PR#15 recall: semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu
+[2026-09-28T16:17:04Z] PR#15 usage: tokens: 713
+[2026-09-28T16:17:07Z] PR#15 classify: is_workaround=True
+[2026-09-28T16:17:15Z] PR#15 reflect: recall returned 0 similar open hacks (need 2+), skipping reflect
+[2026-09-28T16:17:21Z] PR#15 check: resolve-check for hack HACK-006
+[2026-09-28T16:17:23Z] PR#15 usage: tokens: 1192
+[2026-09-28T16:17:26Z] PR#15 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T16:17:26Z] PR#15 check: resolve-check for hack HACK-008
+[2026-09-28T16:17:35Z] PR#15 usage: tokens: 1160
+[2026-09-28T16:17:38Z] PR#15 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:17:38Z] PR#15 check: resolve-check for hack HACK-012
+[2026-09-28T16:17:48Z] PR#15 usage: tokens: 1252
+[2026-09-28T16:17:51Z] PR#15 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:17:56Z] PR#15 retain: retained hack HACK-015
+[2026-09-28T16:17:56Z] PR#15 done: tag=HACK, comments=0
+[2026-09-28T16:17:56Z] PR#16 start: processing PR #16: add basic metrics counters
+[2026-09-28T16:17:56Z] PR#16 recall: file query: Code changes touching files: metrics.py; functions: get_counts, __init__, __ente
+[2026-09-28T16:18:00Z] PR#16 recall: semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char
+[2026-09-28T16:18:13Z] PR#16 usage: tokens: 538
+[2026-09-28T16:18:16Z] PR#16 classify: is_workaround=False
+[2026-09-28T16:18:20Z] PR#16 check: resolve-check for hack HACK-006
+[2026-09-28T16:18:23Z] PR#16 usage: tokens: 887
+[2026-09-28T16:18:26Z] PR#16 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:18:26Z] PR#16 check: resolve-check for hack HACK-008
+[2026-09-28T16:18:32Z] PR#16 usage: tokens: 914
+[2026-09-28T16:18:35Z] PR#16 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:18:35Z] PR#16 check: resolve-check for hack HACK-012
+[2026-09-28T16:18:51Z] PR#16 usage: tokens: 915
+[2026-09-28T16:18:54Z] PR#16 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:18:54Z] PR#16 done: tag=, comments=0
+[2026-09-28T16:18:54Z] PR#17 start: processing PR #17: reorganize billing modules
+[2026-09-28T16:18:54Z] PR#17 recall: file query: Code changes touching files: billing/stripe_retry.py, billing/retry.py; function
+[2026-09-28T16:19:03Z] PR#17 recall: semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize
+[2026-09-28T16:19:07Z] PR#17 usage: tokens: 446
+[2026-09-28T16:19:10Z] PR#17 classify: is_workaround=False
+[2026-09-28T16:19:23Z] PR#17 check: resolve-check for hack HACK-006
+[2026-09-28T16:19:24Z] PR#17 usage: tokens: 787
+[2026-09-28T16:19:27Z] PR#17 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T16:19:27Z] PR#17 check: resolve-check for hack HACK-008
+[2026-09-28T16:19:28Z] PR#17 usage: tokens: 961
+[2026-09-28T16:19:31Z] PR#17 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:19:31Z] PR#17 check: resolve-check for hack HACK-012
+[2026-09-28T16:19:47Z] PR#17 usage: tokens: 788
+[2026-09-28T16:19:50Z] PR#17 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:19:50Z] PR#17 retain: hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py
+[2026-09-28T16:19:50Z] PR#17 done: tag=MOVE, comments=1
+[2026-09-28T16:19:50Z] PR#18 start: processing PR #18: add .env.example file
+[2026-09-28T16:19:50Z] PR#18 recall: file query: Code changes touching files: .env.example
+[2026-09-28T16:19:57Z] PR#18 recall: semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env
+[2026-09-28T16:20:02Z] PR#18 usage: tokens: 456
+[2026-09-28T16:20:05Z] PR#18 classify: is_workaround=False
+[2026-09-28T16:20:17Z] PR#18 check: resolve-check for hack HACK-006
+[2026-09-28T16:20:20Z] PR#18 usage: tokens: 766
+[2026-09-28T16:20:23Z] PR#18 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:20:23Z] PR#18 check: resolve-check for hack HACK-008
+[2026-09-28T16:20:25Z] PR#18 usage: tokens: 857
+[2026-09-28T16:20:28Z] PR#18 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:20:28Z] PR#18 check: resolve-check for hack HACK-012
+[2026-09-28T16:20:42Z] PR#18 usage: tokens: 796
+[2026-09-28T16:20:45Z] PR#18 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:20:45Z] PR#18 done: tag=, comments=0
+[2026-09-28T16:20:45Z] PR#19 start: processing PR #19: bump stripe-sdk to 4.0.3
+[2026-09-28T16:20:45Z] PR#19 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T16:20:53Z] PR#19 recall: semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri
+[2026-09-28T16:21:01Z] PR#19 usage: tokens: 427
+[2026-09-28T16:21:04Z] PR#19 classify: is_workaround=False
+[2026-09-28T16:21:17Z] PR#19 check: resolve-check for hack HACK-006
+[2026-09-28T16:21:19Z] PR#19 usage: tokens: 845
+[2026-09-28T16:21:22Z] PR#19 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T16:21:22Z] PR#19 check: resolve-check for hack HACK-008
+[2026-09-28T16:21:27Z] PR#19 usage: tokens: 859
+[2026-09-28T16:21:30Z] PR#19 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:21:30Z] PR#19 check: resolve-check for hack HACK-012
+[2026-09-28T16:21:50Z] PR#19 usage: tokens: 727
+[2026-09-28T16:21:53Z] PR#19 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:21:53Z] PR#19 done: tag=, comments=0
+[2026-09-28T16:21:53Z] PR#20 start: processing PR #20: feat: verify webhook signatures
+[2026-09-28T16:21:53Z] PR#20 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T16:22:00Z] PR#20 recall: semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:
+[2026-09-28T16:22:20Z] PR#20 usage: tokens: 414
+[2026-09-28T16:22:23Z] PR#20 classify: is_workaround=False
+[2026-09-28T16:22:28Z] PR#20 check: resolve-check for hack HACK-006
+[2026-09-28T16:22:29Z] PR#20 usage: tokens: 711
+[2026-09-28T16:22:32Z] PR#20 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:22:32Z] PR#20 check: resolve-check for hack HACK-008
+[2026-09-28T16:22:33Z] PR#20 usage: tokens: 751
+[2026-09-28T16:22:36Z] PR#20 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:22:36Z] PR#20 check: resolve-check for hack HACK-012
+[2026-09-28T16:22:38Z] PR#20 usage: tokens: 683
+[2026-09-28T16:22:41Z] PR#20 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:22:41Z] PR#20 done: tag=, comments=0
+[2026-09-28T16:22:41Z] PR#21 start: processing PR #21: add tests for charge retry logic
+[2026-09-28T16:22:41Z] PR#21 recall: file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha
+[2026-09-28T16:22:53Z] PR#21 recall: semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test
+[2026-09-28T16:22:57Z] PR#21 usage: tokens: 521
+[2026-09-28T16:23:00Z] PR#21 classify: is_workaround=False
+[2026-09-28T16:23:07Z] PR#21 check: resolve-check for hack HACK-006
+[2026-09-28T16:23:08Z] PR#21 usage: tokens: 899
+[2026-09-28T16:23:11Z] PR#21 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:23:11Z] PR#21 check: resolve-check for hack HACK-008
+[2026-09-28T16:23:16Z] PR#21 usage: tokens: 851
+[2026-09-28T16:23:19Z] PR#21 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:23:19Z] PR#21 check: resolve-check for hack HACK-012
+[2026-09-28T16:23:35Z] PR#21 usage: tokens: 828
+[2026-09-28T16:23:38Z] PR#21 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:23:38Z] PR#21 done: tag=, comments=0
+[2026-09-28T16:23:38Z] PR#22 start: processing PR #22: add batch charge verification and fallback
+[2026-09-28T16:23:38Z] PR#22 recall: file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice
+[2026-09-28T16:23:51Z] PR#22 recall: semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb
+[2026-09-28T16:23:56Z] PR#22 usage: tokens: 774
+[2026-09-28T16:23:59Z] PR#22 classify: is_workaround=True
+[2026-09-28T16:24:05Z] PR#22 reflect: recall returned 0 similar open hacks (need 2+), skipping reflect
+[2026-09-28T16:24:20Z] PR#22 check: resolve-check for hack HACK-006
+[2026-09-28T16:24:21Z] PR#22 usage: tokens: 1093
+[2026-09-28T16:24:24Z] PR#22 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T16:24:24Z] PR#22 check: resolve-check for hack HACK-008
+[2026-09-28T16:24:25Z] PR#22 usage: tokens: 1154
+[2026-09-28T16:25:02Z] PR#22 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:25:02Z] PR#22 check: resolve-check for hack HACK-012
+[2026-09-28T16:25:03Z] PR#22 error: LLM call failed: Connection error.
+[2026-09-28T16:25:05Z] PR#22 error: LLM call failed: Connection error.
+[2026-09-28T16:25:08Z] PR#22 error: LLM call failed: Connection error.
+[2026-09-28T16:25:10Z] PR#22 retain: retained hack HACK-022
+[2026-09-28T16:25:10Z] PR#22 done: tag=HACK, comments=0
+[2026-09-28T16:25:10Z] PR#23 start: processing PR #23: docs: document batch charging flow
+[2026-09-28T16:25:10Z] PR#23 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T16:25:12Z] PR#23 recall: semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do
+[2026-09-28T16:25:15Z] PR#23 error: LLM call failed: Connection error.
+[2026-09-28T16:25:17Z] PR#23 error: LLM call failed: Connection error.
+[2026-09-28T16:25:20Z] PR#23 usage: tokens: 414
+[2026-09-28T16:25:23Z] PR#23 classify: is_workaround=False
+[2026-09-28T16:25:30Z] PR#23 check: resolve-check for hack HACK-006
+[2026-09-28T16:25:31Z] PR#23 usage: tokens: 646
+[2026-09-28T16:25:34Z] PR#23 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:25:34Z] PR#23 check: resolve-check for hack HACK-008
+[2026-09-28T16:25:36Z] PR#23 usage: tokens: 709
+[2026-09-28T16:25:39Z] PR#23 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:25:39Z] PR#23 check: resolve-check for hack HACK-012
+[2026-09-28T16:25:43Z] PR#23 usage: tokens: 725
+[2026-09-28T16:25:46Z] PR#23 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:25:46Z] PR#23 done: tag=, comments=0
+[2026-09-28T16:25:46Z] PR#24 start: processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API
+[2026-09-28T16:25:46Z] PR#24 recall: file query: Code changes touching files: billing/stripe_retry.py, requirements.txt
+[2026-09-28T16:25:51Z] PR#24 recall: semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch
+[2026-09-28T16:25:56Z] PR#24 usage: tokens: 469
+[2026-09-28T16:25:59Z] PR#24 classify: is_workaround=False
+[2026-09-28T16:26:13Z] PR#24 check: resolve-check for hack HACK-006
+[2026-09-28T16:26:14Z] PR#24 usage: tokens: 1040
+[2026-09-28T16:26:17Z] PR#24 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T16:26:17Z] PR#24 check: resolve-check for hack HACK-008
+[2026-09-28T16:26:18Z] PR#24 usage: tokens: 968
+[2026-09-28T16:26:21Z] PR#24 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:26:21Z] PR#24 check: resolve-check for hack HACK-012
+[2026-09-28T16:26:23Z] PR#24 usage: tokens: 988
+[2026-09-28T16:26:26Z] PR#24 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:26:26Z] PR#24 done: tag=, comments=0
+[2026-09-28T16:26:26Z] PR#25 start: processing PR #25: remove unused imports
+[2026-09-28T16:26:26Z] PR#25 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T16:26:31Z] PR#25 recall: semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a
+[2026-09-28T16:26:43Z] PR#25 usage: tokens: 408
+[2026-09-28T16:26:46Z] PR#25 classify: is_workaround=False
+[2026-09-28T16:26:52Z] PR#25 check: resolve-check for hack HACK-006
+[2026-09-28T16:26:53Z] PR#25 usage: tokens: 704
+[2026-09-28T16:26:56Z] PR#25 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:26:56Z] PR#25 check: resolve-check for hack HACK-008
+[2026-09-28T16:27:03Z] PR#25 usage: tokens: 776
+[2026-09-28T16:27:06Z] PR#25 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:27:06Z] PR#25 check: resolve-check for hack HACK-012
+[2026-09-28T16:27:23Z] PR#25 usage: tokens: 687
+[2026-09-28T16:27:26Z] PR#25 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T16:27:26Z] PR#25 done: tag=, comments=0
+[2026-09-28T16:27:26Z] PR#26 start: processing PR #26: remove fixed retry delay workaround
+[2026-09-28T16:27:26Z] PR#26 recall: file query: Code changes touching files: billing/stripe_retry.py
+[2026-09-28T16:27:36Z] PR#26 recall: semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t
+[2026-09-28T16:27:56Z] PR#26 usage: tokens: 499
+[2026-09-28T16:27:59Z] PR#26 classify: is_workaround=False
+[2026-09-28T16:28:04Z] PR#26 check: resolve-check for hack HACK-006
+[2026-09-28T16:28:06Z] PR#26 usage: tokens: 1197
+[2026-09-28T16:28:09Z] PR#26 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T16:28:09Z] PR#26 check: resolve-check for hack HACK-008
+[2026-09-28T16:28:10Z] PR#26 usage: tokens: 1054
+[2026-09-28T16:28:13Z] PR#26 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:28:13Z] PR#26 check: resolve-check for hack HACK-012
+[2026-09-28T16:28:23Z] PR#26 usage: tokens: 1150
+[2026-09-28T16:28:26Z] PR#26 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T16:28:26Z] PR#26 retain: hack HACK-006 retired (anchor removed)
+[2026-09-28T16:28:26Z] PR#26 done: tag=, comments=1
+[2026-09-28T17:45:26Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-28T17:45:26Z] PR#1 recall: file query: Code changes touching files: requirements.txt, webhooks.py, checkout.py, config.
+[2026-09-28T17:45:32Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-28T17:45:35Z] PR#1 usage: tokens: 1181
+[2026-09-28T17:45:38Z] PR#1 classify: is_workaround=False
+[2026-09-28T17:45:38Z] PR#1 done: tag=, comments=0
+[2026-09-28T17:45:38Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-28T17:45:38Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: setup_logging, format
+[2026-09-28T17:45:40Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-28T17:45:42Z] PR#2 classify: is_workaround=False
+[2026-09-28T17:45:42Z] PR#2 done: tag=, comments=0
+[2026-09-28T17:45:42Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-28T17:45:42Z] PR#3 recall: file query: Code changes touching files: health.py; functions: health, register_health
+[2026-09-28T17:45:44Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-28T17:45:46Z] PR#3 classify: is_workaround=False
+[2026-09-28T17:45:46Z] PR#3 done: tag=, comments=0
+[2026-09-28T17:45:46Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-28T17:45:46Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-28T17:45:48Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-28T17:45:50Z] PR#4 classify: is_workaround=True
+[2026-09-28T17:45:50Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T17:45:55Z] PR#4 retain: retained hack HACK-004
+[2026-09-28T17:45:55Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-28T17:45:55Z] PR#4 done: tag=HACK, comments=1
+[2026-09-28T17:45:55Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-28T17:45:55Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_basic_invoi
+[2026-09-28T17:45:57Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-28T17:45:59Z] PR#5 classify: is_workaround=False
+[2026-09-28T17:45:59Z] PR#5 done: tag=, comments=0
+[2026-09-28T17:45:59Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-28T17:45:59Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-28T17:46:01Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-28T17:46:03Z] PR#6 classify: is_workaround=True
+[2026-09-28T17:46:03Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T17:46:15Z] PR#6 retain: retained hack HACK-006
+[2026-09-28T17:46:15Z] PR#6 done: tag=HACK, comments=0
+[2026-09-28T17:46:15Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-28T17:46:15Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-28T17:46:17Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-28T17:46:19Z] PR#7 classify: is_workaround=False
+[2026-09-28T17:46:21Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-28T17:46:21Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:46:21Z] PR#7 done: tag=, comments=0
+[2026-09-28T17:46:21Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-28T17:46:21Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-28T17:46:23Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-28T17:46:25Z] PR#8 classify: is_workaround=True
+[2026-09-28T17:46:25Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-28T17:46:27Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-28T17:46:27Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:46:30Z] PR#8 retain: retained hack HACK-008
+[2026-09-28T17:46:30Z] PR#8 done: tag=HACK, comments=0
+[2026-09-28T17:46:30Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-28T17:46:30Z] PR#9 recall: empty diff, skipping recall
+[2026-09-28T17:46:30Z] PR#9 classify: empty diff, skipping
+[2026-09-28T17:46:32Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-28T17:46:32Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:46:33Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-28T17:46:33Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:46:33Z] PR#9 done: tag=, comments=0
+[2026-09-28T17:46:33Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-28T17:46:33Z] PR#10 recall: file query: Code changes touching files: db.py, webhooks.py; functions: get_db
+[2026-09-28T17:46:35Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-28T17:46:37Z] PR#10 classify: is_workaround=False
+[2026-09-28T17:46:39Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-28T17:46:39Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:46:39Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-28T17:46:39Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:46:39Z] PR#10 done: tag=, comments=0
+[2026-09-28T17:46:39Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-28T17:46:39Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T17:46:41Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-28T17:46:43Z] PR#11 classify: is_workaround=False
+[2026-09-28T17:46:45Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-28T17:46:45Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:46:45Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-28T17:46:45Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:46:45Z] PR#11 done: tag=, comments=0
+[2026-09-28T17:46:45Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-28T17:46:45Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-28T17:46:47Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-28T17:46:49Z] PR#12 classify: is_workaround=True
+[2026-09-28T17:46:51Z] PR#12 reflect_gate: query: The tax provider API has high latency (p95 over 2 seconds) which is too slow for...
+[2026-09-28T17:46:51Z] PR#12 reflect_gate: recall hit IDs: []
+[2026-09-28T17:46:51Z] PR#12 reflect_gate: survivors after open filter: []
+[2026-09-28T17:46:51Z] PR#12 reflect_gate: returned IDs: []
+[2026-09-28T17:46:51Z] PR#12 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T17:46:53Z] PR#12 check: resolve-check for hack HACK-006
+[2026-09-28T17:46:53Z] PR#12 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:46:53Z] PR#12 check: resolve-check for hack HACK-008
+[2026-09-28T17:46:53Z] PR#12 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:46:58Z] PR#12 retain: retained hack HACK-012
+[2026-09-28T17:46:58Z] PR#12 done: tag=HACK, comments=0
+[2026-09-28T17:46:58Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-28T17:46:58Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T17:47:00Z] PR#13 recall: semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques
+[2026-09-28T17:47:02Z] PR#13 classify: is_workaround=False
+[2026-09-28T17:47:04Z] PR#13 check: resolve-check for hack HACK-006
+[2026-09-28T17:47:04Z] PR#13 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:04Z] PR#13 check: resolve-check for hack HACK-008
+[2026-09-28T17:47:04Z] PR#13 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:47:04Z] PR#13 check: resolve-check for hack HACK-012
+[2026-09-28T17:47:04Z] PR#13 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:04Z] PR#13 done: tag=, comments=0
+[2026-09-28T17:47:04Z] PR#14 start: processing PR #14: feat: add global error handler
+[2026-09-28T17:47:04Z] PR#14 recall: file query: Code changes touching files: errors.py; functions: bad_request, not_found, regis
+[2026-09-28T17:47:06Z] PR#14 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: 
+[2026-09-28T17:47:08Z] PR#14 classify: is_workaround=False
+[2026-09-28T17:47:10Z] PR#14 check: resolve-check for hack HACK-006
+[2026-09-28T17:47:10Z] PR#14 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:10Z] PR#14 check: resolve-check for hack HACK-008
+[2026-09-28T17:47:10Z] PR#14 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:10Z] PR#14 check: resolve-check for hack HACK-012
+[2026-09-28T17:47:10Z] PR#14 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:10Z] PR#14 done: tag=, comments=0
+[2026-09-28T17:47:10Z] PR#15 start: processing PR #15: increase stripe timeout and limit concurrency
+[2026-09-28T17:47:10Z] PR#15 recall: file query: Code changes touching files: checkout.py, config.py
+[2026-09-28T17:47:12Z] PR#15 recall: semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu
+[2026-09-28T17:47:15Z] PR#15 usage: tokens: 713
+[2026-09-28T17:47:18Z] PR#15 classify: is_workaround=True
+[2026-09-28T17:47:20Z] PR#15 reflect_gate: query: Stripe times out under load, and concurrent requests exacerbate the issue. This ...
+[2026-09-28T17:47:20Z] PR#15 reflect_gate: recall hit IDs: []
+[2026-09-28T17:47:20Z] PR#15 reflect_gate: survivors after open filter: []
+[2026-09-28T17:47:20Z] PR#15 reflect_gate: returned IDs: []
+[2026-09-28T17:47:20Z] PR#15 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T17:47:22Z] PR#15 check: resolve-check for hack HACK-006
+[2026-09-28T17:47:22Z] PR#15 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T17:47:22Z] PR#15 check: resolve-check for hack HACK-008
+[2026-09-28T17:47:22Z] PR#15 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:22Z] PR#15 check: resolve-check for hack HACK-012
+[2026-09-28T17:47:22Z] PR#15 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:28Z] PR#15 retain: retained hack HACK-015
+[2026-09-28T17:47:28Z] PR#15 retain: hack HACK-015 retired (anchor removed)
+[2026-09-28T17:47:28Z] PR#15 done: tag=HACK, comments=1
+[2026-09-28T17:47:28Z] PR#16 start: processing PR #16: add basic metrics counters
+[2026-09-28T17:47:28Z] PR#16 recall: file query: Code changes touching files: metrics.py; functions: __exit__, __init__, get_coun
+[2026-09-28T17:47:30Z] PR#16 recall: semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char
+[2026-09-28T17:47:32Z] PR#16 classify: is_workaround=False
+[2026-09-28T17:47:34Z] PR#16 check: resolve-check for hack HACK-006
+[2026-09-28T17:47:34Z] PR#16 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:34Z] PR#16 check: resolve-check for hack HACK-008
+[2026-09-28T17:47:34Z] PR#16 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:34Z] PR#16 check: resolve-check for hack HACK-012
+[2026-09-28T17:47:34Z] PR#16 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:34Z] PR#16 done: tag=, comments=0
+[2026-09-28T17:47:34Z] PR#17 start: processing PR #17: reorganize billing modules
+[2026-09-28T17:47:34Z] PR#17 recall: file query: Code changes touching files: billing/stripe_retry.py, billing/retry.py; function
+[2026-09-28T17:47:36Z] PR#17 recall: semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize
+[2026-09-28T17:47:38Z] PR#17 classify: is_workaround=False
+[2026-09-28T17:47:40Z] PR#17 check: resolve-check for hack HACK-006
+[2026-09-28T17:47:40Z] PR#17 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T17:47:40Z] PR#17 check: resolve-check for hack HACK-008
+[2026-09-28T17:47:40Z] PR#17 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:40Z] PR#17 check: resolve-check for hack HACK-012
+[2026-09-28T17:47:40Z] PR#17 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:40Z] PR#17 retain: hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py
+[2026-09-28T17:47:40Z] PR#17 done: tag=MOVE, comments=1
+[2026-09-28T17:47:40Z] PR#18 start: processing PR #18: add .env.example file
+[2026-09-28T17:47:40Z] PR#18 recall: file query: Code changes touching files: .env.example
+[2026-09-28T17:47:42Z] PR#18 recall: semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env
+[2026-09-28T17:47:44Z] PR#18 classify: is_workaround=False
+[2026-09-28T17:47:46Z] PR#18 check: resolve-check for hack HACK-006
+[2026-09-28T17:47:46Z] PR#18 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:47:46Z] PR#18 check: resolve-check for hack HACK-008
+[2026-09-28T17:47:46Z] PR#18 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:47:46Z] PR#18 check: resolve-check for hack HACK-012
+[2026-09-28T17:47:46Z] PR#18 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:46Z] PR#18 done: tag=, comments=0
+[2026-09-28T17:47:46Z] PR#19 start: processing PR #19: bump stripe-sdk to 4.0.3
+[2026-09-28T17:47:46Z] PR#19 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T17:47:48Z] PR#19 recall: semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri
+[2026-09-28T17:47:50Z] PR#19 classify: is_workaround=False
+[2026-09-28T17:47:52Z] PR#19 check: resolve-check for hack HACK-006
+[2026-09-28T17:47:52Z] PR#19 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T17:47:52Z] PR#19 check: resolve-check for hack HACK-008
+[2026-09-28T17:47:52Z] PR#19 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:52Z] PR#19 check: resolve-check for hack HACK-012
+[2026-09-28T17:47:52Z] PR#19 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:52Z] PR#19 done: tag=, comments=0
+[2026-09-28T17:47:52Z] PR#20 start: processing PR #20: feat: verify webhook signatures
+[2026-09-28T17:47:52Z] PR#20 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T17:47:54Z] PR#20 recall: semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:
+[2026-09-28T17:47:56Z] PR#20 classify: is_workaround=False
+[2026-09-28T17:47:58Z] PR#20 check: resolve-check for hack HACK-006
+[2026-09-28T17:47:58Z] PR#20 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:58Z] PR#20 check: resolve-check for hack HACK-008
+[2026-09-28T17:47:58Z] PR#20 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:47:58Z] PR#20 check: resolve-check for hack HACK-012
+[2026-09-28T17:47:58Z] PR#20 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:47:58Z] PR#20 done: tag=, comments=0
+[2026-09-28T17:47:58Z] PR#21 start: processing PR #21: add tests for charge retry logic
+[2026-09-28T17:47:58Z] PR#21 recall: file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha
+[2026-09-28T17:48:00Z] PR#21 recall: semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test
+[2026-09-28T17:48:02Z] PR#21 classify: is_workaround=False
+[2026-09-28T17:48:04Z] PR#21 check: resolve-check for hack HACK-006
+[2026-09-28T17:48:04Z] PR#21 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:04Z] PR#21 check: resolve-check for hack HACK-008
+[2026-09-28T17:48:04Z] PR#21 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:04Z] PR#21 check: resolve-check for hack HACK-012
+[2026-09-28T17:48:04Z] PR#21 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:04Z] PR#21 done: tag=, comments=0
+[2026-09-28T17:48:04Z] PR#22 start: processing PR #22: add batch charge verification and fallback
+[2026-09-28T17:48:04Z] PR#22 recall: file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice
+[2026-09-28T17:48:06Z] PR#22 recall: semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb
+[2026-09-28T17:48:08Z] PR#22 classify: is_workaround=True
+[2026-09-28T17:48:10Z] PR#22 reflect_gate: query: Stripe's batch charge API returns inconsistent totals under load, causing produc...
+[2026-09-28T17:48:10Z] PR#22 reflect_gate: recall hit IDs: []
+[2026-09-28T17:48:10Z] PR#22 reflect_gate: survivors after open filter: []
+[2026-09-28T17:48:10Z] PR#22 reflect_gate: returned IDs: []
+[2026-09-28T17:48:10Z] PR#22 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T17:48:12Z] PR#22 check: resolve-check for hack HACK-006
+[2026-09-28T17:48:12Z] PR#22 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T17:48:12Z] PR#22 check: resolve-check for hack HACK-008
+[2026-09-28T17:48:12Z] PR#22 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:12Z] PR#22 check: resolve-check for hack HACK-012
+[2026-09-28T17:48:13Z] PR#22 usage: tokens: 1133
+[2026-09-28T17:48:16Z] PR#22 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:22Z] PR#22 retain: retained hack HACK-022
+[2026-09-28T17:48:22Z] PR#22 done: tag=HACK, comments=0
+[2026-09-28T17:48:22Z] PR#23 start: processing PR #23: docs: document batch charging flow
+[2026-09-28T17:48:22Z] PR#23 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T17:48:24Z] PR#23 recall: semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do
+[2026-09-28T17:48:26Z] PR#23 classify: is_workaround=False
+[2026-09-28T17:48:28Z] PR#23 check: resolve-check for hack HACK-006
+[2026-09-28T17:48:28Z] PR#23 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:28Z] PR#23 check: resolve-check for hack HACK-008
+[2026-09-28T17:48:28Z] PR#23 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:48:28Z] PR#23 check: resolve-check for hack HACK-012
+[2026-09-28T17:48:28Z] PR#23 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:28Z] PR#23 check: resolve-check for hack HACK-022
+[2026-09-28T17:48:28Z] PR#23 usage: tokens: 690
+[2026-09-28T17:48:31Z] PR#23 check: hack HACK-022: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:31Z] PR#23 done: tag=, comments=0
+[2026-09-28T17:48:31Z] PR#24 start: processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API
+[2026-09-28T17:48:31Z] PR#24 recall: file query: Code changes touching files: requirements.txt, billing/stripe_retry.py
+[2026-09-28T17:48:33Z] PR#24 recall: semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch
+[2026-09-28T17:48:36Z] PR#24 usage: tokens: 469
+[2026-09-28T17:48:39Z] PR#24 classify: is_workaround=False
+[2026-09-28T17:48:41Z] PR#24 check: resolve-check for hack HACK-006
+[2026-09-28T17:48:41Z] PR#24 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T17:48:41Z] PR#24 check: resolve-check for hack HACK-008
+[2026-09-28T17:48:41Z] PR#24 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:41Z] PR#24 check: resolve-check for hack HACK-012
+[2026-09-28T17:48:41Z] PR#24 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:48:41Z] PR#24 check: resolve-check for hack HACK-022
+[2026-09-28T17:48:41Z] PR#24 usage: tokens: 964
+[2026-09-28T17:48:44Z] PR#24 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-28T17:48:44Z] PR#24 done: tag=, comments=0
+[2026-09-28T17:48:44Z] PR#25 start: processing PR #25: remove unused imports
+[2026-09-28T17:48:44Z] PR#25 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T17:48:46Z] PR#25 recall: semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a
+[2026-09-28T17:48:48Z] PR#25 classify: is_workaround=False
+[2026-09-28T17:48:50Z] PR#25 check: resolve-check for hack HACK-006
+[2026-09-28T17:48:50Z] PR#25 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:48:50Z] PR#25 check: resolve-check for hack HACK-008
+[2026-09-28T17:48:50Z] PR#25 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:48:50Z] PR#25 check: resolve-check for hack HACK-012
+[2026-09-28T17:48:50Z] PR#25 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:48:50Z] PR#25 check: resolve-check for hack HACK-022
+[2026-09-28T17:48:51Z] PR#25 usage: tokens: 715
+[2026-09-28T17:48:54Z] PR#25 check: hack HACK-022: NEEDS_WORK (conf=0.99)
+[2026-09-28T17:48:54Z] PR#25 done: tag=, comments=0
+[2026-09-28T17:48:54Z] PR#26 start: processing PR #26: remove fixed retry delay workaround
+[2026-09-28T17:48:54Z] PR#26 recall: file query: Code changes touching files: billing/stripe_retry.py
+[2026-09-28T17:48:56Z] PR#26 recall: semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t
+[2026-09-28T17:48:58Z] PR#26 classify: is_workaround=False
+[2026-09-28T17:49:00Z] PR#26 check: resolve-check for hack HACK-006
+[2026-09-28T17:49:00Z] PR#26 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T17:49:00Z] PR#26 check: resolve-check for hack HACK-008
+[2026-09-28T17:49:00Z] PR#26 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:49:00Z] PR#26 check: resolve-check for hack HACK-012
+[2026-09-28T17:49:00Z] PR#26 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T17:49:00Z] PR#26 check: resolve-check for hack HACK-022
+[2026-09-28T17:49:01Z] PR#26 usage: tokens: 1067
+[2026-09-28T17:49:04Z] PR#26 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-28T17:49:04Z] PR#26 retain: hack HACK-006 retired (anchor removed)
+[2026-09-28T17:49:04Z] PR#26 done: tag=, comments=1
+[2026-09-28T18:14:06Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-28T18:14:06Z] PR#1 recall: file query: Code changes touching files: invoices.py, config.py, tax.py, billing/retry.py, c
+[2026-09-28T18:14:12Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-28T18:14:14Z] PR#1 usage: tokens: 1181
+[2026-09-28T18:14:17Z] PR#1 classify: is_workaround=False
+[2026-09-28T18:14:17Z] PR#1 done: tag=, comments=0
+[2026-09-28T18:14:17Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-28T18:14:17Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: setup_logging, format
+[2026-09-28T18:14:19Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-28T18:14:21Z] PR#2 classify: is_workaround=False
+[2026-09-28T18:14:22Z] PR#2 done: tag=, comments=0
+[2026-09-28T18:14:22Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-28T18:14:22Z] PR#3 recall: file query: Code changes touching files: health.py; functions: register_health, health
+[2026-09-28T18:14:24Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-28T18:14:26Z] PR#3 classify: is_workaround=False
+[2026-09-28T18:14:26Z] PR#3 done: tag=, comments=0
+[2026-09-28T18:14:26Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-28T18:14:26Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-28T18:14:28Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-28T18:14:30Z] PR#4 classify: is_workaround=True
+[2026-09-28T18:14:30Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T18:14:53Z] PR#4 retain: retained hack HACK-004
+[2026-09-28T18:14:53Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-28T18:14:53Z] PR#4 done: tag=HACK, comments=1
+[2026-09-28T18:14:53Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-28T18:14:53Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_zero_amount
+[2026-09-28T18:14:55Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-28T18:14:57Z] PR#5 classify: is_workaround=False
+[2026-09-28T18:14:57Z] PR#5 done: tag=, comments=0
+[2026-09-28T18:14:57Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-28T18:14:57Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-28T18:14:59Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-28T18:15:01Z] PR#6 classify: is_workaround=True
+[2026-09-28T18:15:01Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T18:15:03Z] PR#6 retain: retained hack HACK-006
+[2026-09-28T18:15:03Z] PR#6 done: tag=HACK, comments=0
+[2026-09-28T18:15:03Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-28T18:15:03Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-28T18:15:05Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-28T18:15:07Z] PR#7 classify: is_workaround=False
+[2026-09-28T18:15:09Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-28T18:15:09Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:15:09Z] PR#7 done: tag=, comments=0
+[2026-09-28T18:15:09Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-28T18:15:09Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-28T18:15:11Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-28T18:15:13Z] PR#8 classify: is_workaround=True
+[2026-09-28T18:15:13Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-28T18:15:15Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-28T18:15:15Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:15:17Z] PR#8 retain: retained hack HACK-008
+[2026-09-28T18:15:17Z] PR#8 done: tag=HACK, comments=0
+[2026-09-28T18:15:17Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-28T18:15:17Z] PR#9 recall: empty diff, skipping recall
+[2026-09-28T18:15:17Z] PR#9 classify: empty diff, skipping
+[2026-09-28T18:15:19Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-28T18:15:19Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:15:19Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-28T18:15:19Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:15:19Z] PR#9 done: tag=, comments=0
+[2026-09-28T18:15:19Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-28T18:15:19Z] PR#10 recall: file query: Code changes touching files: db.py, webhooks.py; functions: get_db
+[2026-09-28T18:15:21Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-28T18:15:23Z] PR#10 classify: is_workaround=False
+[2026-09-28T18:15:25Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-28T18:15:25Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:15:25Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-28T18:15:25Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:15:25Z] PR#10 done: tag=, comments=0
+[2026-09-28T18:15:25Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-28T18:15:25Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:15:27Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-28T18:15:29Z] PR#11 classify: is_workaround=False
+[2026-09-28T18:15:31Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-28T18:15:31Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:15:31Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-28T18:15:31Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:15:31Z] PR#11 done: tag=, comments=0
+[2026-09-28T18:15:31Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-28T18:15:31Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-28T18:15:33Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-28T18:15:35Z] PR#12 classify: is_workaround=True
+[2026-09-28T18:15:37Z] PR#12 reflect_gate: query: The tax provider API has high latency (p95 over 2 seconds) which is too slow for...
+[2026-09-28T18:15:37Z] PR#12 reflect_gate: recall hit IDs: []
+[2026-09-28T18:15:37Z] PR#12 reflect_gate: survivors after open filter: []
+[2026-09-28T18:15:37Z] PR#12 reflect_gate: returned IDs: []
+[2026-09-28T18:15:37Z] PR#12 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:15:39Z] PR#12 check: resolve-check for hack HACK-006
+[2026-09-28T18:15:39Z] PR#12 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:15:39Z] PR#12 check: resolve-check for hack HACK-008
+[2026-09-28T18:15:39Z] PR#12 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:15:41Z] PR#12 retain: retained hack HACK-012
+[2026-09-28T18:15:41Z] PR#12 done: tag=HACK, comments=0
+[2026-09-28T18:15:41Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-28T18:15:41Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T18:48:20Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-28T18:48:20Z] PR#1 recall: file query: Code changes touching files: billing/retry.py, webhooks.py, requirements.txt, co
+[2026-09-28T18:48:26Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-28T18:48:31Z] PR#1 usage: tokens: 1181
+[2026-09-28T18:48:34Z] PR#1 classify: is_workaround=False
+[2026-09-28T18:48:34Z] PR#1 done: tag=, comments=0
+[2026-09-28T18:48:34Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-28T18:48:34Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: setup_logging, format
+[2026-09-28T18:48:36Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-28T18:48:37Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-28T18:48:37Z] PR#1 recall: file query: Code changes touching files: webhooks.py, tax.py, checkout.py, invoices.py, bill
+[2026-09-28T18:48:38Z] PR#2 classify: is_workaround=False
+[2026-09-28T18:48:38Z] PR#2 done: tag=, comments=0
+[2026-09-28T18:48:38Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-28T18:48:38Z] PR#3 recall: file query: Code changes touching files: health.py; functions: health, register_health
+[2026-09-28T18:48:40Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-28T18:48:42Z] PR#3 classify: is_workaround=False
+[2026-09-28T18:48:42Z] PR#3 done: tag=, comments=0
+[2026-09-28T18:48:42Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-28T18:48:42Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-28T18:48:44Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-28T18:48:45Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-28T18:48:46Z] PR#4 classify: is_workaround=True
+[2026-09-28T18:48:46Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T18:48:48Z] PR#1 usage: tokens: 1181
+[2026-09-28T18:48:51Z] PR#1 classify: is_workaround=False
+[2026-09-28T18:48:51Z] PR#1 done: tag=, comments=0
+[2026-09-28T18:48:51Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-28T18:48:51Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: format, setup_logging
+[2026-09-28T18:48:51Z] PR#4 retain: retained hack HACK-004
+[2026-09-28T18:48:51Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-28T18:48:51Z] PR#4 done: tag=HACK, comments=1
+[2026-09-28T18:48:51Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-28T18:48:51Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_basic_invoi
+[2026-09-28T18:48:53Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-28T18:48:53Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-28T18:48:55Z] PR#2 classify: is_workaround=False
+[2026-09-28T18:48:55Z] PR#2 done: tag=, comments=0
+[2026-09-28T18:48:55Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-28T18:48:55Z] PR#3 recall: file query: Code changes touching files: health.py; functions: register_health, health
+[2026-09-28T18:48:55Z] PR#5 classify: is_workaround=False
+[2026-09-28T18:48:55Z] PR#5 done: tag=, comments=0
+[2026-09-28T18:48:55Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-28T18:48:55Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-28T18:48:57Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-28T18:48:57Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-28T18:48:59Z] PR#3 classify: is_workaround=False
+[2026-09-28T18:48:59Z] PR#3 done: tag=, comments=0
+[2026-09-28T18:48:59Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-28T18:48:59Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-28T18:48:59Z] PR#6 classify: is_workaround=True
+[2026-09-28T18:48:59Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T18:49:01Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-28T18:49:03Z] PR#4 classify: is_workaround=True
+[2026-09-28T18:49:03Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T18:49:04Z] PR#6 retain: retained hack HACK-006
+[2026-09-28T18:49:04Z] PR#6 done: tag=HACK, comments=0
+[2026-09-28T18:49:04Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-28T18:49:04Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-28T18:49:06Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-28T18:49:08Z] PR#7 classify: is_workaround=False
+[2026-09-28T18:49:09Z] PR#4 retain: retained hack HACK-004
+[2026-09-28T18:49:09Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-28T18:49:09Z] PR#4 done: tag=HACK, comments=1
+[2026-09-28T18:49:09Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-28T18:49:09Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_basic_invoi
+[2026-09-28T18:49:10Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:10Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:49:10Z] PR#7 done: tag=, comments=0
+[2026-09-28T18:49:10Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-28T18:49:10Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-28T18:49:11Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-28T18:49:12Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-28T18:49:13Z] PR#5 classify: is_workaround=False
+[2026-09-28T18:49:13Z] PR#5 done: tag=, comments=0
+[2026-09-28T18:49:13Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-28T18:49:13Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-28T18:49:14Z] PR#8 classify: is_workaround=True
+[2026-09-28T18:49:14Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-28T18:49:15Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-28T18:49:16Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:16Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:17Z] PR#6 classify: is_workaround=True
+[2026-09-28T18:49:17Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T18:49:21Z] PR#6 retain: retained hack HACK-006
+[2026-09-28T18:49:21Z] PR#6 done: tag=HACK, comments=0
+[2026-09-28T18:49:21Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-28T18:49:21Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-28T18:49:22Z] PR#8 retain: retained hack HACK-008
+[2026-09-28T18:49:22Z] PR#8 done: tag=HACK, comments=0
+[2026-09-28T18:49:22Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-28T18:49:22Z] PR#9 recall: empty diff, skipping recall
+[2026-09-28T18:49:22Z] PR#9 classify: empty diff, skipping
+[2026-09-28T18:49:23Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-28T18:49:24Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:24Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:49:24Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-28T18:49:24Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:49:24Z] PR#9 done: tag=, comments=0
+[2026-09-28T18:49:24Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-28T18:49:24Z] PR#10 recall: file query: Code changes touching files: db.py, webhooks.py; functions: get_db
+[2026-09-28T18:49:25Z] PR#7 classify: is_workaround=False
+[2026-09-28T18:49:26Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-28T18:49:27Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:27Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:49:27Z] PR#7 done: tag=, comments=0
+[2026-09-28T18:49:27Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-28T18:49:27Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-28T18:49:28Z] PR#10 classify: is_workaround=False
+[2026-09-28T18:49:29Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-28T18:49:30Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:30Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:30Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-28T18:49:30Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:30Z] PR#10 done: tag=, comments=0
+[2026-09-28T18:49:30Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-28T18:49:30Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:49:31Z] PR#8 classify: is_workaround=True
+[2026-09-28T18:49:31Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-28T18:49:32Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-28T18:49:33Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:33Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:34Z] PR#11 classify: is_workaround=False
+[2026-09-28T18:49:36Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:36Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:36Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-28T18:49:36Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:36Z] PR#11 done: tag=, comments=0
+[2026-09-28T18:49:36Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-28T18:49:36Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-28T18:49:38Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-28T18:49:40Z] PR#12 classify: is_workaround=True
+[2026-09-28T18:49:42Z] PR#12 reflect_gate: query: The tax provider API has high latency (p95 over 2 seconds) which is too slow for...
+[2026-09-28T18:49:42Z] PR#12 reflect_gate: recall hit IDs: []
+[2026-09-28T18:49:42Z] PR#12 reflect_gate: survivors after open filter: []
+[2026-09-28T18:49:42Z] PR#12 reflect_gate: returned IDs: []
+[2026-09-28T18:49:42Z] PR#12 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:49:44Z] PR#12 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:44Z] PR#12 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:44Z] PR#12 check: resolve-check for hack HACK-008
+[2026-09-28T18:49:44Z] PR#12 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:45Z] PR#8 retain: retained hack HACK-008
+[2026-09-28T18:49:45Z] PR#8 done: tag=HACK, comments=0
+[2026-09-28T18:49:45Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-28T18:49:45Z] PR#9 recall: empty diff, skipping recall
+[2026-09-28T18:49:45Z] PR#9 classify: empty diff, skipping
+[2026-09-28T18:49:47Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:47Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:49:47Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-28T18:49:47Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:49:47Z] PR#9 done: tag=, comments=0
+[2026-09-28T18:49:47Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-28T18:49:47Z] PR#10 recall: file query: Code changes touching files: db.py, webhooks.py; functions: get_db
+[2026-09-28T18:49:49Z] PR#12 retain: retained hack HACK-012
+[2026-09-28T18:49:49Z] PR#12 done: tag=HACK, comments=0
+[2026-09-28T18:49:49Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-28T18:49:49Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T18:49:49Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-28T18:49:51Z] PR#13 recall: semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques
+[2026-09-28T18:49:51Z] PR#10 classify: is_workaround=False
+[2026-09-28T18:49:53Z] PR#13 classify: is_workaround=False
+[2026-09-28T18:49:53Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:53Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:53Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-28T18:49:53Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:53Z] PR#10 done: tag=, comments=0
+[2026-09-28T18:49:53Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-28T18:49:53Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:49:55Z] PR#13 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:55Z] PR#13 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:55Z] PR#13 check: resolve-check for hack HACK-008
+[2026-09-28T18:49:55Z] PR#13 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:49:55Z] PR#13 check: resolve-check for hack HACK-012
+[2026-09-28T18:49:55Z] PR#13 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:55Z] PR#13 done: tag=, comments=0
+[2026-09-28T18:49:55Z] PR#14 start: processing PR #14: feat: add global error handler
+[2026-09-28T18:49:55Z] PR#14 recall: file query: Code changes touching files: errors.py; functions: bad_request, register_error_h
+[2026-09-28T18:49:55Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-28T18:49:57Z] PR#14 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: 
+[2026-09-28T18:49:57Z] PR#11 classify: is_workaround=False
+[2026-09-28T18:49:59Z] PR#14 classify: is_workaround=False
+[2026-09-28T18:49:59Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-28T18:49:59Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:59Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-28T18:49:59Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:49:59Z] PR#11 done: tag=, comments=0
+[2026-09-28T18:49:59Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-28T18:49:59Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-28T18:50:01Z] PR#14 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:01Z] PR#14 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:01Z] PR#14 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:01Z] PR#14 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:01Z] PR#14 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:01Z] PR#14 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:01Z] PR#14 done: tag=, comments=0
+[2026-09-28T18:50:01Z] PR#15 start: processing PR #15: increase stripe timeout and limit concurrency
+[2026-09-28T18:50:01Z] PR#15 recall: file query: Code changes touching files: config.py, checkout.py
+[2026-09-28T18:50:01Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-28T18:50:03Z] PR#15 recall: semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu
+[2026-09-28T18:50:03Z] PR#12 classify: is_workaround=True
+[2026-09-28T18:50:05Z] PR#15 classify: is_workaround=True
+[2026-09-28T18:50:05Z] PR#12 reflect_gate: query: The tax provider API has high latency (p95 over 2 seconds) which is too slow for...
+[2026-09-28T18:50:05Z] PR#12 reflect_gate: recall hit IDs: []
+[2026-09-28T18:50:05Z] PR#12 reflect_gate: survivors after open filter: []
+[2026-09-28T18:50:05Z] PR#12 reflect_gate: returned IDs: []
+[2026-09-28T18:50:05Z] PR#12 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:50:07Z] PR#15 reflect_gate: query: Stripe times out under load, and concurrent requests exacerbate the issue. This ...
+[2026-09-28T18:50:07Z] PR#15 reflect_gate: recall hit IDs: []
+[2026-09-28T18:50:07Z] PR#15 reflect_gate: survivors after open filter: []
+[2026-09-28T18:50:07Z] PR#15 reflect_gate: returned IDs: []
+[2026-09-28T18:50:07Z] PR#15 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:50:07Z] PR#12 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:07Z] PR#12 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:07Z] PR#12 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:07Z] PR#12 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:09Z] PR#15 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:09Z] PR#15 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:50:09Z] PR#15 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:09Z] PR#15 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:09Z] PR#15 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:09Z] PR#15 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:13Z] PR#12 retain: retained hack HACK-012
+[2026-09-28T18:50:13Z] PR#12 done: tag=HACK, comments=0
+[2026-09-28T18:50:13Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-28T18:50:13Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T18:50:15Z] PR#13 recall: semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques
+[2026-09-28T18:50:17Z] PR#13 classify: is_workaround=False
+[2026-09-28T18:50:17Z] PR#15 retain: retained hack HACK-015
+[2026-09-28T18:50:17Z] PR#15 done: tag=HACK, comments=0
+[2026-09-28T18:50:17Z] PR#16 start: processing PR #16: add basic metrics counters
+[2026-09-28T18:50:17Z] PR#16 recall: file query: Code changes touching files: metrics.py; functions: get_counts, __init__, __exit
+[2026-09-28T18:50:19Z] PR#13 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:19Z] PR#13 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:19Z] PR#13 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:19Z] PR#13 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:50:19Z] PR#13 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:19Z] PR#13 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:19Z] PR#13 done: tag=, comments=0
+[2026-09-28T18:50:19Z] PR#14 start: processing PR #14: feat: add global error handler
+[2026-09-28T18:50:19Z] PR#14 recall: file query: Code changes touching files: errors.py; functions: register_error_handlers, serv
+[2026-09-28T18:50:19Z] PR#16 recall: semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char
+[2026-09-28T18:50:21Z] PR#14 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: 
+[2026-09-28T18:50:21Z] PR#16 classify: is_workaround=False
+[2026-09-28T18:50:23Z] PR#14 classify: is_workaround=False
+[2026-09-28T18:50:23Z] PR#16 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:23Z] PR#16 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:23Z] PR#16 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:23Z] PR#16 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:23Z] PR#16 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:23Z] PR#16 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:23Z] PR#16 check: resolve-check for hack HACK-015
+[2026-09-28T18:50:24Z] PR#16 usage: tokens: 948
+[2026-09-28T18:50:25Z] PR#14 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:25Z] PR#14 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:25Z] PR#14 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:25Z] PR#14 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:25Z] PR#14 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:25Z] PR#14 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:25Z] PR#14 done: tag=, comments=0
+[2026-09-28T18:50:25Z] PR#15 start: processing PR #15: increase stripe timeout and limit concurrency
+[2026-09-28T18:50:25Z] PR#15 recall: file query: Code changes touching files: checkout.py, config.py
+[2026-09-28T18:50:27Z] PR#15 recall: semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu
+[2026-09-28T18:50:27Z] PR#16 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:27Z] PR#16 done: tag=, comments=0
+[2026-09-28T18:50:27Z] PR#17 start: processing PR #17: reorganize billing modules
+[2026-09-28T18:50:27Z] PR#17 recall: file query: Code changes touching files: billing/retry.py, billing/stripe_retry.py; function
+[2026-09-28T18:50:29Z] PR#15 classify: is_workaround=True
+[2026-09-28T18:50:29Z] PR#17 recall: semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize
+[2026-09-28T18:50:31Z] PR#15 reflect_gate: query: Stripe times out under load, and concurrent requests exacerbate the issue. This ...
+[2026-09-28T18:50:31Z] PR#15 reflect_gate: recall hit IDs: []
+[2026-09-28T18:50:31Z] PR#15 reflect_gate: survivors after open filter: []
+[2026-09-28T18:50:31Z] PR#15 reflect_gate: returned IDs: []
+[2026-09-28T18:50:31Z] PR#15 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:50:32Z] PR#17 usage: tokens: 446
+[2026-09-28T18:50:33Z] PR#15 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:33Z] PR#15 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:50:33Z] PR#15 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:33Z] PR#15 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:33Z] PR#15 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:33Z] PR#15 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:35Z] PR#17 classify: is_workaround=False
+[2026-09-28T18:50:37Z] PR#17 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:37Z] PR#17 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:50:37Z] PR#17 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:37Z] PR#17 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:37Z] PR#17 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:37Z] PR#17 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:37Z] PR#17 check: resolve-check for hack HACK-015
+[2026-09-28T18:50:38Z] PR#17 usage: tokens: 871
+[2026-09-28T18:50:38Z] PR#15 retain: retained hack HACK-015
+[2026-09-28T18:50:38Z] PR#15 retain: hack HACK-015 retired (anchor removed)
+[2026-09-28T18:50:38Z] PR#15 done: tag=HACK, comments=1
+[2026-09-28T18:50:38Z] PR#16 start: processing PR #16: add basic metrics counters
+[2026-09-28T18:50:38Z] PR#16 recall: file query: Code changes touching files: metrics.py; functions: get_counts, __enter__, incre
+[2026-09-28T18:50:40Z] PR#16 recall: semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char
+[2026-09-28T18:50:41Z] PR#17 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:50:41Z] PR#17 retain: hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py
+[2026-09-28T18:50:41Z] PR#17 done: tag=MOVE, comments=1
+[2026-09-28T18:50:41Z] PR#18 start: processing PR #18: add .env.example file
+[2026-09-28T18:50:41Z] PR#18 recall: file query: Code changes touching files: .env.example
+[2026-09-28T18:50:42Z] PR#16 classify: is_workaround=False
+[2026-09-28T18:50:43Z] PR#18 recall: semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env
+[2026-09-28T18:50:44Z] PR#16 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:44Z] PR#16 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:44Z] PR#16 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:44Z] PR#16 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:44Z] PR#16 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:44Z] PR#16 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:44Z] PR#16 done: tag=, comments=0
+[2026-09-28T18:50:44Z] PR#17 start: processing PR #17: reorganize billing modules
+[2026-09-28T18:50:44Z] PR#17 recall: file query: Code changes touching files: billing/stripe_retry.py, billing/retry.py; function
+[2026-09-28T18:50:45Z] PR#18 classify: is_workaround=False
+[2026-09-28T18:50:46Z] PR#17 recall: semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize
+[2026-09-28T18:50:47Z] PR#18 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:47Z] PR#18 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:50:47Z] PR#18 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:47Z] PR#18 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:50:47Z] PR#18 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:47Z] PR#18 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:47Z] PR#18 check: resolve-check for hack HACK-015
+[2026-09-28T18:50:48Z] PR#18 usage: tokens: 814
+[2026-09-28T18:50:48Z] PR#17 classify: is_workaround=False
+[2026-09-28T18:50:50Z] PR#17 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:50Z] PR#17 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:50:50Z] PR#17 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:50Z] PR#17 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:50Z] PR#17 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:50Z] PR#17 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:50Z] PR#17 retain: hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py
+[2026-09-28T18:50:50Z] PR#17 done: tag=MOVE, comments=1
+[2026-09-28T18:50:50Z] PR#18 start: processing PR #18: add .env.example file
+[2026-09-28T18:50:50Z] PR#18 recall: file query: Code changes touching files: .env.example
+[2026-09-28T18:50:51Z] PR#18 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:51Z] PR#18 done: tag=, comments=0
+[2026-09-28T18:50:51Z] PR#19 start: processing PR #19: bump stripe-sdk to 4.0.3
+[2026-09-28T18:50:51Z] PR#19 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T18:50:52Z] PR#18 recall: semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env
+[2026-09-28T18:50:53Z] PR#19 recall: semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri
+[2026-09-28T18:50:54Z] PR#18 classify: is_workaround=False
+[2026-09-28T18:50:55Z] PR#19 classify: is_workaround=False
+[2026-09-28T18:50:56Z] PR#18 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:56Z] PR#18 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:50:56Z] PR#18 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:56Z] PR#18 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:50:56Z] PR#18 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:56Z] PR#18 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:56Z] PR#18 done: tag=, comments=0
+[2026-09-28T18:50:56Z] PR#19 start: processing PR #19: bump stripe-sdk to 4.0.3
+[2026-09-28T18:50:56Z] PR#19 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T18:50:57Z] PR#19 check: resolve-check for hack HACK-006
+[2026-09-28T18:50:57Z] PR#19 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:50:57Z] PR#19 check: resolve-check for hack HACK-008
+[2026-09-28T18:50:57Z] PR#19 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:57Z] PR#19 check: resolve-check for hack HACK-012
+[2026-09-28T18:50:57Z] PR#19 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:50:57Z] PR#19 check: resolve-check for hack HACK-015
+[2026-09-28T18:50:58Z] PR#19 usage: tokens: 808
+[2026-09-28T18:50:58Z] PR#19 recall: semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri
+[2026-09-28T18:51:00Z] PR#19 classify: is_workaround=False
+[2026-09-28T18:51:01Z] PR#19 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:01Z] PR#19 done: tag=, comments=0
+[2026-09-28T18:51:01Z] PR#20 start: processing PR #20: feat: verify webhook signatures
+[2026-09-28T18:51:01Z] PR#20 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:51:02Z] PR#19 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:02Z] PR#19 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:02Z] PR#19 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:02Z] PR#19 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:02Z] PR#19 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:02Z] PR#19 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:02Z] PR#19 done: tag=, comments=0
+[2026-09-28T18:51:02Z] PR#20 start: processing PR #20: feat: verify webhook signatures
+[2026-09-28T18:51:02Z] PR#20 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:51:03Z] PR#20 recall: semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:
+[2026-09-28T18:51:04Z] PR#20 recall: semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:
+[2026-09-28T18:51:05Z] PR#20 classify: is_workaround=False
+[2026-09-28T18:51:06Z] PR#20 classify: is_workaround=False
+[2026-09-28T18:51:07Z] PR#20 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:07Z] PR#20 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:07Z] PR#20 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:07Z] PR#20 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:07Z] PR#20 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:07Z] PR#20 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:51:07Z] PR#20 check: resolve-check for hack HACK-015
+[2026-09-28T18:51:08Z] PR#20 usage: tokens: 764
+[2026-09-28T18:51:08Z] PR#20 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:08Z] PR#20 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:08Z] PR#20 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:08Z] PR#20 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:08Z] PR#20 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:08Z] PR#20 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:51:08Z] PR#20 done: tag=, comments=0
+[2026-09-28T18:51:08Z] PR#21 start: processing PR #21: add tests for charge retry logic
+[2026-09-28T18:51:08Z] PR#21 recall: file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha
+[2026-09-28T18:51:10Z] PR#21 recall: semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test
+[2026-09-28T18:51:11Z] PR#20 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:11Z] PR#20 done: tag=, comments=0
+[2026-09-28T18:51:11Z] PR#21 start: processing PR #21: add tests for charge retry logic
+[2026-09-28T18:51:11Z] PR#21 recall: file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha
+[2026-09-28T18:51:12Z] PR#21 classify: is_workaround=False
+[2026-09-28T18:51:13Z] PR#21 recall: semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test
+[2026-09-28T18:51:14Z] PR#21 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:14Z] PR#21 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:14Z] PR#21 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:14Z] PR#21 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:14Z] PR#21 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:14Z] PR#21 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:14Z] PR#21 done: tag=, comments=0
+[2026-09-28T18:51:14Z] PR#22 start: processing PR #22: add batch charge verification and fallback
+[2026-09-28T18:51:14Z] PR#22 recall: file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice
+[2026-09-28T18:51:15Z] PR#21 classify: is_workaround=False
+[2026-09-28T18:51:16Z] PR#22 recall: semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb
+[2026-09-28T18:51:17Z] PR#21 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:17Z] PR#21 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:17Z] PR#21 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:17Z] PR#21 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:17Z] PR#21 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:17Z] PR#21 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:17Z] PR#21 check: resolve-check for hack HACK-015
+[2026-09-28T18:51:18Z] PR#21 usage: tokens: 858
+[2026-09-28T18:51:18Z] PR#22 classify: is_workaround=True
+[2026-09-28T18:51:20Z] PR#22 reflect_gate: query: Stripe's batch charge API returns inconsistent totals under load, causing produc...
+[2026-09-28T18:51:20Z] PR#22 reflect_gate: recall hit IDs: []
+[2026-09-28T18:51:20Z] PR#22 reflect_gate: survivors after open filter: []
+[2026-09-28T18:51:20Z] PR#22 reflect_gate: returned IDs: []
+[2026-09-28T18:51:20Z] PR#22 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:51:21Z] PR#21 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:21Z] PR#21 done: tag=, comments=0
+[2026-09-28T18:51:21Z] PR#22 start: processing PR #22: add batch charge verification and fallback
+[2026-09-28T18:51:21Z] PR#22 recall: file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice
+[2026-09-28T18:51:22Z] PR#22 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:22Z] PR#22 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:22Z] PR#22 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:22Z] PR#22 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:22Z] PR#22 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:22Z] PR#22 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:23Z] PR#22 recall: semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb
+[2026-09-28T18:51:25Z] PR#22 classify: is_workaround=True
+[2026-09-28T18:51:26Z] PR#22 retain: retained hack HACK-022
+[2026-09-28T18:51:26Z] PR#22 done: tag=HACK, comments=0
+[2026-09-28T18:51:26Z] PR#23 start: processing PR #23: docs: document batch charging flow
+[2026-09-28T18:51:26Z] PR#23 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:51:27Z] PR#22 reflect_gate: query: Stripe's batch charge API returns inconsistent totals under load, causing produc...
+[2026-09-28T18:51:27Z] PR#22 reflect_gate: recall hit IDs: []
+[2026-09-28T18:51:27Z] PR#22 reflect_gate: survivors after open filter: []
+[2026-09-28T18:51:27Z] PR#22 reflect_gate: returned IDs: []
+[2026-09-28T18:51:27Z] PR#22 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:51:28Z] PR#23 recall: semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do
+[2026-09-28T18:51:29Z] PR#22 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:29Z] PR#22 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:29Z] PR#22 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:29Z] PR#22 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:29Z] PR#22 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:29Z] PR#22 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:29Z] PR#22 check: resolve-check for hack HACK-015
+[2026-09-28T18:51:29Z] PR#22 usage: tokens: 1095
+[2026-09-28T18:51:30Z] PR#23 classify: is_workaround=False
+[2026-09-28T18:51:32Z] PR#23 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:32Z] PR#23 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:32Z] PR#23 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:32Z] PR#23 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:51:32Z] PR#23 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:32Z] PR#23 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:32Z] PR#23 check: resolve-check for hack HACK-022
+[2026-09-28T18:51:32Z] PR#23 check: hack HACK-022: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:32Z] PR#23 done: tag=, comments=0
+[2026-09-28T18:51:32Z] PR#24 start: processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API
+[2026-09-28T18:51:32Z] PR#24 recall: file query: Code changes touching files: requirements.txt, billing/stripe_retry.py
+[2026-09-28T18:51:32Z] PR#22 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:34Z] PR#24 recall: semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch
+[2026-09-28T18:51:36Z] PR#24 classify: is_workaround=False
+[2026-09-28T18:51:38Z] PR#22 retain: retained hack HACK-022
+[2026-09-28T18:51:38Z] PR#22 done: tag=HACK, comments=0
+[2026-09-28T18:51:38Z] PR#23 start: processing PR #23: docs: document batch charging flow
+[2026-09-28T18:51:38Z] PR#23 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:51:38Z] PR#24 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:38Z] PR#24 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:38Z] PR#24 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:38Z] PR#24 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:38Z] PR#24 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:38Z] PR#24 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:38Z] PR#24 check: resolve-check for hack HACK-022
+[2026-09-28T18:51:38Z] PR#24 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:38Z] PR#24 done: tag=, comments=0
+[2026-09-28T18:51:38Z] PR#25 start: processing PR #25: remove unused imports
+[2026-09-28T18:51:38Z] PR#25 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:51:40Z] PR#23 recall: semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do
+[2026-09-28T18:51:40Z] PR#25 recall: semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a
+[2026-09-28T18:51:42Z] PR#23 classify: is_workaround=False
+[2026-09-28T18:51:42Z] PR#25 classify: is_workaround=False
+[2026-09-28T18:51:44Z] PR#23 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:44Z] PR#23 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:44Z] PR#23 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:44Z] PR#23 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:51:44Z] PR#23 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:44Z] PR#23 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:44Z] PR#23 check: resolve-check for hack HACK-015
+[2026-09-28T18:51:44Z] PR#23 usage: tokens: 757
+[2026-09-28T18:51:44Z] PR#25 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:44Z] PR#25 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:51:44Z] PR#25 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:44Z] PR#25 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:51:44Z] PR#25 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:44Z] PR#25 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:51:44Z] PR#25 check: resolve-check for hack HACK-022
+[2026-09-28T18:51:44Z] PR#25 check: hack HACK-022: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:51:44Z] PR#25 done: tag=, comments=0
+[2026-09-28T18:51:44Z] PR#26 start: processing PR #26: remove fixed retry delay workaround
+[2026-09-28T18:51:44Z] PR#26 recall: file query: Code changes touching files: billing/stripe_retry.py
+[2026-09-28T18:51:46Z] PR#26 recall: semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t
+[2026-09-28T18:51:47Z] PR#23 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:47Z] PR#23 check: resolve-check for hack HACK-022
+[2026-09-28T18:51:47Z] PR#23 check: hack HACK-022: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:47Z] PR#23 done: tag=, comments=0
+[2026-09-28T18:51:47Z] PR#24 start: processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API
+[2026-09-28T18:51:47Z] PR#24 recall: file query: Code changes touching files: requirements.txt, billing/stripe_retry.py
+[2026-09-28T18:51:48Z] PR#26 classify: is_workaround=False
+[2026-09-28T18:51:49Z] PR#24 recall: semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch
+[2026-09-28T18:51:50Z] PR#26 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:50Z] PR#26 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:50Z] PR#26 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:50Z] PR#26 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:50Z] PR#26 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:50Z] PR#26 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:50Z] PR#26 check: resolve-check for hack HACK-022
+[2026-09-28T18:51:50Z] PR#26 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:50Z] PR#26 retain: hack HACK-006 retired (anchor removed)
+[2026-09-28T18:51:50Z] PR#26 done: tag=, comments=1
+[2026-09-28T18:51:51Z] PR#24 classify: is_workaround=False
+[2026-09-28T18:51:53Z] PR#24 check: resolve-check for hack HACK-006
+[2026-09-28T18:51:53Z] PR#24 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:51:53Z] PR#24 check: resolve-check for hack HACK-008
+[2026-09-28T18:51:53Z] PR#24 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:53Z] PR#24 check: resolve-check for hack HACK-012
+[2026-09-28T18:51:53Z] PR#24 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:51:53Z] PR#24 check: resolve-check for hack HACK-015
+[2026-09-28T18:52:04Z] PR#24 usage: tokens: 1105
+[2026-09-28T18:52:07Z] PR#24 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:52:07Z] PR#24 check: resolve-check for hack HACK-022
+[2026-09-28T18:52:07Z] PR#24 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:52:07Z] PR#24 done: tag=, comments=0
+[2026-09-28T18:52:07Z] PR#25 start: processing PR #25: remove unused imports
+[2026-09-28T18:52:07Z] PR#25 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:52:09Z] PR#25 recall: semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a
+[2026-09-28T18:52:11Z] PR#25 classify: is_workaround=False
+[2026-09-28T18:52:13Z] PR#25 check: resolve-check for hack HACK-006
+[2026-09-28T18:52:13Z] PR#25 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:52:13Z] PR#25 check: resolve-check for hack HACK-008
+[2026-09-28T18:52:13Z] PR#25 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:52:13Z] PR#25 check: resolve-check for hack HACK-012
+[2026-09-28T18:52:13Z] PR#25 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:52:13Z] PR#25 check: resolve-check for hack HACK-015
+[2026-09-28T18:52:24Z] PR#25 retry: 429 rate limit, waiting 6.58s
+[2026-09-28T18:52:26Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-28T18:52:26Z] PR#1 recall: file query: Code changes touching files: webhooks.py, billing/retry.py, invoices.py, checkou
+[2026-09-28T18:52:31Z] PR#25 usage: tokens: 765
+[2026-09-28T18:52:34Z] PR#25 check: hack HACK-015: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:52:34Z] PR#25 check: resolve-check for hack HACK-022
+[2026-09-28T18:52:34Z] PR#25 check: hack HACK-022: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:52:34Z] PR#25 done: tag=, comments=0
+[2026-09-28T18:52:34Z] PR#26 start: processing PR #26: remove fixed retry delay workaround
+[2026-09-28T18:52:34Z] PR#26 recall: file query: Code changes touching files: billing/stripe_retry.py
+[2026-09-28T18:52:34Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-28T18:52:36Z] PR#26 recall: semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t
+[2026-09-28T18:52:38Z] PR#26 classify: is_workaround=False
+[2026-09-28T18:52:40Z] PR#26 check: resolve-check for hack HACK-006
+[2026-09-28T18:52:40Z] PR#26 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:52:40Z] PR#26 check: resolve-check for hack HACK-008
+[2026-09-28T18:52:40Z] PR#26 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:52:40Z] PR#26 check: resolve-check for hack HACK-012
+[2026-09-28T18:52:40Z] PR#26 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:52:40Z] PR#26 check: resolve-check for hack HACK-015
+[2026-09-28T18:52:41Z] PR#26 usage: tokens: 1134
+[2026-09-28T18:52:44Z] PR#26 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:52:44Z] PR#26 check: resolve-check for hack HACK-022
+[2026-09-28T18:52:44Z] PR#26 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:52:44Z] PR#26 retain: hack HACK-006 retired (anchor removed)
+[2026-09-28T18:52:44Z] PR#26 done: tag=, comments=1
+[2026-09-28T18:53:08Z] PR#1 usage: tokens: 1181
+[2026-09-28T18:53:11Z] PR#1 classify: is_workaround=False
+[2026-09-28T18:53:11Z] PR#1 done: tag=, comments=0
+[2026-09-28T18:53:11Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-28T18:53:11Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: format, setup_logging
+[2026-09-28T18:53:18Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-28T18:53:23Z] PR#2 classify: is_workaround=False
+[2026-09-28T18:53:23Z] PR#2 done: tag=, comments=0
+[2026-09-28T18:53:23Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-28T18:53:23Z] PR#3 recall: file query: Code changes touching files: health.py; functions: register_health, health
+[2026-09-28T18:53:27Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-28T18:53:31Z] PR#3 classify: is_workaround=False
+[2026-09-28T18:53:31Z] PR#3 done: tag=, comments=0
+[2026-09-28T18:53:31Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-28T18:53:31Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-28T18:53:44Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-28T18:53:49Z] PR#4 classify: is_workaround=True
+[2026-09-28T18:53:49Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T18:53:52Z] PR#4 retain: retained hack HACK-004
+[2026-09-28T18:53:52Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-28T18:53:52Z] PR#4 done: tag=HACK, comments=1
+[2026-09-28T18:53:52Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-28T18:53:52Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_zero_amount
+[2026-09-28T18:53:56Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-28T18:53:59Z] PR#5 classify: is_workaround=False
+[2026-09-28T18:53:59Z] PR#5 done: tag=, comments=0
+[2026-09-28T18:53:59Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-28T18:53:59Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-28T18:54:02Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-28T18:54:05Z] PR#6 classify: is_workaround=True
+[2026-09-28T18:54:05Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-28T18:54:15Z] PR#6 retain: retained hack HACK-006
+[2026-09-28T18:54:15Z] PR#6 done: tag=HACK, comments=0
+[2026-09-28T18:54:15Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-28T18:54:15Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-28T18:54:18Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-28T18:54:21Z] PR#7 classify: is_workaround=False
+[2026-09-28T18:54:25Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-28T18:54:25Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:54:25Z] PR#7 done: tag=, comments=0
+[2026-09-28T18:54:25Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-28T18:54:25Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-28T18:54:28Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-28T18:54:32Z] PR#8 classify: is_workaround=True
+[2026-09-28T18:54:32Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-28T18:54:35Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-28T18:54:35Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:54:44Z] PR#8 retain: retained hack HACK-008
+[2026-09-28T18:54:44Z] PR#8 done: tag=HACK, comments=0
+[2026-09-28T18:54:44Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-28T18:54:44Z] PR#9 recall: empty diff, skipping recall
+[2026-09-28T18:54:44Z] PR#9 classify: empty diff, skipping
+[2026-09-28T18:54:47Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-28T18:54:47Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:54:47Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-28T18:54:47Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:54:47Z] PR#9 done: tag=, comments=0
+[2026-09-28T18:54:47Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-28T18:54:47Z] PR#10 recall: file query: Code changes touching files: db.py, webhooks.py; functions: get_db
+[2026-09-28T18:54:52Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-28T18:54:56Z] PR#10 classify: is_workaround=False
+[2026-09-28T18:54:59Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-28T18:54:59Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:54:59Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-28T18:54:59Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:54:59Z] PR#10 done: tag=, comments=0
+[2026-09-28T18:54:59Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-28T18:54:59Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:55:02Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-28T18:55:13Z] PR#11 classify: is_workaround=False
+[2026-09-28T18:55:16Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-28T18:55:16Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:16Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-28T18:55:16Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:16Z] PR#11 done: tag=, comments=0
+[2026-09-28T18:55:16Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-28T18:55:16Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-28T18:55:20Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-28T18:55:24Z] PR#12 classify: is_workaround=True
+[2026-09-28T18:55:27Z] PR#12 reflect_gate: query: The tax provider API has high latency (p95 over 2 seconds) which is too slow for...
+[2026-09-28T18:55:27Z] PR#12 reflect_gate: recall hit IDs: []
+[2026-09-28T18:55:27Z] PR#12 reflect_gate: survivors after open filter: []
+[2026-09-28T18:55:27Z] PR#12 reflect_gate: returned IDs: []
+[2026-09-28T18:55:27Z] PR#12 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:55:31Z] PR#12 check: resolve-check for hack HACK-006
+[2026-09-28T18:55:31Z] PR#12 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:31Z] PR#12 check: resolve-check for hack HACK-008
+[2026-09-28T18:55:31Z] PR#12 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:34Z] PR#12 retain: retained hack HACK-012
+[2026-09-28T18:55:34Z] PR#12 done: tag=HACK, comments=0
+[2026-09-28T18:55:34Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-28T18:55:34Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T18:55:37Z] PR#13 recall: semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques
+[2026-09-28T18:55:40Z] PR#13 classify: is_workaround=False
+[2026-09-28T18:55:48Z] PR#13 check: resolve-check for hack HACK-006
+[2026-09-28T18:55:48Z] PR#13 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:48Z] PR#13 check: resolve-check for hack HACK-008
+[2026-09-28T18:55:48Z] PR#13 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:55:48Z] PR#13 check: resolve-check for hack HACK-012
+[2026-09-28T18:55:48Z] PR#13 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:48Z] PR#13 done: tag=, comments=0
+[2026-09-28T18:55:48Z] PR#14 start: processing PR #14: feat: add global error handler
+[2026-09-28T18:55:48Z] PR#14 recall: file query: Code changes touching files: errors.py; functions: not_found, register_error_han
+[2026-09-28T18:55:51Z] PR#14 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: 
+[2026-09-28T18:55:55Z] PR#14 classify: is_workaround=False
+[2026-09-28T18:55:58Z] PR#14 check: resolve-check for hack HACK-006
+[2026-09-28T18:55:58Z] PR#14 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:58Z] PR#14 check: resolve-check for hack HACK-008
+[2026-09-28T18:55:58Z] PR#14 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:58Z] PR#14 check: resolve-check for hack HACK-012
+[2026-09-28T18:55:58Z] PR#14 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:55:58Z] PR#14 done: tag=, comments=0
+[2026-09-28T18:55:58Z] PR#15 start: processing PR #15: increase stripe timeout and limit concurrency
+[2026-09-28T18:55:58Z] PR#15 recall: file query: Code changes touching files: checkout.py, config.py
+[2026-09-28T18:56:02Z] PR#15 recall: semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu
+[2026-09-28T18:56:05Z] PR#15 classify: is_workaround=True
+[2026-09-28T18:56:15Z] PR#15 reflect_gate: query: Stripe times out under load, and concurrent requests exacerbate the issue. This ...
+[2026-09-28T18:56:15Z] PR#15 reflect_gate: recall hit IDs: []
+[2026-09-28T18:56:15Z] PR#15 reflect_gate: survivors after open filter: []
+[2026-09-28T18:56:15Z] PR#15 reflect_gate: returned IDs: []
+[2026-09-28T18:56:15Z] PR#15 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:56:18Z] PR#15 check: resolve-check for hack HACK-006
+[2026-09-28T18:56:18Z] PR#15 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:56:18Z] PR#15 check: resolve-check for hack HACK-008
+[2026-09-28T18:56:18Z] PR#15 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:56:18Z] PR#15 check: resolve-check for hack HACK-012
+[2026-09-28T18:56:18Z] PR#15 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:56:21Z] PR#15 retain: retained hack HACK-015
+[2026-09-28T18:56:21Z] PR#15 retain: hack HACK-015 retired (anchor removed)
+[2026-09-28T18:56:21Z] PR#15 done: tag=HACK, comments=1
+[2026-09-28T18:56:21Z] PR#16 start: processing PR #16: add basic metrics counters
+[2026-09-28T18:56:21Z] PR#16 recall: file query: Code changes touching files: metrics.py; functions: increment, __enter__, __init
+[2026-09-28T18:56:25Z] PR#16 recall: semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char
+[2026-09-28T18:56:28Z] PR#16 classify: is_workaround=False
+[2026-09-28T18:56:31Z] PR#16 check: resolve-check for hack HACK-006
+[2026-09-28T18:56:31Z] PR#16 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:56:31Z] PR#16 check: resolve-check for hack HACK-008
+[2026-09-28T18:56:31Z] PR#16 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:56:31Z] PR#16 check: resolve-check for hack HACK-012
+[2026-09-28T18:56:31Z] PR#16 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:56:31Z] PR#16 done: tag=, comments=0
+[2026-09-28T18:56:31Z] PR#17 start: processing PR #17: reorganize billing modules
+[2026-09-28T18:56:31Z] PR#17 recall: file query: Code changes touching files: billing/retry.py, billing/stripe_retry.py; function
+[2026-09-28T18:56:37Z] PR#17 recall: semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize
+[2026-09-28T18:56:44Z] PR#17 classify: is_workaround=False
+[2026-09-28T18:56:48Z] PR#17 check: resolve-check for hack HACK-006
+[2026-09-28T18:56:48Z] PR#17 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:56:48Z] PR#17 check: resolve-check for hack HACK-008
+[2026-09-28T18:56:48Z] PR#17 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:56:48Z] PR#17 check: resolve-check for hack HACK-012
+[2026-09-28T18:56:48Z] PR#17 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:56:48Z] PR#17 retain: hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py
+[2026-09-28T18:56:48Z] PR#17 done: tag=MOVE, comments=1
+[2026-09-28T18:56:48Z] PR#18 start: processing PR #18: add .env.example file
+[2026-09-28T18:56:48Z] PR#18 recall: file query: Code changes touching files: .env.example
+[2026-09-28T18:56:51Z] PR#18 recall: semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env
+[2026-09-28T18:56:55Z] PR#18 classify: is_workaround=False
+[2026-09-28T18:56:58Z] PR#18 check: resolve-check for hack HACK-006
+[2026-09-28T18:56:58Z] PR#18 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:56:58Z] PR#18 check: resolve-check for hack HACK-008
+[2026-09-28T18:56:58Z] PR#18 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:56:58Z] PR#18 check: resolve-check for hack HACK-012
+[2026-09-28T18:56:58Z] PR#18 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:56:58Z] PR#18 done: tag=, comments=0
+[2026-09-28T18:56:58Z] PR#19 start: processing PR #19: bump stripe-sdk to 4.0.3
+[2026-09-28T18:56:58Z] PR#19 recall: file query: Code changes touching files: requirements.txt
+[2026-09-28T18:57:02Z] PR#19 recall: semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri
+[2026-09-28T18:57:05Z] PR#19 classify: is_workaround=False
+[2026-09-28T18:57:17Z] PR#19 check: resolve-check for hack HACK-006
+[2026-09-28T18:57:17Z] PR#19 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:57:17Z] PR#19 check: resolve-check for hack HACK-008
+[2026-09-28T18:57:17Z] PR#19 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:57:17Z] PR#19 check: resolve-check for hack HACK-012
+[2026-09-28T18:57:17Z] PR#19 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:57:17Z] PR#19 done: tag=, comments=0
+[2026-09-28T18:57:17Z] PR#20 start: processing PR #20: feat: verify webhook signatures
+[2026-09-28T18:57:17Z] PR#20 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:57:20Z] PR#20 recall: semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:
+[2026-09-28T18:57:23Z] PR#20 classify: is_workaround=False
+[2026-09-28T18:57:27Z] PR#20 check: resolve-check for hack HACK-006
+[2026-09-28T18:57:27Z] PR#20 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:57:27Z] PR#20 check: resolve-check for hack HACK-008
+[2026-09-28T18:57:27Z] PR#20 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:57:27Z] PR#20 check: resolve-check for hack HACK-012
+[2026-09-28T18:57:27Z] PR#20 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:57:27Z] PR#20 done: tag=, comments=0
+[2026-09-28T18:57:27Z] PR#21 start: processing PR #21: add tests for charge retry logic
+[2026-09-28T18:57:27Z] PR#21 recall: file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha
+[2026-09-28T18:57:30Z] PR#21 recall: semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test
+[2026-09-28T18:57:34Z] PR#21 classify: is_workaround=False
+[2026-09-28T18:57:45Z] PR#21 check: resolve-check for hack HACK-006
+[2026-09-28T18:57:45Z] PR#21 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:57:45Z] PR#21 check: resolve-check for hack HACK-008
+[2026-09-28T18:57:45Z] PR#21 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:57:45Z] PR#21 check: resolve-check for hack HACK-012
+[2026-09-28T18:57:45Z] PR#21 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:57:45Z] PR#21 done: tag=, comments=0
+[2026-09-28T18:57:45Z] PR#22 start: processing PR #22: add batch charge verification and fallback
+[2026-09-28T18:57:45Z] PR#22 recall: file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice
+[2026-09-28T18:57:49Z] PR#22 recall: semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb
+[2026-09-28T18:57:52Z] PR#22 classify: is_workaround=True
+[2026-09-28T18:57:56Z] PR#22 reflect_gate: query: Stripe's batch charge API returns inconsistent totals under load, causing produc...
+[2026-09-28T18:57:56Z] PR#22 reflect_gate: recall hit IDs: []
+[2026-09-28T18:57:56Z] PR#22 reflect_gate: survivors after open filter: []
+[2026-09-28T18:57:56Z] PR#22 reflect_gate: returned IDs: []
+[2026-09-28T18:57:56Z] PR#22 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-28T18:57:59Z] PR#22 check: resolve-check for hack HACK-006
+[2026-09-28T18:57:59Z] PR#22 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:57:59Z] PR#22 check: resolve-check for hack HACK-008
+[2026-09-28T18:57:59Z] PR#22 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:57:59Z] PR#22 check: resolve-check for hack HACK-012
+[2026-09-28T18:57:59Z] PR#22 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:58:02Z] PR#22 retain: retained hack HACK-022
+[2026-09-28T18:58:02Z] PR#22 done: tag=HACK, comments=0
+[2026-09-28T18:58:02Z] PR#23 start: processing PR #23: docs: document batch charging flow
+[2026-09-28T18:58:02Z] PR#23 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:58:06Z] PR#23 recall: semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do
+[2026-09-28T18:58:14Z] PR#23 classify: is_workaround=False
+[2026-09-28T18:58:18Z] PR#23 check: resolve-check for hack HACK-006
+[2026-09-28T18:58:18Z] PR#23 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:58:18Z] PR#23 check: resolve-check for hack HACK-008
+[2026-09-28T18:58:18Z] PR#23 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:58:18Z] PR#23 check: resolve-check for hack HACK-012
+[2026-09-28T18:58:18Z] PR#23 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:58:18Z] PR#23 check: resolve-check for hack HACK-022
+[2026-09-28T18:58:18Z] PR#23 check: hack HACK-022: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:58:18Z] PR#23 done: tag=, comments=0
+[2026-09-28T18:58:18Z] PR#24 start: processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API
+[2026-09-28T18:58:18Z] PR#24 recall: file query: Code changes touching files: billing/stripe_retry.py, requirements.txt
+[2026-09-28T18:58:21Z] PR#24 recall: semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch
+[2026-09-28T18:58:24Z] PR#24 classify: is_workaround=False
+[2026-09-28T18:58:27Z] PR#24 check: resolve-check for hack HACK-006
+[2026-09-28T18:58:27Z] PR#24 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:58:27Z] PR#24 check: resolve-check for hack HACK-008
+[2026-09-28T18:58:27Z] PR#24 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:58:27Z] PR#24 check: resolve-check for hack HACK-012
+[2026-09-28T18:58:27Z] PR#24 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:58:27Z] PR#24 check: resolve-check for hack HACK-022
+[2026-09-28T18:58:27Z] PR#24 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:58:27Z] PR#24 done: tag=, comments=0
+[2026-09-28T18:58:27Z] PR#25 start: processing PR #25: remove unused imports
+[2026-09-28T18:58:27Z] PR#25 recall: file query: Code changes touching files: .pr_marker
+[2026-09-28T18:58:31Z] PR#25 recall: semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a
+[2026-09-28T18:58:34Z] PR#25 classify: is_workaround=False
+[2026-09-28T18:58:43Z] PR#25 check: resolve-check for hack HACK-006
+[2026-09-28T18:58:43Z] PR#25 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:58:43Z] PR#25 check: resolve-check for hack HACK-008
+[2026-09-28T18:58:43Z] PR#25 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:58:43Z] PR#25 check: resolve-check for hack HACK-012
+[2026-09-28T18:58:43Z] PR#25 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:58:43Z] PR#25 check: resolve-check for hack HACK-022
+[2026-09-28T18:58:43Z] PR#25 check: hack HACK-022: NEEDS_WORK (conf=0.99)
+[2026-09-28T18:58:43Z] PR#25 done: tag=, comments=0
+[2026-09-28T18:58:43Z] PR#26 start: processing PR #26: remove fixed retry delay workaround
+[2026-09-28T18:58:43Z] PR#26 recall: file query: Code changes touching files: billing/stripe_retry.py
+[2026-09-28T18:58:46Z] PR#26 recall: semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t
+[2026-09-28T18:58:50Z] PR#26 classify: is_workaround=False
+[2026-09-28T18:58:53Z] PR#26 check: resolve-check for hack HACK-006
+[2026-09-28T18:58:53Z] PR#26 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:58:53Z] PR#26 check: resolve-check for hack HACK-008
+[2026-09-28T18:58:53Z] PR#26 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:58:53Z] PR#26 check: resolve-check for hack HACK-012
+[2026-09-28T18:58:53Z] PR#26 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-28T18:58:53Z] PR#26 check: resolve-check for hack HACK-022
+[2026-09-28T18:58:53Z] PR#26 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-28T18:58:53Z] PR#26 retain: hack HACK-006 retired (anchor removed)
+[2026-09-28T18:58:53Z] PR#26 done: tag=, comments=1
+[2026-09-29T00:03:23Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-29T00:03:23Z] PR#1 recall: file query: Code changes touching files: requirements.txt, webhooks.py, tax.py, billing/retr
+[2026-09-29T00:03:36Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-29T00:03:41Z] PR#1 retry: 429 rate limit, waiting 2s
+[2026-09-29T00:03:44Z] PR#1 usage: tokens: 1181
+[2026-09-29T00:03:47Z] PR#1 classify: is_workaround=False
+[2026-09-29T00:03:47Z] PR#1 done: tag=, comments=0
+[2026-09-29T00:03:47Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-29T00:03:47Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: format, setup_logging
+[2026-09-29T00:03:51Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-29T00:03:55Z] PR#2 classify: is_workaround=False
+[2026-09-29T00:03:55Z] PR#2 done: tag=, comments=0
+[2026-09-29T00:03:55Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-29T00:03:55Z] PR#3 recall: file query: Code changes touching files: health.py; functions: register_health, health
+[2026-09-29T00:04:00Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-29T00:04:04Z] PR#3 classify: is_workaround=False
+[2026-09-29T00:04:04Z] PR#3 done: tag=, comments=0
+[2026-09-29T00:04:04Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-29T00:04:04Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-29T00:04:09Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-29T00:04:12Z] PR#4 classify: is_workaround=True
+[2026-09-29T00:04:12Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-29T00:04:16Z] PR#4 retain: retained hack HACK-004
+[2026-09-29T00:04:16Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-29T00:04:16Z] PR#4 done: tag=HACK, comments=1
+[2026-09-29T00:04:16Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-29T00:04:16Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_zero_amount
+[2026-09-29T00:04:19Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-29T00:04:23Z] PR#5 classify: is_workaround=False
+[2026-09-29T00:04:23Z] PR#5 done: tag=, comments=0
+[2026-09-29T00:04:23Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-29T00:04:23Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-29T00:04:27Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-29T00:04:31Z] PR#6 classify: is_workaround=True
+[2026-09-29T00:04:31Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-29T00:04:34Z] PR#6 retain: retained hack HACK-006
+[2026-09-29T00:04:34Z] PR#6 done: tag=HACK, comments=0
+[2026-09-29T00:04:34Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-29T00:04:34Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-29T00:04:38Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-29T00:04:43Z] PR#7 classify: is_workaround=False
+[2026-09-29T00:04:46Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-29T00:04:46Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:04:46Z] PR#7 done: tag=, comments=0
+[2026-09-29T00:04:46Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-29T00:04:46Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-29T00:04:50Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-29T00:04:54Z] PR#8 classify: is_workaround=True
+[2026-09-29T00:04:54Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-29T00:04:59Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-29T00:04:59Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:05:02Z] PR#8 retain: retained hack HACK-008
+[2026-09-29T00:05:02Z] PR#8 done: tag=HACK, comments=0
+[2026-09-29T00:05:02Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-29T00:05:02Z] PR#9 recall: empty diff, skipping recall
+[2026-09-29T00:05:02Z] PR#9 classify: empty diff, skipping
+[2026-09-29T00:05:06Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-29T00:05:06Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:05:06Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-29T00:05:06Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:05:06Z] PR#9 done: tag=, comments=0
+[2026-09-29T00:05:06Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-29T00:05:06Z] PR#10 recall: file query: Code changes touching files: webhooks.py, db.py; functions: get_db
+[2026-09-29T00:05:10Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-29T00:05:15Z] PR#10 usage: tokens: 625
+[2026-09-29T00:05:18Z] PR#10 classify: is_workaround=False
+[2026-09-29T00:05:22Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-29T00:05:22Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:05:22Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-29T00:05:22Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:05:22Z] PR#10 done: tag=, comments=0
+[2026-09-29T00:05:22Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-29T00:05:22Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T00:05:26Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-29T00:05:30Z] PR#11 classify: is_workaround=False
+[2026-09-29T00:05:33Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-29T00:05:33Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:05:33Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-29T00:05:33Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:05:33Z] PR#11 done: tag=, comments=0
+[2026-09-29T00:05:33Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-29T00:05:33Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-29T00:05:37Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-29T00:05:41Z] PR#12 classify: is_workaround=True
+[2026-09-29T00:05:45Z] PR#12 reflect_gate: query: The tax provider API has high latency (p95 over 2 seconds) which is too slow for...
+[2026-09-29T00:05:45Z] PR#12 reflect_gate: recall hit IDs: []
+[2026-09-29T00:05:45Z] PR#12 reflect_gate: survivors after open filter: []
+[2026-09-29T00:05:45Z] PR#12 reflect_gate: returned IDs: []
+[2026-09-29T00:05:45Z] PR#12 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-29T00:05:49Z] PR#12 check: resolve-check for hack HACK-006
+[2026-09-29T00:05:49Z] PR#12 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:05:49Z] PR#12 check: resolve-check for hack HACK-008
+[2026-09-29T00:05:49Z] PR#12 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:05:53Z] PR#12 retain: retained hack HACK-012
+[2026-09-29T00:05:53Z] PR#12 done: tag=HACK, comments=0
+[2026-09-29T00:05:53Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-29T00:05:53Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-29T00:05:56Z] PR#13 recall: semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques
+[2026-09-29T00:06:00Z] PR#13 classify: is_workaround=False
+[2026-09-29T00:06:04Z] PR#13 check: resolve-check for hack HACK-006
+[2026-09-29T00:06:04Z] PR#13 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:04Z] PR#13 check: resolve-check for hack HACK-008
+[2026-09-29T00:06:04Z] PR#13 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:06:04Z] PR#13 check: resolve-check for hack HACK-012
+[2026-09-29T00:06:05Z] PR#13 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:05Z] PR#13 done: tag=, comments=0
+[2026-09-29T00:06:05Z] PR#14 start: processing PR #14: feat: add global error handler
+[2026-09-29T00:06:05Z] PR#14 recall: file query: Code changes touching files: errors.py; functions: register_error_handlers, serv
+[2026-09-29T00:06:08Z] PR#14 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: 
+[2026-09-29T00:06:12Z] PR#14 classify: is_workaround=False
+[2026-09-29T00:06:16Z] PR#14 check: resolve-check for hack HACK-006
+[2026-09-29T00:06:16Z] PR#14 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:16Z] PR#14 check: resolve-check for hack HACK-008
+[2026-09-29T00:06:16Z] PR#14 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:16Z] PR#14 check: resolve-check for hack HACK-012
+[2026-09-29T00:06:16Z] PR#14 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:16Z] PR#14 done: tag=, comments=0
+[2026-09-29T00:06:16Z] PR#15 start: processing PR #15: increase stripe timeout and limit concurrency
+[2026-09-29T00:06:16Z] PR#15 recall: file query: Code changes touching files: config.py, checkout.py
+[2026-09-29T00:06:19Z] PR#15 recall: semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu
+[2026-09-29T00:06:23Z] PR#15 classify: is_workaround=True
+[2026-09-29T00:06:26Z] PR#15 reflect_gate: query: Stripe times out under load, and concurrent requests exacerbate the issue. This ...
+[2026-09-29T00:06:26Z] PR#15 reflect_gate: recall hit IDs: []
+[2026-09-29T00:06:26Z] PR#15 reflect_gate: survivors after open filter: []
+[2026-09-29T00:06:26Z] PR#15 reflect_gate: returned IDs: []
+[2026-09-29T00:06:26Z] PR#15 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-29T00:06:30Z] PR#15 check: resolve-check for hack HACK-006
+[2026-09-29T00:06:30Z] PR#15 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:06:30Z] PR#15 check: resolve-check for hack HACK-008
+[2026-09-29T00:06:30Z] PR#15 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:30Z] PR#15 check: resolve-check for hack HACK-012
+[2026-09-29T00:06:30Z] PR#15 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:34Z] PR#15 retain: retained hack HACK-015
+[2026-09-29T00:06:34Z] PR#15 done: tag=HACK, comments=0
+[2026-09-29T00:06:34Z] PR#16 start: processing PR #16: add basic metrics counters
+[2026-09-29T00:06:34Z] PR#16 recall: file query: Code changes touching files: metrics.py; functions: __init__, increment, __enter
+[2026-09-29T00:06:37Z] PR#16 recall: semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char
+[2026-09-29T00:06:41Z] PR#16 classify: is_workaround=False
+[2026-09-29T00:06:44Z] PR#16 check: resolve-check for hack HACK-006
+[2026-09-29T00:06:45Z] PR#16 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:45Z] PR#16 check: resolve-check for hack HACK-008
+[2026-09-29T00:06:45Z] PR#16 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:45Z] PR#16 check: resolve-check for hack HACK-012
+[2026-09-29T00:06:45Z] PR#16 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:45Z] PR#16 check: resolve-check for hack HACK-015
+[2026-09-29T00:06:45Z] PR#16 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:45Z] PR#16 done: tag=, comments=0
+[2026-09-29T00:06:45Z] PR#17 start: processing PR #17: reorganize billing modules
+[2026-09-29T00:06:45Z] PR#17 recall: file query: Code changes touching files: billing/stripe_retry.py, billing/retry.py; function
+[2026-09-29T00:06:48Z] PR#17 recall: semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize
+[2026-09-29T00:06:52Z] PR#17 classify: is_workaround=False
+[2026-09-29T00:06:55Z] PR#17 check: resolve-check for hack HACK-006
+[2026-09-29T00:06:55Z] PR#17 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:06:55Z] PR#17 check: resolve-check for hack HACK-008
+[2026-09-29T00:06:55Z] PR#17 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:55Z] PR#17 check: resolve-check for hack HACK-012
+[2026-09-29T00:06:55Z] PR#17 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:06:55Z] PR#17 check: resolve-check for hack HACK-015
+[2026-09-29T00:06:55Z] PR#17 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:06:55Z] PR#17 retain: hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py
+[2026-09-29T00:06:55Z] PR#17 done: tag=MOVE, comments=1
+[2026-09-29T00:06:55Z] PR#18 start: processing PR #18: add .env.example file
+[2026-09-29T00:06:55Z] PR#18 recall: file query: Code changes touching files: .env.example
+[2026-09-29T00:06:59Z] PR#18 recall: semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env
+[2026-09-29T00:07:03Z] PR#18 classify: is_workaround=False
+[2026-09-29T00:07:07Z] PR#18 check: resolve-check for hack HACK-006
+[2026-09-29T00:07:07Z] PR#18 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:07:07Z] PR#18 check: resolve-check for hack HACK-008
+[2026-09-29T00:07:07Z] PR#18 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:07:07Z] PR#18 check: resolve-check for hack HACK-012
+[2026-09-29T00:07:07Z] PR#18 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:07Z] PR#18 check: resolve-check for hack HACK-015
+[2026-09-29T00:07:07Z] PR#18 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:07Z] PR#18 done: tag=, comments=0
+[2026-09-29T00:07:07Z] PR#19 start: processing PR #19: bump stripe-sdk to 4.0.3
+[2026-09-29T00:07:07Z] PR#19 recall: file query: Code changes touching files: requirements.txt
+[2026-09-29T00:07:11Z] PR#19 recall: semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri
+[2026-09-29T00:07:14Z] PR#19 classify: is_workaround=False
+[2026-09-29T00:07:18Z] PR#19 check: resolve-check for hack HACK-006
+[2026-09-29T00:07:18Z] PR#19 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:07:18Z] PR#19 check: resolve-check for hack HACK-008
+[2026-09-29T00:07:18Z] PR#19 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:18Z] PR#19 check: resolve-check for hack HACK-012
+[2026-09-29T00:07:18Z] PR#19 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:18Z] PR#19 check: resolve-check for hack HACK-015
+[2026-09-29T00:07:18Z] PR#19 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:07:18Z] PR#19 done: tag=, comments=0
+[2026-09-29T00:07:18Z] PR#20 start: processing PR #20: feat: verify webhook signatures
+[2026-09-29T00:07:18Z] PR#20 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T00:07:22Z] PR#20 recall: semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:
+[2026-09-29T00:07:25Z] PR#20 classify: is_workaround=False
+[2026-09-29T00:07:29Z] PR#20 check: resolve-check for hack HACK-006
+[2026-09-29T00:07:29Z] PR#20 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:29Z] PR#20 check: resolve-check for hack HACK-008
+[2026-09-29T00:07:29Z] PR#20 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:29Z] PR#20 check: resolve-check for hack HACK-012
+[2026-09-29T00:07:29Z] PR#20 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:07:29Z] PR#20 check: resolve-check for hack HACK-015
+[2026-09-29T00:07:29Z] PR#20 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:29Z] PR#20 done: tag=, comments=0
+[2026-09-29T00:07:29Z] PR#21 start: processing PR #21: add tests for charge retry logic
+[2026-09-29T00:07:29Z] PR#21 recall: file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha
+[2026-09-29T00:07:33Z] PR#21 recall: semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test
+[2026-09-29T00:07:37Z] PR#21 classify: is_workaround=False
+[2026-09-29T00:07:41Z] PR#21 check: resolve-check for hack HACK-006
+[2026-09-29T00:07:41Z] PR#21 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:41Z] PR#21 check: resolve-check for hack HACK-008
+[2026-09-29T00:07:41Z] PR#21 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:41Z] PR#21 check: resolve-check for hack HACK-012
+[2026-09-29T00:07:41Z] PR#21 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:41Z] PR#21 check: resolve-check for hack HACK-015
+[2026-09-29T00:07:41Z] PR#21 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:41Z] PR#21 done: tag=, comments=0
+[2026-09-29T00:07:41Z] PR#22 start: processing PR #22: add batch charge verification and fallback
+[2026-09-29T00:07:41Z] PR#22 recall: file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice
+[2026-09-29T00:07:45Z] PR#22 recall: semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb
+[2026-09-29T00:07:49Z] PR#22 classify: is_workaround=True
+[2026-09-29T00:07:52Z] PR#22 reflect_gate: query: Stripe's batch charge API returns inconsistent totals under load, causing produc...
+[2026-09-29T00:07:52Z] PR#22 reflect_gate: recall hit IDs: []
+[2026-09-29T00:07:52Z] PR#22 reflect_gate: survivors after open filter: []
+[2026-09-29T00:07:52Z] PR#22 reflect_gate: returned IDs: []
+[2026-09-29T00:07:52Z] PR#22 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-29T00:07:56Z] PR#22 check: resolve-check for hack HACK-006
+[2026-09-29T00:07:56Z] PR#22 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:07:56Z] PR#22 check: resolve-check for hack HACK-008
+[2026-09-29T00:07:56Z] PR#22 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:56Z] PR#22 check: resolve-check for hack HACK-012
+[2026-09-29T00:07:56Z] PR#22 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:07:56Z] PR#22 check: resolve-check for hack HACK-015
+[2026-09-29T00:07:56Z] PR#22 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:08:00Z] PR#22 retain: retained hack HACK-022
+[2026-09-29T00:08:00Z] PR#22 done: tag=HACK, comments=0
+[2026-09-29T00:08:00Z] PR#23 start: processing PR #23: docs: document batch charging flow
+[2026-09-29T00:08:00Z] PR#23 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T00:08:03Z] PR#23 recall: semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do
+[2026-09-29T00:08:07Z] PR#23 classify: is_workaround=False
+[2026-09-29T00:08:11Z] PR#23 check: resolve-check for hack HACK-006
+[2026-09-29T00:08:11Z] PR#23 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:08:11Z] PR#23 check: resolve-check for hack HACK-008
+[2026-09-29T00:08:11Z] PR#23 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:08:11Z] PR#23 check: resolve-check for hack HACK-012
+[2026-09-29T00:08:11Z] PR#23 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:08:11Z] PR#23 check: resolve-check for hack HACK-015
+[2026-09-29T00:08:11Z] PR#23 check: hack HACK-015: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:08:11Z] PR#23 check: resolve-check for hack HACK-022
+[2026-09-29T00:08:11Z] PR#23 check: hack HACK-022: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:08:11Z] PR#23 done: tag=, comments=0
+[2026-09-29T00:08:11Z] PR#24 start: processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API
+[2026-09-29T00:08:11Z] PR#24 recall: file query: Code changes touching files: requirements.txt, billing/stripe_retry.py
+[2026-09-29T00:08:15Z] PR#24 recall: semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch
+[2026-09-29T00:08:19Z] PR#24 classify: is_workaround=False
+[2026-09-29T00:08:22Z] PR#24 check: resolve-check for hack HACK-006
+[2026-09-29T00:08:23Z] PR#24 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:08:23Z] PR#24 check: resolve-check for hack HACK-008
+[2026-09-29T00:08:23Z] PR#24 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:08:23Z] PR#24 check: resolve-check for hack HACK-012
+[2026-09-29T00:08:23Z] PR#24 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:08:23Z] PR#24 check: resolve-check for hack HACK-015
+[2026-09-29T00:08:23Z] PR#24 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:08:23Z] PR#24 check: resolve-check for hack HACK-022
+[2026-09-29T00:08:23Z] PR#24 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:08:23Z] PR#24 done: tag=, comments=0
+[2026-09-29T00:08:23Z] PR#25 start: processing PR #25: remove unused imports
+[2026-09-29T00:08:23Z] PR#25 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T00:08:26Z] PR#25 recall: semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a
+[2026-09-29T00:08:29Z] PR#25 classify: is_workaround=False
+[2026-09-29T00:08:33Z] PR#25 check: resolve-check for hack HACK-006
+[2026-09-29T00:08:33Z] PR#25 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:08:33Z] PR#25 check: resolve-check for hack HACK-008
+[2026-09-29T00:08:33Z] PR#25 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:08:33Z] PR#25 check: resolve-check for hack HACK-012
+[2026-09-29T00:08:33Z] PR#25 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:08:33Z] PR#25 check: resolve-check for hack HACK-015
+[2026-09-29T00:08:33Z] PR#25 check: hack HACK-015: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:08:33Z] PR#25 check: resolve-check for hack HACK-022
+[2026-09-29T00:08:33Z] PR#25 check: hack HACK-022: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:08:33Z] PR#25 done: tag=, comments=0
+[2026-09-29T00:08:33Z] PR#26 start: processing PR #26: remove fixed retry delay workaround
+[2026-09-29T00:08:33Z] PR#26 recall: file query: Code changes touching files: billing/stripe_retry.py
+[2026-09-29T00:08:37Z] PR#26 recall: semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t
+[2026-09-29T00:08:41Z] PR#26 classify: is_workaround=False
+[2026-09-29T00:08:44Z] PR#26 check: resolve-check for hack HACK-006
+[2026-09-29T00:08:44Z] PR#26 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:08:44Z] PR#26 check: resolve-check for hack HACK-008
+[2026-09-29T00:08:44Z] PR#26 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:08:44Z] PR#26 check: resolve-check for hack HACK-012
+[2026-09-29T00:08:44Z] PR#26 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:08:44Z] PR#26 check: resolve-check for hack HACK-015
+[2026-09-29T00:08:44Z] PR#26 check: hack HACK-015: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:08:44Z] PR#26 check: resolve-check for hack HACK-022
+[2026-09-29T00:08:44Z] PR#26 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:08:44Z] PR#26 retain: hack HACK-006 retired (anchor removed)
+[2026-09-29T00:08:44Z] PR#26 done: tag=, comments=1
+[2026-09-29T00:12:10Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-29T00:12:10Z] PR#1 recall: file query: Code changes touching files: webhooks.py, config.py, billing/retry.py, invoices.
+[2026-09-29T00:12:10Z] PR#1 recall: file recall returned results
+[2026-09-29T00:12:10Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-29T00:12:10Z] PR#1 recall: semantic recall returned results
+[2026-09-29T00:12:12Z] PR#1 retry: 429 rate limit, waiting 2s
+[2026-09-29T00:12:14Z] PR#1 retry: 429 rate limit, waiting 4s
+[2026-09-29T00:12:18Z] PR#1 retry: 429 rate limit, waiting 8s
+[2026-09-29T00:12:26Z] PR#1 retry: 429 rate limit, waiting 16s
+[2026-09-29T00:12:43Z] PR#1 usage: tokens: 1181
+[2026-09-29T00:12:46Z] PR#1 classify: is_workaround=False
+[2026-09-29T00:12:46Z] PR#1 done: tag=, comments=0
+[2026-09-29T00:12:46Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-29T00:12:46Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: format, setup_logging
+[2026-09-29T00:12:46Z] PR#2 recall: file recall returned results
+[2026-09-29T00:12:46Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-29T00:12:46Z] PR#2 recall: semantic recall returned results
+[2026-09-29T00:12:46Z] PR#2 classify: is_workaround=False
+[2026-09-29T00:12:46Z] PR#2 done: tag=, comments=0
+[2026-09-29T00:12:46Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-29T00:12:46Z] PR#3 recall: file query: Code changes touching files: health.py; functions: health, register_health
+[2026-09-29T00:12:46Z] PR#3 recall: file recall returned results
+[2026-09-29T00:12:46Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-29T00:12:46Z] PR#3 recall: semantic recall returned results
+[2026-09-29T00:12:46Z] PR#3 classify: is_workaround=False
+[2026-09-29T00:12:46Z] PR#3 done: tag=, comments=0
+[2026-09-29T00:12:46Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-29T00:12:46Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-29T00:12:46Z] PR#4 recall: file recall returned results
+[2026-09-29T00:12:46Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-29T00:12:46Z] PR#4 recall: semantic recall returned results
+[2026-09-29T00:12:46Z] PR#4 classify: is_workaround=True
+[2026-09-29T00:12:46Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-29T00:12:46Z] PR#4 retain: retained hack HACK-004
+[2026-09-29T00:12:46Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-29T00:12:46Z] PR#4 done: tag=HACK, comments=1
+[2026-09-29T00:12:46Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-29T00:12:46Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_zero_amount
+[2026-09-29T00:12:46Z] PR#5 recall: file recall returned results
+[2026-09-29T00:12:46Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-29T00:12:46Z] PR#5 recall: semantic recall returned results
+[2026-09-29T00:12:46Z] PR#5 classify: is_workaround=False
+[2026-09-29T00:12:46Z] PR#5 done: tag=, comments=0
+[2026-09-29T00:12:46Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-29T00:12:46Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-29T00:12:46Z] PR#6 recall: file recall returned results
+[2026-09-29T00:12:46Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-29T00:12:46Z] PR#6 recall: semantic recall returned results
+[2026-09-29T00:12:46Z] PR#6 classify: is_workaround=True
+[2026-09-29T00:12:46Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-29T00:12:46Z] PR#6 retain: retained hack HACK-006
+[2026-09-29T00:12:46Z] PR#6 done: tag=HACK, comments=0
+[2026-09-29T00:12:46Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-29T00:12:46Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-29T00:12:46Z] PR#7 recall: file recall returned results
+[2026-09-29T00:12:46Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-29T00:12:46Z] PR#7 recall: semantic recall returned results
+[2026-09-29T00:12:46Z] PR#7 classify: is_workaround=False
+[2026-09-29T00:12:46Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-29T00:12:46Z] PR#7 retry: 429 rate limit, waiting 2s
+[2026-09-29T00:12:49Z] PR#7 retry: 429 rate limit, waiting 4s
+[2026-09-29T00:12:54Z] PR#7 retry: 429 rate limit, waiting 8s
+[2026-09-29T00:13:03Z] PR#7 usage: tokens: 849
+[2026-09-29T00:13:06Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=1.0)
+[2026-09-29T00:13:06Z] PR#7 done: tag=, comments=0
+[2026-09-29T00:13:06Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-29T00:13:06Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-29T00:13:06Z] PR#8 recall: file recall returned results
+[2026-09-29T00:13:06Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-29T00:13:06Z] PR#8 recall: semantic recall returned results
+[2026-09-29T00:13:06Z] PR#8 classify: is_workaround=True
+[2026-09-29T00:13:06Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-29T00:13:06Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-29T00:13:07Z] PR#8 usage: tokens: 1009
+[2026-09-29T00:13:10Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:13:10Z] PR#8 retain: retained hack HACK-008
+[2026-09-29T00:13:10Z] PR#8 done: tag=HACK, comments=0
+[2026-09-29T00:13:10Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-29T00:13:10Z] PR#9 recall: empty diff, skipping recall
+[2026-09-29T00:13:10Z] PR#9 classify: empty diff, skipping
+[2026-09-29T00:13:10Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-29T00:13:11Z] PR#9 usage: tokens: 614
+[2026-09-29T00:13:14Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:13:14Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-29T00:13:15Z] PR#9 usage: tokens: 695
+[2026-09-29T00:13:18Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:13:18Z] PR#9 done: tag=, comments=0
+[2026-09-29T00:13:18Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-29T00:13:18Z] PR#10 recall: file query: Code changes touching files: db.py, webhooks.py; functions: get_db
+[2026-09-29T00:13:18Z] PR#10 recall: file recall returned results
+[2026-09-29T00:13:18Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-29T00:13:18Z] PR#10 recall: semantic recall returned results
+[2026-09-29T00:13:18Z] PR#10 classify: is_workaround=False
+[2026-09-29T00:13:18Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-29T00:13:19Z] PR#10 retry: 429 rate limit, waiting 2s
+[2026-09-29T00:13:22Z] PR#10 usage: tokens: 1190
+[2026-09-29T00:13:25Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:13:25Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-29T00:13:43Z] PR#10 usage: tokens: 1167
+[2026-09-29T00:13:46Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:13:46Z] PR#10 done: tag=, comments=0
+[2026-09-29T00:13:46Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-29T00:13:46Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T00:13:46Z] PR#11 recall: file recall returned results
+[2026-09-29T00:13:46Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-29T00:13:46Z] PR#11 recall: semantic recall returned results
+[2026-09-29T00:13:46Z] PR#11 classify: is_workaround=False
+[2026-09-29T00:13:46Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-29T00:13:59Z] PR#11 usage: tokens: 1156
+[2026-09-29T00:14:02Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:14:02Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-29T00:14:19Z] PR#11 usage: tokens: 761
+[2026-09-29T00:14:22Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:14:22Z] PR#11 done: tag=, comments=0
+[2026-09-29T00:14:22Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-29T00:14:22Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-29T00:14:22Z] PR#12 recall: file recall returned results
+[2026-09-29T00:14:22Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-29T00:14:22Z] PR#12 recall: semantic recall returned results
+[2026-09-29T00:14:22Z] PR#12 classify: is_workaround=True
+[2026-09-29T00:14:22Z] PR#12 skip: error: 'DummyResp' object is not iterable
+[2026-09-29T00:14:22Z] PR#12 done: tag=HACK, comments=0
+[2026-09-29T00:14:22Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-29T00:14:22Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-29T00:14:22Z] PR#13 recall: file recall returned results
+[2026-09-29T00:14:22Z] PR#13 recall: semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques
+[2026-09-29T00:14:22Z] PR#13 recall: semantic recall returned results
+[2026-09-29T00:14:22Z] PR#13 classify: is_workaround=False
+[2026-09-29T00:14:22Z] PR#13 check: resolve-check for hack HACK-006
+[2026-09-29T00:14:56Z] PR#13 usage: tokens: 792
+[2026-09-29T00:14:59Z] PR#13 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:14:59Z] PR#13 check: resolve-check for hack HACK-008
+[2026-09-29T00:15:00Z] PR#13 usage: tokens: 781
+[2026-09-29T00:15:03Z] PR#13 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:15:03Z] PR#13 done: tag=, comments=0
+[2026-09-29T00:15:03Z] PR#14 start: processing PR #14: feat: add global error handler
+[2026-09-29T00:15:03Z] PR#14 recall: file query: Code changes touching files: errors.py; functions: register_error_handlers, bad_
+[2026-09-29T00:15:03Z] PR#14 recall: file recall returned results
+[2026-09-29T00:15:03Z] PR#14 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: 
+[2026-09-29T00:15:03Z] PR#14 recall: semantic recall returned results
+[2026-09-29T00:15:03Z] PR#14 classify: is_workaround=False
+[2026-09-29T00:15:03Z] PR#14 check: resolve-check for hack HACK-006
+[2026-09-29T00:15:27Z] PR#14 usage: tokens: 942
+[2026-09-29T00:15:30Z] PR#14 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:15:30Z] PR#14 check: resolve-check for hack HACK-008
+[2026-09-29T00:15:46Z] PR#14 usage: tokens: 896
+[2026-09-29T00:15:49Z] PR#14 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:15:49Z] PR#14 done: tag=, comments=0
+[2026-09-29T00:15:49Z] PR#15 start: processing PR #15: increase stripe timeout and limit concurrency
+[2026-09-29T00:15:49Z] PR#15 recall: file query: Code changes touching files: config.py, checkout.py
+[2026-09-29T00:15:49Z] PR#15 recall: file recall returned results
+[2026-09-29T00:15:49Z] PR#15 recall: related_hack: HACK-008 via file match
+[2026-09-29T00:15:49Z] PR#15 recall: semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu
+[2026-09-29T00:15:49Z] PR#15 recall: semantic recall returned results
+[2026-09-29T00:15:49Z] PR#15 classify: is_workaround=True
+[2026-09-29T00:15:49Z] PR#15 skip: error: 'DummyResp' object is not iterable
+[2026-09-29T00:15:49Z] PR#15 done: tag=HACK, comments=1
+[2026-09-29T00:15:49Z] PR#16 start: processing PR #16: add basic metrics counters
+[2026-09-29T00:15:49Z] PR#16 recall: file query: Code changes touching files: metrics.py; functions: __init__, get_counts, __exit
+[2026-09-29T00:15:49Z] PR#16 recall: file recall returned results
+[2026-09-29T00:15:49Z] PR#16 recall: semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char
+[2026-09-29T00:15:49Z] PR#16 recall: semantic recall returned results
+[2026-09-29T00:15:49Z] PR#16 classify: is_workaround=False
+[2026-09-29T00:15:49Z] PR#16 check: resolve-check for hack HACK-006
+[2026-09-29T00:15:50Z] PR#16 usage: tokens: 879
+[2026-09-29T00:15:53Z] PR#16 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:15:53Z] PR#16 check: resolve-check for hack HACK-008
+[2026-09-29T00:15:54Z] PR#16 usage: tokens: 965
+[2026-09-29T00:15:57Z] PR#16 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:15:57Z] PR#16 done: tag=, comments=0
+[2026-09-29T00:15:57Z] PR#17 start: processing PR #17: reorganize billing modules
+[2026-09-29T00:15:57Z] PR#17 recall: file query: Code changes touching files: billing/retry.py, billing/stripe_retry.py; function
+[2026-09-29T00:15:57Z] PR#17 recall: file recall returned results
+[2026-09-29T00:15:57Z] PR#17 recall: related_hack: HACK-006 via file match
+[2026-09-29T00:15:57Z] PR#17 recall: semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize
+[2026-09-29T00:15:57Z] PR#17 recall: semantic recall returned results
+[2026-09-29T00:15:57Z] PR#17 classify: is_workaround=False
+[2026-09-29T00:15:57Z] PR#17 check: resolve-check for hack HACK-006
+[2026-09-29T00:16:10Z] PR#17 usage: tokens: 802
+[2026-09-29T00:16:13Z] PR#17 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:16:13Z] PR#17 check: resolve-check for hack HACK-008
+[2026-09-29T00:16:45Z] PR#17 usage: tokens: 955
+[2026-09-29T00:16:48Z] PR#17 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:16:48Z] PR#17 retain: hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py
+[2026-09-29T00:16:48Z] PR#17 done: tag=MOVE, comments=2
+[2026-09-29T00:16:48Z] PR#18 start: processing PR #18: add .env.example file
+[2026-09-29T00:16:48Z] PR#18 recall: file query: Code changes touching files: .env.example
+[2026-09-29T00:16:48Z] PR#18 recall: file recall returned results
+[2026-09-29T00:16:48Z] PR#18 recall: semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env
+[2026-09-29T00:16:48Z] PR#18 recall: semantic recall returned results
+[2026-09-29T00:16:48Z] PR#18 classify: is_workaround=False
+[2026-09-29T00:16:48Z] PR#18 check: resolve-check for hack HACK-006
+[2026-09-29T00:17:04Z] PR#18 usage: tokens: 750
+[2026-09-29T00:17:07Z] PR#18 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:17:07Z] PR#18 check: resolve-check for hack HACK-008
+[2026-09-29T00:17:08Z] PR#18 usage: tokens: 812
+[2026-09-29T00:17:11Z] PR#18 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:17:11Z] PR#18 done: tag=, comments=0
+[2026-09-29T00:17:11Z] PR#19 start: processing PR #19: bump stripe-sdk to 4.0.3
+[2026-09-29T00:17:11Z] PR#19 recall: file query: Code changes touching files: requirements.txt
+[2026-09-29T00:17:11Z] PR#19 recall: file recall returned results
+[2026-09-29T00:17:11Z] PR#19 recall: semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri
+[2026-09-29T00:17:11Z] PR#19 recall: semantic recall returned results
+[2026-09-29T00:17:11Z] PR#19 classify: is_workaround=False
+[2026-09-29T00:17:11Z] PR#19 check: resolve-check for hack HACK-006
+[2026-09-29T00:17:13Z] PR#19 usage: tokens: 930
+[2026-09-29T00:17:16Z] PR#19 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:17:16Z] PR#19 check: resolve-check for hack HACK-008
+[2026-09-29T00:17:55Z] PR#19 usage: tokens: 876
+[2026-09-29T00:17:58Z] PR#19 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:17:59Z] PR#19 done: tag=, comments=0
+[2026-09-29T00:17:59Z] PR#20 start: processing PR #20: feat: verify webhook signatures
+[2026-09-29T00:17:59Z] PR#20 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T00:17:59Z] PR#20 recall: file recall returned results
+[2026-09-29T00:17:59Z] PR#20 recall: semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:
+[2026-09-29T00:17:59Z] PR#20 recall: semantic recall returned results
+[2026-09-29T00:17:59Z] PR#20 classify: is_workaround=False
+[2026-09-29T00:17:59Z] PR#20 check: resolve-check for hack HACK-006
+[2026-09-29T00:18:15Z] PR#20 usage: tokens: 753
+[2026-09-29T00:18:18Z] PR#20 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:18:18Z] PR#20 check: resolve-check for hack HACK-008
+[2026-09-29T00:18:19Z] PR#20 usage: tokens: 819
+[2026-09-29T00:18:22Z] PR#20 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:18:22Z] PR#20 done: tag=, comments=0
+[2026-09-29T00:18:22Z] PR#21 start: processing PR #21: add tests for charge retry logic
+[2026-09-29T00:18:22Z] PR#21 recall: file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha
+[2026-09-29T00:18:22Z] PR#21 recall: file recall returned results
+[2026-09-29T00:18:22Z] PR#21 recall: semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test
+[2026-09-29T00:18:22Z] PR#21 recall: semantic recall returned results
+[2026-09-29T00:18:22Z] PR#21 classify: is_workaround=False
+[2026-09-29T00:18:22Z] PR#21 check: resolve-check for hack HACK-006
+[2026-09-29T00:18:51Z] PR#21 usage: tokens: 932
+[2026-09-29T00:18:54Z] PR#21 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:18:54Z] PR#21 check: resolve-check for hack HACK-008
+[2026-09-29T00:19:12Z] PR#21 usage: tokens: 914
+[2026-09-29T00:19:15Z] PR#21 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:19:15Z] PR#21 done: tag=, comments=0
+[2026-09-29T00:19:15Z] PR#22 start: processing PR #22: add batch charge verification and fallback
+[2026-09-29T00:19:15Z] PR#22 recall: file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice
+[2026-09-29T00:19:15Z] PR#22 recall: file recall returned results
+[2026-09-29T00:19:15Z] PR#22 recall: semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb
+[2026-09-29T00:19:15Z] PR#22 recall: semantic recall returned results
+[2026-09-29T00:19:15Z] PR#22 classify: is_workaround=True
+[2026-09-29T00:19:15Z] PR#22 skip: error: 'DummyResp' object is not iterable
+[2026-09-29T00:19:15Z] PR#22 done: tag=HACK, comments=0
+[2026-09-29T00:19:15Z] PR#23 start: processing PR #23: docs: document batch charging flow
+[2026-09-29T00:19:15Z] PR#23 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T00:19:15Z] PR#23 recall: file recall returned results
+[2026-09-29T00:19:15Z] PR#23 recall: semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do
+[2026-09-29T00:19:15Z] PR#23 recall: semantic recall returned results
+[2026-09-29T00:19:15Z] PR#23 classify: is_workaround=False
+[2026-09-29T00:19:15Z] PR#23 check: resolve-check for hack HACK-006
+[2026-09-29T00:19:28Z] PR#23 usage: tokens: 743
+[2026-09-29T00:19:31Z] PR#23 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:19:31Z] PR#23 check: resolve-check for hack HACK-008
+[2026-09-29T00:19:45Z] PR#23 usage: tokens: 724
+[2026-09-29T00:19:48Z] PR#23 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:19:48Z] PR#23 done: tag=, comments=0
+[2026-09-29T00:19:48Z] PR#24 start: processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API
+[2026-09-29T00:19:48Z] PR#24 recall: file query: Code changes touching files: requirements.txt, billing/stripe_retry.py
+[2026-09-29T00:19:48Z] PR#24 recall: file recall returned results
+[2026-09-29T00:19:48Z] PR#24 recall: related_hack: HACK-006 via file match
+[2026-09-29T00:19:48Z] PR#24 recall: semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch
+[2026-09-29T00:19:48Z] PR#24 recall: semantic recall returned results
+[2026-09-29T00:19:48Z] PR#24 classify: is_workaround=False
+[2026-09-29T00:19:48Z] PR#24 check: resolve-check for hack HACK-006
+[2026-09-29T00:19:57Z] PR#24 usage: tokens: 966
+[2026-09-29T00:20:00Z] PR#24 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T00:20:00Z] PR#24 check: resolve-check for hack HACK-008
+[2026-09-29T00:20:02Z] PR#24 usage: tokens: 1000
+[2026-09-29T00:20:05Z] PR#24 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:20:05Z] PR#24 done: tag=, comments=1
+[2026-09-29T00:20:05Z] PR#25 start: processing PR #25: remove unused imports
+[2026-09-29T00:20:05Z] PR#25 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T00:20:05Z] PR#25 recall: file recall returned results
+[2026-09-29T00:20:05Z] PR#25 recall: semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a
+[2026-09-29T00:20:05Z] PR#25 recall: semantic recall returned results
+[2026-09-29T00:20:05Z] PR#25 classify: is_workaround=False
+[2026-09-29T00:20:05Z] PR#25 check: resolve-check for hack HACK-006
+[2026-09-29T00:20:33Z] PR#25 usage: tokens: 799
+[2026-09-29T00:20:36Z] PR#25 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:20:36Z] PR#25 check: resolve-check for hack HACK-008
+[2026-09-29T00:20:53Z] PR#25 usage: tokens: 891
+[2026-09-29T00:20:56Z] PR#25 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T00:20:56Z] PR#25 done: tag=, comments=0
+[2026-09-29T00:20:56Z] PR#26 start: processing PR #26: remove fixed retry delay workaround
+[2026-09-29T00:20:56Z] PR#26 recall: file query: Code changes touching files: billing/stripe_retry.py
+[2026-09-29T00:20:56Z] PR#26 recall: file recall returned results
+[2026-09-29T00:20:56Z] PR#26 recall: related_hack: HACK-006 via file match
+[2026-09-29T00:20:56Z] PR#26 recall: semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t
+[2026-09-29T00:20:56Z] PR#26 recall: semantic recall returned results
+[2026-09-29T00:20:56Z] PR#26 classify: is_workaround=False
+[2026-09-29T00:20:56Z] PR#26 check: resolve-check for hack HACK-006
+[2026-09-29T00:21:15Z] PR#26 usage: tokens: 1199
+[2026-09-29T00:21:18Z] PR#26 check: hack HACK-006: NEEDS_WORK (conf=0.85)
+[2026-09-29T00:21:18Z] PR#26 check: resolve-check for hack HACK-008
+[2026-09-29T00:21:24Z] PR#26 usage: tokens: 1199
+[2026-09-29T00:21:27Z] PR#26 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T00:21:27Z] PR#26 retain: hack HACK-006 retired (anchor removed)
+[2026-09-29T00:21:27Z] PR#26 done: tag=, comments=2
+[2026-09-29T02:39:59Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-29T02:39:59Z] PR#1 recall: file query: Code changes touching files: invoices.py, checkout.py, config.py, requirements.t
+[2026-09-29T02:40:08Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-29T02:49:11Z] PR#1 usage: tokens: 1181
+[2026-09-29T02:49:14Z] PR#1 classify: is_workaround=False
+[2026-09-29T02:49:14Z] PR#1 done: tag=, comments=0
+[2026-09-29T02:49:14Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-29T02:49:14Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: format, setup_logging
+[2026-09-29T02:49:18Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-29T02:49:21Z] PR#2 classify: is_workaround=False
+[2026-09-29T02:49:21Z] PR#2 done: tag=, comments=0
+[2026-09-29T02:49:21Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-29T02:49:21Z] PR#3 recall: file query: Code changes touching files: health.py; functions: register_health, health
+[2026-09-29T02:49:25Z] PR#3 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add health check endpoint': feat:
+[2026-09-29T02:49:30Z] PR#3 classify: is_workaround=False
+[2026-09-29T02:49:30Z] PR#3 done: tag=, comments=0
+[2026-09-29T02:49:30Z] PR#4 start: processing PR #4: fix duplicate webhook processing
+[2026-09-29T02:49:30Z] PR#4 recall: file query: Code changes touching files: webhooks.py
+[2026-09-29T02:49:34Z] PR#4 recall: semantic query: What workarounds or hacks relate to: PR 'fix duplicate webhook processing': skip
+[2026-09-29T02:49:35Z] PR#1 start: processing PR #1: Initial payments service scaffolding
+[2026-09-29T02:49:35Z] PR#1 recall: file query: Code changes touching files: requirements.txt, billing/retry.py, webhooks.py, co
+[2026-09-29T02:49:37Z] PR#4 classify: is_workaround=True
+[2026-09-29T02:49:37Z] PR#4 reflect: only 1 open hacks, skipping reflect
+[2026-09-29T02:49:41Z] PR#4 retain: retained hack HACK-004
+[2026-09-29T02:49:41Z] PR#4 retain: hack HACK-004 retired (anchor removed)
+[2026-09-29T02:49:41Z] PR#4 done: tag=HACK, comments=1
+[2026-09-29T02:49:41Z] PR#5 start: processing PR #5: add unit tests for invoice generation
+[2026-09-29T02:49:41Z] PR#5 recall: file query: Code changes touching files: tests/test_invoices.py; functions: test_basic_invoi
+[2026-09-29T02:49:43Z] PR#1 recall: semantic query: What workarounds or hacks relate to: PR 'Initial payments service scaffolding': 
+[2026-09-29T02:49:44Z] PR#5 recall: semantic query: What workarounds or hacks relate to: PR 'add unit tests for invoice generation':
+[2026-09-29T02:49:47Z] PR#1 usage: tokens: 1181
+[2026-09-29T02:49:47Z] PR#5 classify: is_workaround=False
+[2026-09-29T02:49:47Z] PR#5 done: tag=, comments=0
+[2026-09-29T02:49:47Z] PR#6 start: processing PR #6: use fixed retry delay for charge attempts
+[2026-09-29T02:49:47Z] PR#6 recall: file query: Code changes touching files: billing/retry.py
+[2026-09-29T02:49:50Z] PR#1 classify: is_workaround=False
+[2026-09-29T02:49:50Z] PR#1 done: tag=, comments=0
+[2026-09-29T02:49:50Z] PR#2 start: processing PR #2: configure structured logging
+[2026-09-29T02:49:50Z] PR#2 recall: file query: Code changes touching files: logging_config.py; functions: format, setup_logging
+[2026-09-29T02:49:51Z] PR#6 recall: semantic query: What workarounds or hacks relate to: PR 'use fixed retry delay for charge attemp
+[2026-09-29T02:49:53Z] PR#2 recall: semantic query: What workarounds or hacks relate to: PR 'configure structured logging': added js
+[2026-09-29T02:49:54Z] PR#6 classify: is_workaround=True
+[2026-09-29T02:49:54Z] PR#6 reflect: only 1 open hacks, skipping reflect
+[2026-09-29T02:49:56Z] PR#2 classify: is_workaround=False
+[2026-09-29T02:49:56Z] PR#2 done: tag=, comments=0
+[2026-09-29T02:49:56Z] PR#3 start: processing PR #3: feat: add health check endpoint
+[2026-09-29T02:49:56Z] PR#3 recall: file query: Code changes touching files: health.py; functions: register_health, health
+[2026-09-29T02:49:57Z] PR#6 retain: retained hack HACK-006
+[2026-09-29T02:49:57Z] PR#6 done: tag=HACK, comments=0
+[2026-09-29T02:49:57Z] PR#7 start: processing PR #7: docs: update README with setup instructions
+[2026-09-29T02:49:57Z] PR#7 recall: file query: Code changes touching files: README.md
+[2026-09-29T02:50:01Z] PR#7 recall: semantic query: What workarounds or hacks relate to: PR 'docs: update README with setup instruct
+[2026-09-29T02:50:04Z] PR#7 classify: is_workaround=False
+[2026-09-29T02:50:08Z] PR#7 check: resolve-check for hack HACK-006
+[2026-09-29T02:50:08Z] PR#7 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:50:08Z] PR#7 done: tag=, comments=0
+[2026-09-29T02:50:08Z] PR#8 start: processing PR #8: cap single charge amount at 50000
+[2026-09-29T02:50:08Z] PR#8 recall: file query: Code changes touching files: checkout.py
+[2026-09-29T02:50:11Z] PR#8 recall: semantic query: What workarounds or hacks relate to: PR 'cap single charge amount at 50000': cap
+[2026-09-29T02:50:14Z] PR#8 classify: is_workaround=True
+[2026-09-29T02:50:14Z] PR#8 reflect: only 2 open hacks, skipping reflect
+[2026-09-29T02:50:18Z] PR#8 check: resolve-check for hack HACK-006
+[2026-09-29T02:50:18Z] PR#8 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:50:21Z] PR#8 retain: retained hack HACK-008
+[2026-09-29T02:50:21Z] PR#8 done: tag=HACK, comments=0
+[2026-09-29T02:50:21Z] PR#9 start: processing PR #9: fix typo in webhook log message
+[2026-09-29T02:50:21Z] PR#9 recall: empty diff, skipping recall
+[2026-09-29T02:50:21Z] PR#9 classify: empty diff, skipping
+[2026-09-29T02:50:24Z] PR#9 check: resolve-check for hack HACK-006
+[2026-09-29T02:50:24Z] PR#9 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:50:24Z] PR#9 check: resolve-check for hack HACK-008
+[2026-09-29T02:50:24Z] PR#9 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:50:24Z] PR#9 done: tag=, comments=0
+[2026-09-29T02:50:24Z] PR#10 start: processing PR #10: feat: database-backed event idempotency
+[2026-09-29T02:50:24Z] PR#10 recall: file query: Code changes touching files: webhooks.py, db.py; functions: get_db
+[2026-09-29T02:50:28Z] PR#10 recall: semantic query: What workarounds or hacks relate to: PR 'feat: database-backed event idempotency
+[2026-09-29T02:50:31Z] PR#10 classify: is_workaround=False
+[2026-09-29T02:50:34Z] PR#10 check: resolve-check for hack HACK-006
+[2026-09-29T02:50:34Z] PR#10 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:50:34Z] PR#10 check: resolve-check for hack HACK-008
+[2026-09-29T02:50:34Z] PR#10 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:50:34Z] PR#10 done: tag=, comments=0
+[2026-09-29T02:50:34Z] PR#11 start: processing PR #11: validate checkout request body
+[2026-09-29T02:50:34Z] PR#11 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T02:50:38Z] PR#11 recall: semantic query: What workarounds or hacks relate to: PR 'validate checkout request body': add ba
+[2026-09-29T02:50:41Z] PR#11 classify: is_workaround=False
+[2026-09-29T02:50:44Z] PR#11 check: resolve-check for hack HACK-006
+[2026-09-29T02:50:44Z] PR#11 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:50:44Z] PR#11 check: resolve-check for hack HACK-008
+[2026-09-29T02:50:44Z] PR#11 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:50:44Z] PR#11 done: tag=, comments=0
+[2026-09-29T02:50:44Z] PR#12 start: processing PR #12: cache tax provider responses
+[2026-09-29T02:50:44Z] PR#12 recall: file query: Code changes touching files: tax.py
+[2026-09-29T02:50:47Z] PR#12 recall: semantic query: What workarounds or hacks relate to: PR 'cache tax provider responses': cache ta
+[2026-09-29T02:50:51Z] PR#12 classify: is_workaround=True
+[2026-09-29T02:50:54Z] PR#12 reflect_gate: query: The tax provider API has high latency (p95 over 2 seconds) which is too slow for...
+[2026-09-29T02:50:54Z] PR#12 reflect_gate: recall hit IDs: []
+[2026-09-29T02:50:54Z] PR#12 reflect_gate: survivors after open filter: []
+[2026-09-29T02:50:54Z] PR#12 reflect_gate: returned IDs: []
+[2026-09-29T02:50:54Z] PR#12 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-29T02:50:57Z] PR#12 check: resolve-check for hack HACK-006
+[2026-09-29T02:50:57Z] PR#12 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:50:57Z] PR#12 check: resolve-check for hack HACK-008
+[2026-09-29T02:50:57Z] PR#12 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:01Z] PR#12 retain: retained hack HACK-012
+[2026-09-29T02:51:01Z] PR#12 done: tag=HACK, comments=0
+[2026-09-29T02:51:01Z] PR#13 start: processing PR #13: bump requests to 2.32.0
+[2026-09-29T02:51:01Z] PR#13 recall: file query: Code changes touching files: requirements.txt
+[2026-09-29T02:51:04Z] PR#13 recall: semantic query: What workarounds or hacks relate to: PR 'bump requests to 2.32.0': update reques
+[2026-09-29T02:51:07Z] PR#13 classify: is_workaround=False
+[2026-09-29T02:51:10Z] PR#13 check: resolve-check for hack HACK-006
+[2026-09-29T02:51:10Z] PR#13 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:10Z] PR#13 check: resolve-check for hack HACK-008
+[2026-09-29T02:51:10Z] PR#13 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:51:10Z] PR#13 check: resolve-check for hack HACK-012
+[2026-09-29T02:51:10Z] PR#13 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:10Z] PR#13 done: tag=, comments=0
+[2026-09-29T02:51:10Z] PR#14 start: processing PR #14: feat: add global error handler
+[2026-09-29T02:51:10Z] PR#14 recall: file query: Code changes touching files: errors.py; functions: register_error_handlers, not_
+[2026-09-29T02:51:13Z] PR#14 recall: semantic query: What workarounds or hacks relate to: PR 'feat: add global error handler': feat: 
+[2026-09-29T02:51:17Z] PR#14 classify: is_workaround=False
+[2026-09-29T02:51:20Z] PR#14 check: resolve-check for hack HACK-006
+[2026-09-29T02:51:20Z] PR#14 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:20Z] PR#14 check: resolve-check for hack HACK-008
+[2026-09-29T02:51:20Z] PR#14 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:20Z] PR#14 check: resolve-check for hack HACK-012
+[2026-09-29T02:51:20Z] PR#14 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:20Z] PR#14 done: tag=, comments=0
+[2026-09-29T02:51:20Z] PR#15 start: processing PR #15: increase stripe timeout and limit concurrency
+[2026-09-29T02:51:20Z] PR#15 recall: file query: Code changes touching files: checkout.py, config.py
+[2026-09-29T02:51:24Z] PR#15 recall: semantic query: What workarounds or hacks relate to: PR 'increase stripe timeout and limit concu
+[2026-09-29T02:51:27Z] PR#15 classify: is_workaround=True
+[2026-09-29T02:51:30Z] PR#15 reflect_gate: query: Stripe times out under load, and concurrent requests exacerbate the issue. This ...
+[2026-09-29T02:51:30Z] PR#15 reflect_gate: recall hit IDs: []
+[2026-09-29T02:51:30Z] PR#15 reflect_gate: survivors after open filter: []
+[2026-09-29T02:51:30Z] PR#15 reflect_gate: returned IDs: []
+[2026-09-29T02:51:30Z] PR#15 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-29T02:51:33Z] PR#15 check: resolve-check for hack HACK-006
+[2026-09-29T02:51:33Z] PR#15 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T02:51:33Z] PR#15 check: resolve-check for hack HACK-008
+[2026-09-29T02:51:33Z] PR#15 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:33Z] PR#15 check: resolve-check for hack HACK-012
+[2026-09-29T02:51:33Z] PR#15 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:37Z] PR#15 retain: retained hack HACK-015
+[2026-09-29T02:51:37Z] PR#15 retain: hack HACK-015 retired (anchor removed)
+[2026-09-29T02:51:37Z] PR#15 done: tag=HACK, comments=1
+[2026-09-29T02:51:37Z] PR#16 start: processing PR #16: add basic metrics counters
+[2026-09-29T02:51:37Z] PR#16 recall: file query: Code changes touching files: metrics.py; functions: __exit__, __init__, incremen
+[2026-09-29T02:51:41Z] PR#16 recall: semantic query: What workarounds or hacks relate to: PR 'add basic metrics counters': track char
+[2026-09-29T02:51:45Z] PR#16 classify: is_workaround=False
+[2026-09-29T02:51:48Z] PR#16 check: resolve-check for hack HACK-006
+[2026-09-29T02:51:48Z] PR#16 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:48Z] PR#16 check: resolve-check for hack HACK-008
+[2026-09-29T02:51:48Z] PR#16 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:48Z] PR#16 check: resolve-check for hack HACK-012
+[2026-09-29T02:51:48Z] PR#16 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:48Z] PR#16 done: tag=, comments=0
+[2026-09-29T02:51:48Z] PR#17 start: processing PR #17: reorganize billing modules
+[2026-09-29T02:51:48Z] PR#17 recall: file query: Code changes touching files: billing/stripe_retry.py, billing/retry.py; function
+[2026-09-29T02:51:51Z] PR#17 recall: semantic query: What workarounds or hacks relate to: PR 'reorganize billing modules': reorganize
+[2026-09-29T02:51:55Z] PR#17 classify: is_workaround=False
+[2026-09-29T02:51:58Z] PR#17 check: resolve-check for hack HACK-006
+[2026-09-29T02:51:58Z] PR#17 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T02:51:58Z] PR#17 check: resolve-check for hack HACK-008
+[2026-09-29T02:51:58Z] PR#17 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:58Z] PR#17 check: resolve-check for hack HACK-012
+[2026-09-29T02:51:58Z] PR#17 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:51:58Z] PR#17 retain: hack HACK-006 moved: billing/retry.py -> billing/stripe_retry.py
+[2026-09-29T02:51:58Z] PR#17 done: tag=MOVE, comments=1
+[2026-09-29T02:51:58Z] PR#18 start: processing PR #18: add .env.example file
+[2026-09-29T02:51:58Z] PR#18 recall: file query: Code changes touching files: .env.example
+[2026-09-29T02:52:01Z] PR#18 recall: semantic query: What workarounds or hacks relate to: PR 'add .env.example file': add example env
+[2026-09-29T02:52:05Z] PR#18 classify: is_workaround=False
+[2026-09-29T02:52:08Z] PR#18 check: resolve-check for hack HACK-006
+[2026-09-29T02:52:08Z] PR#18 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:52:08Z] PR#18 check: resolve-check for hack HACK-008
+[2026-09-29T02:52:08Z] PR#18 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:52:08Z] PR#18 check: resolve-check for hack HACK-012
+[2026-09-29T02:52:08Z] PR#18 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:08Z] PR#18 done: tag=, comments=0
+[2026-09-29T02:52:08Z] PR#19 start: processing PR #19: bump stripe-sdk to 4.0.3
+[2026-09-29T02:52:08Z] PR#19 recall: file query: Code changes touching files: requirements.txt
+[2026-09-29T02:52:11Z] PR#19 recall: semantic query: What workarounds or hacks relate to: PR 'bump stripe-sdk to 4.0.3': upgrade stri
+[2026-09-29T02:52:15Z] PR#19 classify: is_workaround=False
+[2026-09-29T02:52:18Z] PR#19 check: resolve-check for hack HACK-006
+[2026-09-29T02:52:18Z] PR#19 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T02:52:18Z] PR#19 check: resolve-check for hack HACK-008
+[2026-09-29T02:52:18Z] PR#19 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:18Z] PR#19 check: resolve-check for hack HACK-012
+[2026-09-29T02:52:18Z] PR#19 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:18Z] PR#19 done: tag=, comments=0
+[2026-09-29T02:52:18Z] PR#20 start: processing PR #20: feat: verify webhook signatures
+[2026-09-29T02:52:18Z] PR#20 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T02:52:22Z] PR#20 recall: semantic query: What workarounds or hacks relate to: PR 'feat: verify webhook signatures': feat:
+[2026-09-29T02:52:25Z] PR#20 classify: is_workaround=False
+[2026-09-29T02:52:28Z] PR#20 check: resolve-check for hack HACK-006
+[2026-09-29T02:52:29Z] PR#20 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:29Z] PR#20 check: resolve-check for hack HACK-008
+[2026-09-29T02:52:29Z] PR#20 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:29Z] PR#20 check: resolve-check for hack HACK-012
+[2026-09-29T02:52:29Z] PR#20 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:52:29Z] PR#20 done: tag=, comments=0
+[2026-09-29T02:52:29Z] PR#21 start: processing PR #21: add tests for charge retry logic
+[2026-09-29T02:52:29Z] PR#21 recall: file query: Code changes touching files: tests/test_retry.py; functions: test_successful_cha
+[2026-09-29T02:52:33Z] PR#21 recall: semantic query: What workarounds or hacks relate to: PR 'add tests for charge retry logic': test
+[2026-09-29T02:52:36Z] PR#21 classify: is_workaround=False
+[2026-09-29T02:52:40Z] PR#21 check: resolve-check for hack HACK-006
+[2026-09-29T02:52:40Z] PR#21 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:40Z] PR#21 check: resolve-check for hack HACK-008
+[2026-09-29T02:52:40Z] PR#21 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:40Z] PR#21 check: resolve-check for hack HACK-012
+[2026-09-29T02:52:40Z] PR#21 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:40Z] PR#21 done: tag=, comments=0
+[2026-09-29T02:52:40Z] PR#22 start: processing PR #22: add batch charge verification and fallback
+[2026-09-29T02:52:40Z] PR#22 recall: file query: Code changes touching files: invoices.py; functions: batch_charge_and_invoice
+[2026-09-29T02:52:43Z] PR#22 recall: semantic query: What workarounds or hacks relate to: PR 'add batch charge verification and fallb
+[2026-09-29T02:52:47Z] PR#22 classify: is_workaround=True
+[2026-09-29T02:52:50Z] PR#22 reflect_gate: query: Stripe's batch charge API returns inconsistent totals under load, causing produc...
+[2026-09-29T02:52:50Z] PR#22 reflect_gate: recall hit IDs: []
+[2026-09-29T02:52:50Z] PR#22 reflect_gate: survivors after open filter: []
+[2026-09-29T02:52:50Z] PR#22 reflect_gate: returned IDs: []
+[2026-09-29T02:52:50Z] PR#22 reflect: only 0 open similar hacks, skipping reflect
+[2026-09-29T02:52:53Z] PR#22 check: resolve-check for hack HACK-006
+[2026-09-29T02:52:53Z] PR#22 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T02:52:53Z] PR#22 check: resolve-check for hack HACK-008
+[2026-09-29T02:52:53Z] PR#22 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:53Z] PR#22 check: resolve-check for hack HACK-012
+[2026-09-29T02:52:53Z] PR#22 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:52:57Z] PR#22 retain: retained hack HACK-022
+[2026-09-29T02:52:57Z] PR#22 done: tag=HACK, comments=0
+[2026-09-29T02:52:57Z] PR#23 start: processing PR #23: docs: document batch charging flow
+[2026-09-29T02:52:57Z] PR#23 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T02:53:00Z] PR#23 recall: semantic query: What workarounds or hacks relate to: PR 'docs: document batch charging flow': do
+[2026-09-29T02:53:04Z] PR#23 classify: is_workaround=False
+[2026-09-29T02:53:07Z] PR#23 check: resolve-check for hack HACK-006
+[2026-09-29T02:53:07Z] PR#23 check: hack HACK-006: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:53:07Z] PR#23 check: resolve-check for hack HACK-008
+[2026-09-29T02:53:07Z] PR#23 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:53:07Z] PR#23 check: resolve-check for hack HACK-012
+[2026-09-29T02:53:07Z] PR#23 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:53:07Z] PR#23 check: resolve-check for hack HACK-022
+[2026-09-29T02:53:07Z] PR#23 check: hack HACK-022: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:53:07Z] PR#23 done: tag=, comments=0
+[2026-09-29T02:53:07Z] PR#24 start: processing PR #24: upgrade to stripe-sdk 4.2 and use batched charge API
+[2026-09-29T02:53:07Z] PR#24 recall: file query: Code changes touching files: requirements.txt, billing/stripe_retry.py
+[2026-09-29T02:53:10Z] PR#24 recall: semantic query: What workarounds or hacks relate to: PR 'upgrade to stripe-sdk 4.2 and use batch
+[2026-09-29T02:53:14Z] PR#24 classify: is_workaround=False
+[2026-09-29T02:53:17Z] PR#24 check: resolve-check for hack HACK-006
+[2026-09-29T02:53:17Z] PR#24 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T02:53:17Z] PR#24 check: resolve-check for hack HACK-008
+[2026-09-29T02:53:17Z] PR#24 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:53:17Z] PR#24 check: resolve-check for hack HACK-012
+[2026-09-29T02:53:17Z] PR#24 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:53:17Z] PR#24 check: resolve-check for hack HACK-022
+[2026-09-29T02:53:17Z] PR#24 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-29T02:53:17Z] PR#24 done: tag=, comments=0
+[2026-09-29T02:53:17Z] PR#25 start: processing PR #25: remove unused imports
+[2026-09-29T02:53:17Z] PR#25 recall: file query: Code changes touching files: .pr_marker
+[2026-09-29T02:53:20Z] PR#25 recall: semantic query: What workarounds or hacks relate to: PR 'remove unused imports': ran autoflake a
+[2026-09-29T02:53:24Z] PR#25 classify: is_workaround=False
+[2026-09-29T02:53:28Z] PR#25 check: resolve-check for hack HACK-006
+[2026-09-29T02:53:28Z] PR#25 check: hack HACK-006: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:53:28Z] PR#25 check: resolve-check for hack HACK-008
+[2026-09-29T02:53:28Z] PR#25 check: hack HACK-008: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:53:28Z] PR#25 check: resolve-check for hack HACK-012
+[2026-09-29T02:53:28Z] PR#25 check: hack HACK-012: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:53:28Z] PR#25 check: resolve-check for hack HACK-022
+[2026-09-29T02:53:28Z] PR#25 check: hack HACK-022: NEEDS_WORK (conf=0.99)
+[2026-09-29T02:53:28Z] PR#25 done: tag=, comments=0
+[2026-09-29T02:53:28Z] PR#26 start: processing PR #26: remove fixed retry delay workaround
+[2026-09-29T02:53:28Z] PR#26 recall: file query: Code changes touching files: billing/stripe_retry.py
+[2026-09-29T02:53:31Z] PR#26 recall: semantic query: What workarounds or hacks relate to: PR 'remove fixed retry delay workaround': t
+[2026-09-29T02:53:35Z] PR#26 classify: is_workaround=False
+[2026-09-29T02:53:38Z] PR#26 check: resolve-check for hack HACK-006
+[2026-09-29T02:53:38Z] PR#26 check: hack HACK-006: NEEDS_WORK (conf=0.95)
+[2026-09-29T02:53:38Z] PR#26 check: resolve-check for hack HACK-008
+[2026-09-29T02:53:38Z] PR#26 check: hack HACK-008: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:53:38Z] PR#26 check: resolve-check for hack HACK-012
+[2026-09-29T02:53:38Z] PR#26 check: hack HACK-012: NEEDS_WORK (conf=0.98)
+[2026-09-29T02:53:38Z] PR#26 check: resolve-check for hack HACK-022
+[2026-09-29T02:53:38Z] PR#26 check: hack HACK-022: NEEDS_WORK (conf=0.95)
+[2026-09-29T02:53:38Z] PR#26 retain: hack HACK-006 retired (anchor removed)
+[2026-09-29T02:53:38Z] PR#26 done: tag=, comments=1

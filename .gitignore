@@ -1,9 +1,1 @@
-.env
-.env.*
-!.env.example
-.venv/
-__pycache__/
-*.log
-data/cache/
-data/runs/*/repo/
-env_dump*
+__pycache__/ 

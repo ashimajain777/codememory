@@ -1,0 +1,65 @@
+F.F..FFF.F
+======================================================================
+FAIL: test_hack_statuses (__main__.TestPipelineOutput.test_hack_statuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\Desktop\CodeMemory\codememory\tests\verify.py", line 123, in test_hack_statuses
+    self.assertEqual(hack.get('status'), expected_status, f"{hack_id} status mismatch")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'retired' != 'condition_met'
+- retired
++ condition_met
+ : HACK-004 status mismatch
+
+======================================================================
+FAIL: test_no_frontend_references_backend (__main__.TestPipelineOutput.test_no_frontend_references_backend)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\Desktop\CodeMemory\codememory\tests\verify.py", line 105, in test_no_frontend_references_backend
+    check_dir(WEB_DIR)
+    ~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Lenovo\Desktop\CodeMemory\codememory\tests\verify.py", line 98, in check_dir
+    self.assertFalse(re.search(r'hindsight', content, re.IGNORECASE), f"Found 'hindsight' in {path}")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <re.Match object; span=(4813, 4822), match='Hindsight'> is not false : Found 'hindsight' in C:\Users\Lenovo\Desktop\CodeMemory\codememory\web\index.html
+
+======================================================================
+FAIL: test_resolver_pr_resolves_s1 (__main__.TestPipelineOutput.test_resolver_pr_resolves_s1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\Desktop\CodeMemory\codememory\tests\verify.py", line 27, in test_resolver_pr_resolves_s1
+    self.assertTrue(len(resolves_comments) > 0, "PR 24 should have a resolves comment for HACK-006")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : PR 24 should have a resolves comment for HACK-006
+
+======================================================================
+FAIL: test_root_cause_fires_on_r3 (__main__.TestPipelineOutput.test_root_cause_fires_on_r3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\Desktop\CodeMemory\codememory\tests\verify.py", line 62, in test_root_cause_fires_on_r3
+    self.assertTrue(len(root_cause_comments) > 0, "PR 22 should have a root_cause comment")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : PR 22 should have a root_cause comment
+
+======================================================================
+FAIL: test_star_cases_empty_sql_baseline (__main__.TestPipelineOutput.test_star_cases_empty_sql_baseline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\Desktop\CodeMemory\codememory\tests\verify.py", line 54, in test_star_cases_empty_sql_baseline
+    self.assertTrue(len(resolves_comments) > 0, "PR 24 should resolve HACK-006")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : PR 24 should resolve HACK-006
+
+======================================================================
+FAIL: test_t1_easy_case_with_sql_baseline (__main__.TestPipelineOutput.test_t1_easy_case_with_sql_baseline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\Desktop\CodeMemory\codememory\tests\verify.py", line 46, in test_t1_easy_case_with_sql_baseline
+    self.assertTrue(len(resolves_comments) > 0, "PR 10 should resolve HACK-004")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : PR 10 should resolve HACK-004
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.019s
+
+FAILED (failures=6)
